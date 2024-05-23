@@ -6,41 +6,22 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/23 20:49:37 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/05/23 22:12:27 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../include/miniRT.h"
 #include <stdio.h>
-#include <stdint.h>
-
-void cpuid(uint32_t eax, uint32_t ecx, uint32_t *regs) {
-	__asm__ __volatile__(
-		"cpuid"
-		: "=a" (regs[0]), "=b" (regs[1]), "=c" (regs[2]), "=d" (regs[3])
-		: "a" (eax), "c" (ecx)
-	);
-}
 
 int main() {
-	uint32_t regs[4];
-	cpuid(1, 0, regs);
-
-	if (regs[2] & (1 << 28))
-		printf("AVX supported\n");
-	cpuid(7, 0, regs);
-	if (regs[1] & (1 << 5))
-		printf("AVX2 supported\n");
-	if (regs[1] & (1 << 16))
-		printf("AVX-512F supported\n");
-	if (regs[1] & (1 << 17))
-		printf("AVX-512DQ supported\n");
-	if (regs[1] & (1 << 18))
-		printf("AVX-512IFMA supported\n");
-	if (regs[1] & (1 << 21))
-		printf("AVX-512VL supported\n");
-	if (regs[1] & (1 << 26))
-		printf("AVX-512BW supported\n");
-	if (regs[1] & (1 << 27))
-		printf("AVX-512VL supported\n");
-	return 0;
+    t_vec v1 = {{1.0, 2.0, 3.0}};
+    t_vec v2 = {{4.0, 5.0, 6.0}};
+    t_vec add = vec_add(v1, v2);
+		t_vec sub = vec_sub(v1, v2);
+    
+		printf("v1 = 		(%f, %f, %f)\n", v1.vec[X], v1.vec[Y], v1.vec[Z] );
+		printf("v2 = 		(%f, %f, %f)\n\n", v2.vec[X], v2.vec[Y], v2.vec[Z] );
+    printf("Addition:	(%f, %f, %f)\n", add.vec[X], add.vec[Y], add.vec[Z]);
+		printf("Substraction:	(%f, %f, %f)\n", sub.vec[X], sub.vec[Y], sub.vec[Z]);
+    return 0;
 }

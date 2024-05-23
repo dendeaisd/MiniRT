@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:35:02 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/23 20:46:43 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/05/23 21:58:16 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,13 @@
 # define VEC3_H
 # include <math.h>
 
-typedef struct s_vec 
+# define X 0
+# define Y 1
+# define Z 2
+
+typedef struct s_vec
 {
-  float	vec[3];
+	float	vec[3];
 }	t_vec;
 
 t_vec	vec_add(t_vec a, t_vec b);
