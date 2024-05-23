@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 21:38:27 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/23 22:17:27 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/05/23 22:30:03 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_vec	vec_add(t_vec a, t_vec b)
 					a.y + b.y, \
 					a.z + b.z});
 }
+
 /**
  * @brief Substracts 2 vectors component-wise.
  * 
@@ -34,7 +35,37 @@ t_vec	vec_add(t_vec a, t_vec b)
 */
 t_vec	vec_sub(t_vec a, t_vec b)
 {
-	return((t_vec){a.x - b.x, \
+	return ((t_vec){a.x - b.x, \
 					a.y - b.y, \
 					a.z - b.z});
+}
+
+/**
+ * @brief Multiplies a vector by a scalar.
+ * 
+ * @param a The vector to be multiplied.
+ * @param scalar The scalar value to multiply with.
+ * @return A vector representing the result of the
+ * scalar multiplication.
+*/
+t_vec	vec_mul(t_vec a, float scalar)
+{
+	return ((t_vec){a.x * scalar, \
+					a.y * scalar, \
+					a.z * scalar});
+}
+
+/**
+ * @brief Divides a vector by a scalar.
+ * 
+ * @param a The vector to be divided.
+ * @param scalar The scalar value to divide by.
+ * @return A vector representing the result of the
+ * scalar division.
+*/
+t_vec	vec_div(t_vec a, float scalar)
+{
+	return ((t_vec){a.x / scalar, \
+					a.y / scalar, \
+					a.z / scalar});
 }
