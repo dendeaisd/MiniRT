@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/23 22:32:46 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/05/24 00:24:08 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ int main() {
 		t_vec sub = vec_sub(v1, v2);
     t_vec mul = vec_mul(v1, scalar);
     t_vec div = vec_div(v2, scalar);
+    float dot_product = vec_dot(v1, v2);
+    t_vec cross_product = vec_cross(v1, v2);
+    t_vec unit_vector = vec_unit(v1);
     
     
 		printf("v1 = 		(%f, %f, %f)\n", v1.x, v1.y, v1.z);
@@ -29,6 +32,9 @@ int main() {
     printf("Addition:	(%f, %f, %f)\n", add.x, add.y, add.z);
 		printf("Substraction:	(%f, %f, %f)\n", sub.x, sub.y, sub.z);
 		printf("Multiplication:	(%f, %f, %f)\n", mul.x, mul.y, mul.z);
-		printf("Division:	(%f, %f, %f)\n", div.x, div.y, div.z);    
+		printf("Division:	(%f, %f, %f)\n", div.x, div.y, div.z);
+    printf("Dot Product: %f\n", dot_product);
+    printf("Cross Product: (%f, %f, %f)\n", cross_product.x, cross_product.y, cross_product.z);
+    printf("Unit Vector: (%f, %f, %f)\n", unit_vector.x, unit_vector.y, unit_vector.z);
     return 0;
 }
