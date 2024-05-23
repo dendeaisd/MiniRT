@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 21:38:27 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/23 22:10:39 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/05/23 22:17:27 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 */
 t_vec	vec_add(t_vec a, t_vec b)
 {
-	return ((t_vec){{a.vec[X] + b.vec[X], \
-					a.vec[Y] + b.vec[Y], \
-					a.vec[Z] + b.vec[Z]}});
+	return ((t_vec){a.x + b.x, \
+					a.y + b.y, \
+					a.z + b.z});
 }
 /**
  * @brief Substracts 2 vectors component-wise.
@@ -34,7 +34,7 @@ t_vec	vec_add(t_vec a, t_vec b)
 */
 t_vec	vec_sub(t_vec a, t_vec b)
 {
-	return((t_vec){{a.vec[X] - b.vec[X], \
-					a.vec[Y] - b.vec[Y], \
-					a.vec[Z] - b.vec[Z]}});
+	return((t_vec){a.x - b.x, \
+					a.y - b.y, \
+					a.z - b.z});
 }

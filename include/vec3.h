@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:35:02 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/23 21:58:16 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/05/23 22:15:24 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@
 
 typedef struct s_vec
 {
-	float	vec[3];
+	float	x;
+	float	y;
+	float	z;
 }	t_vec;
 
 t_vec	vec_add(t_vec a, t_vec b);
