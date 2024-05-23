@@ -6,12 +6,14 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/23 21:58:31 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/05/24 00:59:16 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 # include "vec3.h"
+# include "ray.h"
+
 
 #endif
