@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 21:53:57 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/30 22:10:29 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/05/30 23:31:18 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void render_scene(t_miniRT *miniRT)
+void render_scene(t_mini_rt *mini_rt)
 {
     t_window    *window;
     
-    window = miniRT->window;
+    window = mini_rt->window;
     for (int y = 0; y < window->height; y++) {
 		for (int x = 0; x < window->width; x++) {
 			uint32_t color = ((x * 255 / window->width) << 24) 

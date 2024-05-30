@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_miniRT.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/30 23:37:42 by fvoicu           ###   ########.fr       */
+/*   Created: 2024/05/30 23:01:20 by fvoicu            #+#    #+#             */
+/*   Updated: 2024/05/30 23:43:05 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-
-
-int main(void) {
+t_mini_rt	*init_mini_rt(int width, int height)
+{
 	t_mini_rt	*mini_rt;
 
-	mini_rt = init_mini_rt(WIDTH, HEIGHT);
-	if(!mini_rt)
-		return (fprintf(stderr, "Failed to init miniRT\n"), \
-				EXIT_FAILURE);
-	render_scene(mini_rt);
-	mlx_loop(mini_rt->window->mlx);
+	mini_rt = malloc(sizeof(mini_rt));
+	if (!mini_rt)
+		return (NULL);
+	mini_rt->window = init_window(width, height);
+	if (!mini_rt->window)
+		return (free(mini_rt), NULL);
+	//same for scene
+	return (mini_rt);
+}
 
-	destroy_mini_rt(mini_rt);
-	return EXIT_SUCCESS;
+void	destroy_mini_rt(t_mini_rt *mini_rt)
+{
+	if (mini_rt)
+	{
+		//same for scene
+		destroy_window(mini_rt->window);
+		free(mini_rt);
+	}
 }
