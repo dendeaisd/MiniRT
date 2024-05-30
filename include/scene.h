@@ -6,13 +6,13 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 02:37:02 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/24 02:44:08 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/05/30 21:43:53 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCENE_H
 # define SCENE_H
-#include "object.h"
+# include "object.h"
 
 typedef struct s_camera
 {
@@ -42,6 +42,5 @@ typedef struct s_scene
 	t_object	*objects;
 	int			objects_nb;
 }	t_scene;
-
 
 #endif
