@@ -6,32 +6,64 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 02:50:11 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/30 21:39:38 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/05/31 00:27:58 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene.h"
-#include <stdlib.h>
+#include "miniRT.h"
 
-// static void	init_camera(t_scene *scene, t_vec position, \
-// 						t_vec orientation, float fov)
-// {
-// 	scene->camera.position = position;
-// 	scene->camera.orientation = orientation;
-// 	scene->camera.fov = fov;
-// }
+static void	init_camera(t_camera *camera, t_vec position, \
+						t_vec orientation, float fov);
+static void	init_light(t_light *light, t_vec position, \
+						float brightness);
+static void	init_ambilight(t_ambilight *ambilight, \
+							float ratio, t_vec color);
 
-// static void	init_ambilight(t_scene *scene, float ratio, t_vec color)
-// {
-// 	scene->ambilight.ratio = ratio;
-// 	scene->ambilight.color = color;
-// }
+t_scene	*init_scene(void)
+{
+	t_scene	*scene;
 
-// static void	init_light(t_scene *scene, t_vec position, t_vec color)
-// {
-// 	scene->lights_nb = 1;
-// 	scene->lights = malloc(sizeof(t_light) * scene->lights_nb);
-// 	scene->lights[0].position = (t_vec) {-40, 50, 0};
-// 	scene->lights[0].brightness = 0.6;
-// }
+	scene = malloc(sizeof(t_scene));
+	if (!scene)
+		return (NULL);
+	init_camera(&scene->camera, (t_vec){-50, 0, 0}, \
+				(t_vec){0, 0, 1}, 70.f);
+	init_light(&scene->light, (t_vec){-40, 50, 0}, 0.6);
+	init_ambilight(&scene->ambilight, 0.2, \
+				(t_vec){255, 255, 255});
+	scene->objects = NULL;
+	scene->objects_nb = 0;
+	return (scene);
+}
 
+void	destroy_scene(t_scene *scene)
+{
+	if (scene)
+	{
+		if (scene->objects)
+			free(scene->objects);
+		free(scene);
+	}
+}
+
+static void	init_camera(t_camera *camera, t_vec position, \
+						t_vec orientation, float fov)
+{
+	camera->position = position;
+	camera->orientation = orientation;
+	camera->fov = fov;
+}
+
+static void	init_light(t_light *light, t_vec position, \
+						float brightness)
+{
+	light->position = position;
+	light->brightness = brightness;
+}
+
+static void	init_ambilight(t_ambilight *ambilight, \
+							float ratio, t_vec color)
+{
+	ambilight->ratio = ratio;
+	ambilight->color = color;
+}

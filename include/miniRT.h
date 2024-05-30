@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/30 23:43:13 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/05/31 00:24:00 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <MLX42/MLX42.h>
 # include <stdlib.h>
-// # include <stdio.h>
+# include <stdio.h>
 # include "scene.h"
 # include "ray.h"
 
