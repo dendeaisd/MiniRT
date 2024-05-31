@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 02:50:11 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/31 00:27:58 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/05/31 13:34:00 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ t_scene	*init_scene(void)
 	init_light(&scene->light, (t_vec){-40, 50, 0}, 0.6);
 	init_ambilight(&scene->ambilight, 0.2, \
 				(t_vec){255, 255, 255});
-	scene->objects = NULL;
-	scene->objects_nb = 0;
+	scene->objects_nb = 1;
+	scene->objects = malloc(sizeof(t_object) * scene->objects_nb);
+	scene->objects = init_object(SPHERE, ((t_vec){0, 0, 20.6}, \
+									12.6, (t_vec){10, 0, 255}));
 	return (scene);
 }
 

@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 01:54:16 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/24 02:06:22 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/05/31 17:39:30 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,11 @@ typedef struct s_object
 	t_obj_type	type;
 	t_obj_data	data;
 }	t_object;
+
+typedef void (*init_funcs)(t_object *, void *);
+
+
+
+void	init_object(t_obj_type type, void *params);
 
 #endif
