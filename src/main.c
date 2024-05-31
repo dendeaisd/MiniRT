@@ -6,55 +6,35 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/30 21:41:08 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/05/31 18:19:05 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/miniRT.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "miniRT.h"
 
-int main(void) {
-	t_window window;
-
-	window.width = 800;
-	window.height = 600;
-
-	// Init MLX
-	window.mlx = mlx_init(window.width, window.height, "MLX42", true);
-	if (!window.mlx) {
-		fprintf(stderr, "Error initializing MLX\n");
-		return EXIT_FAILURE;
+void print_obj_data(t_object *obj)
+{
+	switch (obj->type)
+	{
+		case SPHERE:
+			printf("Diameter: %f",obj->data.sphere.diameter);
+			break;
+		default:
+			printf("Object was not initialized.\n");
 	}
+}
 
-	// Create an image
-	window.img = mlx_new_image(window.mlx, window.width, window.height);
-	if (!window.img) {
-		mlx_terminate(window.mlx);
-		fprintf(stderr, "Error creating image\n");
-		return EXIT_FAILURE;
-	}
-	// Draw a gradient on the image
-	for (int y = 0; y < window.height; y++) {
-		for (int x = 0; x < window.width; x++) {
-				uint32_t color = ((x * 255 / window.width) << 24) 
-								| (y * 255 / window.height) << 16 
-								| (x * 255 / window.width) << 8
-								| 0xFF;
-				mlx_put_pixel(window.img, x, y, color);
-		}
-	}
+int	main(void)
+{
+	t_mini_rt	*mini_rt;
 
-	// Display the image on the window
-	if (mlx_image_to_window(window.mlx, window.img, 0, 0) == -1) {
-		mlx_delete_image(window.mlx, window.img);
-		mlx_terminate(window.mlx);
-		fprintf(stderr, "Error displaying image\n");
-		return EXIT_FAILURE;
-	}
-
-	mlx_loop(window.mlx);
-
-	mlx_terminate(window.mlx);
-	return EXIT_SUCCESS;
+	mini_rt = init_mini_rt(WIDTH, HEIGHT);
+	if (!mini_rt)
+		return (fprintf(stderr, "Failed to init miniRT\n"), \
+				EXIT_FAILURE);
+	render_scene(mini_rt);
+	mlx_loop(mini_rt->window->mlx);
+	print_obj_data(mini_rt->scene->objects);
+	destroy_mini_rt(mini_rt);
+	return (EXIT_SUCCESS);
 }
