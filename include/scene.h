@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 02:37:02 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/31 00:24:38 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/01 00:54:03 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ typedef struct s_ambilight
 	t_vec		color;
 }	t_ambilight;
 
+typedef struct s_viewport
+{
+	float		width;
+	float		height;
+}	t_viewport;
+
 typedef struct s_scene
 {
 	t_camera	camera;
@@ -40,6 +46,7 @@ typedef struct s_scene
 	t_ambilight	ambilight;
 	t_object	*objects;
 	int			objects_nb;
+	t_viewport	viewport;
 }	t_scene;
 
 t_scene	*init_scene(void);
