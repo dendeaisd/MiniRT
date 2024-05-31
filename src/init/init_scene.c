@@ -6,11 +6,13 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 02:50:11 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/31 13:34:00 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/05/31 18:17:01 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+//TO DO: implement a better way to manage the object allocation/initiation
+//		 in init_scene	
 
 static void	init_camera(t_camera *camera, t_vec position, \
 						t_vec orientation, float fov);
@@ -21,7 +23,9 @@ static void	init_ambilight(t_ambilight *ambilight, \
 
 t_scene	*init_scene(void)
 {
-	t_scene	*scene;
+	static t_init_array	init_array = {
+		.func = {init_sphere, init_plane, init_cylinder}};
+	t_scene				*scene;
 
 	scene = malloc(sizeof(t_scene));
 	if (!scene)
@@ -33,8 +37,12 @@ t_scene	*init_scene(void)
 				(t_vec){255, 255, 255});
 	scene->objects_nb = 1;
 	scene->objects = malloc(sizeof(t_object) * scene->objects_nb);
-	scene->objects = init_object(SPHERE, ((t_vec){0, 0, 20.6}, \
-									12.6, (t_vec){10, 0, 255}));
+	t_sphere	sphere_params = {
+		.center = (t_vec){0, 0, 20.6},
+		.diameter = 12.6,
+		.color = (t_vec){10, 0, 255}
+	};
+	init_object(SPHERE, &scene->objects[0], &sphere_params, &init_array);
 	return (scene);
 }
 

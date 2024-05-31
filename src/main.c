@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/31 13:28:08 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/05/31 18:19:05 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void print_obj_data(t_object *obj)
 			printf("Object was not initialized.\n");
 	}
 }
+
 int	main(void)
 {
 	t_mini_rt	*mini_rt;

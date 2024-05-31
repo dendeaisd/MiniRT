@@ -6,72 +6,55 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 03:05:32 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/31 14:14:43 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/05/31 17:53:19 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-//function pointers
 
-static void	init_sphere(t_object *object, t_vec center, \
-							float diameter, t_vec color);
-static void	init_plane(t_object *object, t_vec point, \
-							t_vec normal, t_vec color);
-static void	init_cylinder(t_object *object, t_vec center, \
-							t_vec axis, float diameter, float height, \
-							t_vec color);
-
-void	init_object(t_obj_type type, void *params)
+void	init_object(t_obj_type type, t_object *obj, void *params, \
+					t_init_array *init_array)
 {
-	t_sphere	*sphere;
-	t_plane		*plane;
-	t_cylinder	*cylinder;
-
-	sphere = (t_sphere *)params;
-	plane = (t_plane *)params;
-	cylinder = (t_cylinder *)params;
-	if (type == SPHERE)
-		init_sphere(sphere, sphere->center, sphere->diameter, \
-					sphere->color);
-	else if (type == PLANE)
-		init_plane(plane, plane->point, plane->normal, \
-			plane->color);
-	else if (type == CYLINDER)
-		init_cylinder(cylinder, cylinder->center, cylinder->axis, \
-			cylinder->diameter, cylinder->height, cylinder->color);
-	else
+	if (type < 0 || type >= \
+		(sizeof(init_array->func) / sizeof(init_array->func[0])))
 	{
-		printf("No object in the map");
+		printf("Invalid object type\n.");
 		return ;
 	}
+	init_array->func[type](obj, params);
 }
 
-static void	init_sphere(t_object *object, t_vec center, \
-							float diameter, t_vec color)
+void	init_sphere(t_object *object, void *params)
 {
+	t_sphere	*sphere_params;
+
+	sphere_params = (t_sphere *)params;
 	object->type = SPHERE;
-	object->data.sphere.center = center;
-	object->data.sphere.diameter = diameter;
-	object->data.sphere.color = color;
+	object->data.sphere.center = sphere_params->center;
+	object->data.sphere.diameter = sphere_params->diameter;
+	object->data.sphere.color = sphere_params->color;
 }
 
-static void	init_plane(t_object *object, t_vec point, \
-							t_vec normal, t_vec color)
+void	init_plane(t_object *object, void *params)
 {
+	t_plane	*plane_params;
+
+	plane_params = (t_plane *)params;
 	object->type = PLANE;
-	object->data.plane.point = point;
-	object->data.plane.normal = normal;
-	object->data.plane.color = color;
+	object->data.plane.point = plane_params->point;
+	object->data.plane.normal = plane_params->normal;
+	object->data.plane.color = plane_params->color;
 }
 
-static void	init_cylinder(t_object *object, t_vec center, \
-							t_vec axis, float diameter, float height, \
-							t_vec color)
+void	init_cylinder(t_object *object, void *params)
 {
+	t_cylinder	*cylinder_params;
+
+	cylinder_params = (t_cylinder *)params;
 	object->type = CYLINDER;
-	object->data.cylinder.center = center;
-	object->data.cylinder.axis = axis;
-	object->data.cylinder.diameter = diameter;
-	object->data.cylinder.height = height;
-	object->data.cylinder.color = color;
+	object->data.cylinder.center = cylinder_params->center;
+	object->data.cylinder.axis = cylinder_params->axis;
+	object->data.cylinder.diameter = cylinder_params->diameter;
+	object->data.cylinder.height = cylinder_params->height;
+	object->data.cylinder.color = cylinder_params->color;
 }

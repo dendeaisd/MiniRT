@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 01:54:16 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/31 17:39:30 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/05/31 18:18:08 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,18 @@ typedef struct s_object
 	t_obj_data	data;
 }	t_object;
 
-typedef void (*init_funcs)(t_object *, void *);
+typedef void	(*t_init_funcs)(t_object *, void *);
 
+void	init_sphere(t_object *object, void *params);
+void	init_plane(t_object *object, void *params);
+void	init_cylinder(t_object *object, void *params);
 
+typedef struct s_init_array
+{
+	t_init_funcs	func[3];
+}	t_init_array;
 
-void	init_object(t_obj_type type, void *params);
+void	init_object(t_obj_type type, t_object *obj, void *params, \
+					t_init_array *init_array);
 
 #endif
