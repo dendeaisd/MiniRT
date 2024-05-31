@@ -6,45 +6,53 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 01:23:56 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/24 01:36:18 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/01 00:56:57 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/ray.h"
+#include "miniRT.h"
 
-/**
- * @brief Generates a ray given an origin and a direction.
- *
- * This function initializes a ray with a given origin 
- * and direction. The direction vector is normalized, 
- * which simplifies calculations in ray tracing.
- *
- * @param origin The origin of the ray.
- * @param direction The direction of the ray.
- * @return The generated ray with normalized direction.
- */
-t_ray	generate_ray(t_vec origin, t_vec direction)
+float	calc_aspect_ratio(int width, int height)
 {
-	t_ray	ray;
-
-	ray.origin = origin;
-	ray.direction = vec_unit(direction);
-	return (ray);
+	return ((float)width / (float)height);
 }
 
-/**
- * @brief Computes a point along the ray at a given distance.
- *
- * This function returns the point along the ray at 
- * distance `t` from the origin. It uses the parameter `t` 
- * to scale the direction vector and then adds it to the origin.
- *
- * @param ray The ray from which the point is computed.
- * @param t The distance along the ray to compute the point.
- * @return The computed point along the ray.
- */
-
-t_vec	ray_at(t_ray ray, float t)
+void	calc_viewport_dim(t_camera *camera, float aspect_ratio, \
+						t_viewport *viewport)
 {
-	return (vec_add(ray.origin, vec_mul(ray.direction, t)));
+	viewport->height = 2.f * tanf(camera->fov * M_PI / 360.f);
+	viewport->width = viewport->height * aspect_ratio;
+}
+
+t_vec	pixel_to_viewport(int x, int y, t_viewport *viewport, \
+						t_window *window)
+{
+	float	viewport_x;
+	float	viewport_y;
+	float	viewport_z;
+
+	viewport_x = (2.f * (x / (float)window->width - 1.f) * \
+		(viewport->width / 2));
+	viewport_y = (1.f - 2 * (y / (float)window->height)) * \
+		(viewport->height / 2);
+	viewport_z = -1.f;
+	return ((t_vec){viewport_x, viewport_y, viewport_z});
+}
+
+t_ray	generate_ray(t_scene *scene, t_window *window, int x, int y)
+{
+	t_camera	*camera;
+	t_viewport	*viewport;
+	float		aspect_ratio;
+	t_vec		viewport_point;
+	t_vec		ray_direction;
+
+	camera = &scene->camera;
+	viewport = &scene->viewport;
+	aspect_ratio = calc_aspect_ratio(window->width, window->height);
+	calc_viewport_dim(camera, aspect_ratio, viewport);
+	viewport_point = pixel_to_viewport(x, y, viewport, window);
+	ray_direction = vec_sub(viewport_point, camera->position);
+	ray_direction = vec_unit(ray_direction);
+	return ((t_ray){camera->position, ray_direction});
 }
