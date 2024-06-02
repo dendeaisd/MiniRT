@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 00:27:21 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/03 01:20:22 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/03 01:34:22 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,21 @@ bool	solve_quadratic(float b, float discriminant, float *t0, float *t1)
 	if (discriminant > 0)
 		*t1 = (-b + sqrt_disc) / (2 * a);
 	return (true);
+}
+
+bool	find_closest_hit(float t0, float t1, float *t)
+{
+	if (t0 > 0 && t1 > 0)
+	{
+		if (t0 < t1)
+			*t = t0;
+		else 
+			*t = t1;
+		return (true);
+	}
+	else if(t0 > 0)
+		return (*t = t0, true);
+	else if (t1 > 0)
+		return (*t = t1, true);
+	return (false);
 }

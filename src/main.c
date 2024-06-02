@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/03 01:26:52 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/03 01:38:02 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,3 @@ int	main(void)
 	destroy_mini_rt(mini_rt);
 	return (EXIT_SUCCESS);
 }
-
