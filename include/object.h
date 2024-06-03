@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 01:54:16 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/03 01:35:54 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/03 02:00:56 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,9 @@ void	init_object(t_obj_type type, t_object *obj, void *params, \
 
 /***INTERSECTION***/
 //*SPHERE*//
-float	calculate_discriminant(t_ray *ray, t_sphere *sphere);
+float	calculate_discriminant(t_ray *ray, t_sphere *sphere, \
+							float *b, float *c);
 bool	solve_quadratic(float b, float discriminant, float *t0, float *t1);
 bool	find_closest_hit(float t0, float t1, float *t);
+bool	intersect_sphere(t_ray * ray, t_sphere * sphere, float *t);
 #endif

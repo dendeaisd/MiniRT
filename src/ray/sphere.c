@@ -6,27 +6,26 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 00:27:21 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/03 01:34:22 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/03 02:02:07 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-float	calculate_discriminant(t_ray *ray, t_sphere *sphere)
+float	calculate_discriminant(t_ray *ray, t_sphere *sphere, \
+							float *b, float *c)
 {
 	t_vec	sphere_offset;
 	float	radius;
 	float	a;
-	float	b;
-	float	c;
 
 	sphere_offset = vec_sub(ray->origin, sphere->center);
 	radius = sphere->diameter / 2;
 	a = 1.f; //a is normalized ==> always 1
-	b = 2.f * vec_dot(sphere_offset , ray->direction);
-	c = vec_dot(sphere_offset, sphere_offset) \
+	*b = 2.f * vec_dot(sphere_offset , ray->direction);
+	*c = vec_dot(sphere_offset, sphere_offset) \
 		- radius * radius;
-	return (b * b - 4 * a * c);
+	return (*b * *b - 4 * a * *c);
 }
 
 bool	solve_quadratic(float b, float discriminant, float *t0, float *t1)
@@ -58,5 +57,21 @@ bool	find_closest_hit(float t0, float t1, float *t)
 		return (*t = t0, true);
 	else if (t1 > 0)
 		return (*t = t1, true);
+	return (false);
+}
+
+bool	intersect_sphere(t_ray * ray, t_sphere * sphere, float *t)
+{
+	float	discriminant;
+	float	b;
+	float	c;
+	float	t0;
+	float	t1;
+
+	discriminant = calculate_discriminant(ray, sphere, &b, &c);
+	if (!solve_quadratic(b, discriminant, &t0, &t1))
+		return (false);
+	if (find_closest_hit(t0, t1, t))
+		return (true);
 	return (false);
 }
