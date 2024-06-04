@@ -6,7 +6,7 @@
 #    By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/21 18:58:12 by fvoicu            #+#    #+#              #
-#    Updated: 2024/05/30 22:48:04 by fvoicu           ###   ########.fr        #
+#    Updated: 2024/06/04 04:17:36 by fvoicu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ HEADERS	:= -I ./include -I $(LIB)/Libft -I $(LIBMLX)/include
 LIB_M		:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 SRCS		:= $(wildcard src/*.c \
 						src/vector/*.c \
-						src/ray/*.c \
+						src/objects/*.c \
 						src/init/*.c) 
 OBJS		:= ${SRCS:.c=.o}
 
