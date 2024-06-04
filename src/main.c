@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/01 01:06:34 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/04 04:26:32 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(void)
 {
 	t_mini_rt	*mini_rt;
 
-	mini_rt = init_mini_rt(WIDTH, HEIGHT);
+	mini_rt = init_mini_rt(WIDTH, HEIGHT); 
 	if (!mini_rt)
 		return (fprintf(stderr, "Failed to init miniRT\n"), \
 				EXIT_FAILURE);
