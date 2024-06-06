@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/01 00:58:10 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/06 15:02:20 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,17 @@
 # define MINIRT_H
 
 # include <MLX42/MLX42.h>
+
 # include <stdlib.h>
 # include <stdio.h>
+# include <math.h>
+# include <fcntl.h>
+# include <stdbool.h>
+
+# include "libft.h"
 # include "scene.h"
 # include "ray.h"
+
 
 # define WIDTH	800
 # define HEIGHT	600
@@ -33,7 +40,7 @@ typedef struct s_window
 typedef struct s_mini_rt
 {
 	t_window		*window;
-	t_scene			*scene;
+	t_scene			scene;
 }	t_mini_rt;
 
 t_mini_rt	*init_mini_rt(int width, int height);
@@ -54,5 +61,13 @@ void	calc_viewport_dim(t_camera *camera, float aspect_ratio, \
 t_vec	pixel_to_viewport(int x, int y, t_viewport *viewport, \
 						t_window *window);
 /*******************************************************************/
+
+
+/* **************************   PARSING    *********************** */
+# define ERROR "\x1B[31mError: \x1B[0m"
+# define INPUT "\x1B[31mInvalid input: \x1B[0m"
+
+void	parse_rt_file(t_scene *scene, char *file);
+void	ft_error_exit(char *err_msg, int exit_value);
 
 #endif
