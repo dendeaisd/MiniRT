@@ -6,33 +6,15 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:18:17 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/09 16:16:07 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/09 18:46:26 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-/*
-*	Changes the line so that for example a line like:
-*	L	0,0,-5 	0.4		255,255,255
-*	Becomes: L	0 0 -5 0.4 255 255 255
-*	So that the numbers can be properly splited after.
-*/
-// static void modify_before_split(char **line)
-// {
-// 	char *tmp;
-	
-// 	tmp = *line;
-// 	while (*tmp)
-// 	{
-// 		if (*tmp == ',' || *tmp == '\t' || *tmp == '\n')
-// 		// if (*tmp == ',' || *tmp == '\t')
-// 			*tmp = ' ';
-// 		tmp++;
-// 	}
-// }
 
-// // static void	extract_elem_info(char **info)
+
+// static void	extract_elem_info(char **info)
 // static void	extract_elem_info(t_scene *scene, char **info, int **occurences)
 // {
 // 	// // printing for verification:
@@ -64,12 +46,71 @@
 // 	// fv_free_array(info); 
 // }
 
-// static void check_occurences(int *occurences)
+// static void check_occurences(int *map)
 // {
+// 	int	A;
+// 	int	C;
+// 	int	L;
+// 	int	objects_count;
 	
+
+
+// 	// while(*(map + 1))
+// 	// {
+// 	// 	if (*map == 'A' && *(map + 1) == ' ')
+// 	// 		A++;
+// 	// 	else if (*map == 'C' && *(map + 1) == ' ')
+// 	// 		C++;
+// 	// 	else if (*map == 'L' && *(map + 1) == ' ')
+// 	// 		L++;
+// 	// 	else if ((*map == 's' && *(map + 1) == 'p')
+// 	// 		|| (*map == 'p' && *(map + 1) == 'l'))
+// 	// }
 // }
 
-// void read_file_and_save_content()
+/*
+*	Changes the line so that for example a line like:
+*	L	0,0,-5 	0.4		255,255,255
+*	Becomes: L	0 0 -5 0.4 255 255 255
+*	So that the numbers can be properly splited after.
+*/
+static void modify_before_split(char **line)
+{
+	char *tmp;
+	
+	tmp = *line;
+	while (*tmp)
+	{
+		// if (*tmp == ',' || *tmp == '\t' || *tmp == '\n')
+		if (*tmp == ',' || *tmp == '\t')
+			*tmp = ' ';
+		tmp++;
+	}
+}
+
+void	parse_map(char *map, char **map_2d)
+{
+	int		line;
+	char	**elem_info;
+	// int		i;
+
+	map_2d = ft_split(map, '\n');
+	if (!map_2d)
+		ft_error_exit("malloc for split failed", 1);
+	line = -1;
+	while (map_2d[++line])
+	{
+		modify_before_split(&(map_2d[line]));
+		elem_info = ft_split(map_2d[line], ' ');
+		if (!elem_info)
+			ft_exit_v3("malloc for split failed", 1, map_2d);
+		// here i need to parse every element and init it
+		// i = -1;
+		// while (elem_info[++i]
+		fv_free_array(elem_info);
+	}
+	fv_free_array(map_2d);
+}
 
 //my so_long_version
 void	read_and_save_map(int fd, t_parser *parser)

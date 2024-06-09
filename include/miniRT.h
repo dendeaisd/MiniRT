@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/09 16:15:49 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/09 17:32:06 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_window
 typedef struct s_parser
 {
 	char	map[1024];
+	char	**map_2d;
 	int		A;
 	int		C;
 	int		L;
@@ -77,13 +78,14 @@ t_vec	pixel_to_viewport(int x, int y, t_viewport *viewport, \
 # define ERROR "\x1B[31mError: \x1B[0m"
 # define INPUT "\x1B[31mInvalid input: \x1B[0m"
 
-void	parse_rt_file(t_scene *scene, char *file);
+// void	parse_rt_file(t_scene *scene, char *file);
 void	read_and_save_map(int fd, t_parser *parser);
-void	ft_error_exit(char *err_msg, int exit_value, int fd);
+void	parse_map(char *map, char **map_2d);
 
 //parse_utils
+void	ft_error_exit(char *err_msg, int exit_value);
 int		ft_2darray_size(char **array);
 void	ft_exit_v2(char *msg, int exit_val, void *to_free, int fd);
-
+void	ft_exit_v3(char *err_msg, int exit_value, char **array_to_free);
 
 #endif
