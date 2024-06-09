@@ -6,28 +6,44 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:18:17 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/06 15:07:10 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/09 13:33:55 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void modify_before_split(char *line)
+/*
+*	Changes the line so that for example a line like:
+*	L	0,0,-5 	0.4		255,255,255
+*	Becomes: L	0 0 -5 0.4 255 255 255
+*	So that the numbers can be properly splited after.
+*/
+static void modify_before_split(char **line)
 {
-	while (*line)
+	char *tmp;
+	
+	tmp = *line;
+	while (*tmp)
 	{
-		if (*line == ',' || *line == '\t' || *line == '\n')
-			*line = ' ';
-		line++;
+		if (*tmp == ',' || *tmp == '\t' || *tmp == '\n')
+		// if (*tmp == ',' || *tmp == '\t')
+			*tmp = ' ';
+		tmp++;
 	}
 }
 
-static void	extract_elem_info(t_scene *scene, char **info, int fd)
+// static void	extract_elem_info(t_scene *scene, char **info, int fd)
+static void	extract_elem_info(char **info)
 {
-	
+	int	i;
 
-	close(fd);
-	fv_free_array(info);
+	i = -1;
+	printf("The elements of the line:\n");
+	while (info[++i])
+		printf("info [%d]: %s\n", i, info[i]);
+
+	// close(fd);
+	// fv_free_array(info);
 }
 
 
@@ -37,29 +53,31 @@ void	parse_rt_file(t_scene *scene, char *file)
 	char	*line;
 	char	**elem_info;
 
+	(void)scene;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		ft_error_exit("failed to open the file.", 1);
+		ft_error_exit("failed to open the file.", 1, 0);
 	while (true)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		else if (ft_strncmp(line, "\n", 2) == 0)
+		// else if (ft_strncmp(line, "\n", 2) == 0)
+		// {
+		// 	free(line);
+		// 	continue ;
+		// }
+		if (ft_strncmp(line, "\n", 2) != 0)
 		{
+			modify_before_split(&line);
+			elem_info = ft_split(line, ' ');
 			free(line);
-			continue ;
+			if (!elem_info)
+				ft_error_exit("malloc for ft_split failed.", 1, fd);
+			// extract_elem_info(scene, elem_info, fd);
+			extract_elem_info(elem_info);
+			fv_free_array(elem_info);
 		}
-		modify_before_split(&line);
-		elem_info = ft_split(line, ' ');
-		free(line);
-		if (!elem_info)
-		{
-			close(fd);
-			ft_error_exit("malloc for ft_split failed.", 1);
-		}
-		extract_elem_info(scene, elem_info, fd);
-		fv_free_array(elem_info);
 	}
 	close(fd);
 }

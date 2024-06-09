@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/06 15:02:27 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/09 13:13:38 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ void print_obj_data(t_object *obj)
 	}
 }
 
-void	ft_error_exit(char *err_msg, int exit_value)
+void	ft_error_exit(char *err_msg, int exit_value, int fd)
 {
-	ft_putstr_fd("\033[31mError:\033[37m ", 2);
+	ft_putstr_fd(ERROR, 2);
 	ft_putendl_fd(err_msg, 2);
+	if (fd > 2)
+		close(fd);
 	if (exit_value == 1)
 		exit(EXIT_FAILURE);
 	else
@@ -40,9 +42,9 @@ int	main(int argc, char **argv)
 
 	/* ***************** PARSING PART ***************** */
 	if (argc != 2)
-		ft_error_exit("expected two arguments: ./miniRT *.rt", 0);
+		ft_error_exit("expected two arguments in the format:\n./miniRT map.rt", 0, 0);
 	if (ft_strncmp((argv[1] + (ft_strlen(argv[1]) - 3)), ".rt", 4) != 0)
-		ft_error_exit("not a .rt file", 0);
+		ft_error_exit("not a .rt file", 0, 0);
 	parse_rt_file(&mini_rt.scene, argv[1]);
 
 	return 0;
