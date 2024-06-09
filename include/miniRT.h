@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/06 15:02:20 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/09 16:15:49 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,20 @@ typedef struct s_window
 	int				height;
 }	t_window;
 
+typedef struct s_parser
+{
+	char	map[1024];
+	int		A;
+	int		C;
+	int		L;
+	int 	objects_num;
+}	t_parser;
+
 typedef struct s_mini_rt
 {
 	t_window		*window;
 	t_scene			scene;
+	t_parser		parser;
 }	t_mini_rt;
 
 t_mini_rt	*init_mini_rt(int width, int height);
@@ -68,6 +78,12 @@ t_vec	pixel_to_viewport(int x, int y, t_viewport *viewport, \
 # define INPUT "\x1B[31mInvalid input: \x1B[0m"
 
 void	parse_rt_file(t_scene *scene, char *file);
-void	ft_error_exit(char *err_msg, int exit_value);
+void	read_and_save_map(int fd, t_parser *parser);
+void	ft_error_exit(char *err_msg, int exit_value, int fd);
+
+//parse_utils
+int		ft_2darray_size(char **array);
+void	ft_exit_v2(char *msg, int exit_val, void *to_free, int fd);
+
 
 #endif
