@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 00:27:21 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/03 02:02:07 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/10 19:09:14 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ bool	find_closest_hit(float t0, float t1, float *t)
 	return (false);
 }
 
-bool	intersect_sphere(t_ray * ray, t_sphere * sphere, float *t)
+bool	intersect_sphere(t_ray *ray, t_sphere *sphere, float *t)
 {
 	float	discriminant;
 	float	b;
