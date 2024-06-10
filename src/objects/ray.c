@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 01:23:56 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/04 22:35:33 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/10 18:32:43 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,11 @@ t_vec	pixel_to_viewport(int x, int y, t_viewport *viewport, \
 t_ray	generate_ray(t_scene *scene, t_window *window, int x, int y)
 {
 	t_camera	*camera;
-	t_viewport	*viewport;
-	float		aspect_ratio;
 	t_vec		viewport_point;
 	t_vec		ray_direction;
 
 	camera = &scene->camera;
-	viewport = &scene->viewport;
-	aspect_ratio = calc_aspect_ratio(window->width, window->height);
-	calc_viewport_dim(camera, aspect_ratio, viewport);
-	viewport_point = pixel_to_viewport(x, y, viewport, window);
+	viewport_point = pixel_to_viewport(x, y, &camera->viewport, window);
 	ray_direction = vec_sub(viewport_point, camera->position);
 	ray_direction = vec_unit(ray_direction);
 	return ((t_ray){camera->position, ray_direction});

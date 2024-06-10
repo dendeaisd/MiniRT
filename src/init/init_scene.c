@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 02:50:11 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/31 18:17:01 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/10 18:04:08 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ static void	init_camera(t_camera *camera, t_vec position, \
 	camera->position = position;
 	camera->orientation = orientation;
 	camera->fov = fov;
+	camera->ratio = 0.f;
+	camera->viewport.width = 0.f;
+	camera->viewport.height = 0.f;
 }
 
 static void	init_light(t_light *light, t_vec position, \
