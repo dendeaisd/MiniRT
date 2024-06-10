@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/10 16:53:23 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/10 21:42:08 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void print_obj_data(t_object *obj)
 			printf("Object was not initialized.\n");
 	}
 }
-
 
 
 int	main(int argc, char **argv)

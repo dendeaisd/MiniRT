@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/10 16:45:41 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/10 21:59:49 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_parser
 	int		A;
 	int		C;
 	int		L;
-	int 	objects_num;
+	int 	objs;
 }	t_parser;
 
 typedef struct s_mini_rt
