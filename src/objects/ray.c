@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 01:23:56 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/10 18:32:43 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/10 23:26:22 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ t_ray	generate_ray(t_scene *scene, t_window *window, int x, int y)
 
 	camera = &scene->camera;
 	viewport_point = pixel_to_viewport(x, y, &camera->viewport, window);
-	ray_direction = vec_sub(viewport_point, camera->position);
+	// ray_direction = vec_sub(viewport_point, camera->position);
+	ray_direction = vec_sub(camera->position, viewport_point);	
 	ray_direction = vec_unit(ray_direction);
 	return ((t_ray){camera->position, ray_direction});
 }
