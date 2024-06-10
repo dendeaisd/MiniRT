@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/09 18:48:34 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:53:23 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,14 @@ int	main(int argc, char **argv)
 	if (fd == -1)
 		ft_error_exit("failed to open the file.", 1);
 	read_and_save_map(fd, &mini_rt.parser); // fd closes here
-	parse_map(mini_rt.parser.map, mini_rt.parser.map_2d);
+	// printf("The map i read:\n%s\n", mini_rt.parser.map);
+	// parse_map(mini_rt.parser.map, &mini_rt.parser.map_2d);
+	parse_map(mini_rt.parser.map, &mini_rt.parser);
 	
 	// // To check the saving of the 2d map in the struct:
 	// int i = -1;
 	// while (mini_rt.parser.map_2d[++i])
 	// 	printf("line [%d]: %s\n", i, mini_rt.parser.map_2d[i]);
-	// printf("The map i read:\n%s\n", mini_rt.parser.map);
 	
 		
 	// parse_rt_file(&mini_rt.scene, argv[1]);
