@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 01:23:56 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/01 00:56:57 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/04 22:35:33 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ t_vec	pixel_to_viewport(int x, int y, t_viewport *viewport, \
 	float	viewport_y;
 	float	viewport_z;
 
-	viewport_x = (2.f * (x / (float)window->width - 1.f) * \
+	viewport_x = (2.f * ((x + 0.5) / (float)window->width - 1.f) * \
 		(viewport->width / 2));
-	viewport_y = (1.f - 2 * (y / (float)window->height)) * \
+	viewport_y = (1.f - 2 * ((y + 0.5) / (float)window->height)) * \
 		(viewport->height / 2);
 	viewport_z = -1.f;
 	return ((t_vec){viewport_x, viewport_y, viewport_z});
