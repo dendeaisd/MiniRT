@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/10 21:42:08 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/11 11:38:17 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void print_obj_data(t_object *obj)
 int	main(int argc, char **argv)
 {
 	t_mini_rt	mini_rt;
-	int			fd;
+	int			fd; 
 
 	/* ***************** PARSING PART ***************** */
 	if (argc != 2)
@@ -38,10 +38,10 @@ int	main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		ft_error_exit("failed to open the file.", 1);
-	read_and_save_map(fd, &mini_rt.parser); // fd closes here
+	read_and_save_map(fd, &mini_rt); // fd closes here
 	// printf("The map i read:\n%s\n", mini_rt.parser.map);
 	// parse_map(mini_rt.parser.map, &mini_rt.parser.map_2d);
-	parse_map(mini_rt.parser.map, &mini_rt.parser);
+	
 	
 	// // To check the saving of the 2d map in the struct:
 	// int i = -1;

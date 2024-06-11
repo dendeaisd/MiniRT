@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/10 21:59:49 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/11 11:44:35 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,11 @@ t_vec	pixel_to_viewport(int x, int y, t_viewport *viewport, \
 # define INPUT "\x1B[31mInvalid input: \x1B[0m"
 
 // void	parse_rt_file(t_scene *scene, char *file);
-void	read_and_save_map(int fd, t_parser *parser);
+// void	read_and_save_map(int fd, t_parser *parser);
+void	read_and_save_map(int fd, t_mini_rt *mini_rt);
 // void	parse_map(char *map, char ***ref_2d);
 // void	parse_map(char *map);
-void	parse_map(char *map, t_parser *parser);
+// void	parse_map(char *map, t_parser *parser);
 
 //parse_utils
 void	ft_error_exit(char *err_msg, int exit_value);

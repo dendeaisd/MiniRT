@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:18:17 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/10 22:21:47 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/11 11:46:17 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,27 +46,7 @@
 // }
 
 
-//my so_long_version
-void	read_and_save_map(int fd, t_parser *parser)
-{
-	char	*line;
 
-	line = get_next_line(fd);
-	if (!line || !line[0])
-		ft_exit_v2("empty .rt file", 0, line, fd);
-	if (ft_strlen(line) > 1000)
-		ft_exit_v2("invalid map.", 0, line, fd);
-	ft_strlcpy(parser->map, line, ft_strlen(line) + 1);
-	while (line != NULL)
-	{
-		free(line);
-		line = get_next_line(fd);
-		if (line == NULL)
-			break ;
-		ft_strlcat(parser->map, line, 1024);
-	}
-	close(fd);
-}
 
 /*
 *	Changes the line so that for example a line like:
@@ -81,7 +61,7 @@ static void modify_before_split(char **line)
 	tmp = *line;
 	while (*tmp)
 	{
-		// if (*tmp == ',' || *tmp == '\t' || *tmp == '\n')
+		// if (*tmp == ',' || *tmp == '\t' || *tmp == '\n') //i don't need it now since i'm splitting according to the '\n'
 		if (*tmp == ',' || *tmp == '\t')
 			*tmp = ' ';
 		tmp++;
@@ -152,7 +132,7 @@ static void	parse_element(char **info, t_parser *parser)
 		ft_putendl_fd(ERROR "Element can only be: A, C, L, sp, pl, or cy", 2);
 }
 
-void	parse_map(char *map, t_parser *parser)
+static void	parse_map(t_mini_rt *mini_rt)
 {
 	int		line;
 	char	**map_2d;
@@ -161,8 +141,10 @@ void	parse_map(char *map, t_parser *parser)
 
 	// check_characters();
 	// (void)parser;
-	printf("\nCount of objects is: %d\n", find_objects_amount(map));
-	map_2d = ft_split(map, '\n');
+	// printf("\nCount of objects is: %d\n", find_objects_amount(map));
+	
+	mini_rt->scene.objects = (t_object *)malloc(find_objects_amount(mini_rt->parser.map) * sizeof(t_object));
+	map_2d = ft_split(mini_rt->parser.map, '\n'); // First split for the 1D map to split it to its lines
 	if (map_2d == NULL)
 		ft_error_exit("malloc for split failed", 1);
 	line = -1;
@@ -170,17 +152,41 @@ void	parse_map(char *map, t_parser *parser)
 	{
 		// printf("%s\n", map_2d[line]);
 		modify_before_split(&(map_2d[line]));
-		elem_info = ft_split(map_2d[line], ' ');
+		elem_info = ft_split(map_2d[line], ' '); //second split to divide the numbers/info of each element(in each line)
 		// printf("object is %s and size is %d\n", elem_info[0], ft_2darray_size(elem_info));
 		if (!elem_info)
 			ft_exit_v3("malloc for split failed", 1, map_2d);
-		parse_element(elem_info, parser);
+		parse_element(elem_info, &mini_rt->parser);
 		// here i need to parse every element and init it
 		// i = -1;
 		// while (elem_info[++i]
 		fv_free_array(elem_info);
 	}
 	fv_free_array(map_2d);
+}
+
+
+//my so_long_version
+void	read_and_save_map(int fd, t_mini_rt *mini_rt)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	if (!line || !line[0])
+		ft_exit_v2("empty .rt file", 0, line, fd);
+	if (ft_strlen(line) > 1000)
+		ft_exit_v2("invalid map.", 0, line, fd);
+	ft_strlcpy(mini_rt->parser.map, line, ft_strlen(line) + 1);
+	while (line != NULL)
+	{
+		free(line);
+		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
+		ft_strlcat(mini_rt->parser.map, line, 1024);
+	}
+	close(fd);
+	parse_map(mini_rt);
 }
 
 
@@ -215,5 +221,3 @@ void	parse_map(char *map, t_parser *parser)
 // 	close(fd);
 // 	check_occurences(occurences);
 // }
-
-

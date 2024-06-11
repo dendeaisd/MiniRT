@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 02:37:02 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/01 00:54:03 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/11 11:48:01 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_scene
 	t_camera	camera;
 	t_light		light;
 	t_ambilight	ambilight;
-	t_object	*objects;
+	t_object	*objects; //dynamically allocated number_of_objects times the t_object struct
 	int			objects_nb;
 	t_viewport	viewport;
 }	t_scene;
