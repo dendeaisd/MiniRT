@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 02:37:02 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/11 13:16:17 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/11 18:16:21 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_light
 typedef struct s_ambilight
 {
 	float		ratio;
-	t_vec		color;
+	t_color		color;
 }	t_ambilight;
 
 typedef struct s_viewport

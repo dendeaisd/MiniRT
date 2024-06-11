@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:18:17 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/11 17:18:49 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/11 18:55:26 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,21 +60,22 @@ static void	count_elements(t_parser *parser)
 	count += count_each_object(parser->map, "pl");
 	count += count_each_object(parser->map, "cy");
 	parser->objs_count = count;
-	A = count_each_object(parser->map, "A ");
-	C = count_each_object(parser->map, "C ");
-	L = count_each_object(parser->map, "L ");
+	//? should i pass this count to the mini_rt->scene->objects_nb ?
+	A = count_each_object(parser->map, "A");
+	C = count_each_object(parser->map, "C");
+	L = count_each_object(parser->map, "L");
 	if (A != 1 || C != 1 || L != 1)
 		ft_exit("Ambient lightning (A), Camera (C) and Light(L) must be declared once.", 0);
 }
 
-static void	parse_element(char **map_2d, char **info, t_mini_rt *mini_rt)
+static void	parse_element(char **info, t_mini_rt *mini_rt)
 {
 	static int obj_cur_index = 0;
 	
 	if (!ft_strncmp(info[0], "A", 2) && ft_2darray_size(info) == 5)
-		init_amb_light(map_2d, info, mini_rt);
+		init_amb_light(info, mini_rt);
 	else if (!ft_strncmp(info[0], "C", 2) && ft_2darray_size(info) == 8)
-		init_camera(map_2d, info, mini_rt);
+		init_camera(info, mini_rt);
 	else if (!ft_strncmp(info[0], "L", 2) && ft_2darray_size(info) == 8)
 	{
 		// parser->L++;
@@ -92,16 +93,12 @@ static void	parse_element(char **map_2d, char **info, t_mini_rt *mini_rt)
 		obj_cur_index++;
 	}
 	else
-	{
-		fv_free_array(info);
-		ft_exit_v4("invalid rt map.", 0, mini_rt->scene.objects, map_2d);
-	}
+		ft_exit_miniRT("invalid rt map.", 0, info, mini_rt);
 }
 
 static void	parse_map(t_mini_rt *mini_rt)
 {
 	int		line;
-	char	**map_2d;
 	char	**elem_info;
 	// int		i;
 
@@ -112,21 +109,21 @@ static void	parse_map(t_mini_rt *mini_rt)
 	if (mini_rt->scene.objects == NULL)
 		ft_exit("malloc for objects failed", 1);
 	
-	map_2d = ft_split(mini_rt->parser.map, '\n'); // First split for the 1D map to split it to its lines
-	if (map_2d == NULL)
+	mini_rt->parser.map_2d = ft_split(mini_rt->parser.map, '\n'); // First split for the 1D map to split it to its lines
+	if (mini_rt->parser.map_2d == NULL)
 		ft_exit_v2("malloc for split failed", 1, mini_rt->scene.objects, -1);
 
 	line = -1;
-	while (map_2d[++line])
+	while (mini_rt->parser.map_2d[++line])
 	{
-		modify_before_split(&(map_2d[line]));
-		elem_info = ft_split(map_2d[line], ' '); //second split to divide the numbers/info of each element(in each line)
+		modify_before_split(&(mini_rt->parser.map_2d[line]));
+		elem_info = ft_split(mini_rt->parser.map_2d[line], ' '); //second split to divide the numbers/info of each element(in each line)
 		if (!elem_info)
-			ft_exit_v4("malloc for split failed", 1, mini_rt->scene.objects, map_2d);
-		parse_element(map_2d, elem_info, mini_rt);
+			ft_exit_v4("malloc for split failed", 1, mini_rt->scene.objects, mini_rt->parser.map_2d);
+		parse_element(elem_info, mini_rt);
 		fv_free_array(elem_info);
 	}
-	fv_free_array(map_2d);
+	fv_free_array(mini_rt->parser.map_2d);
 }
 
 //my so_long_version

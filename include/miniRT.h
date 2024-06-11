@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/11 17:20:30 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/11 19:26:45 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_window
 typedef struct s_parser
 {
 	char	map[1024];
-	// char	**map_2d;
+	char	**map_2d;
 	int 	objs_count;
 }	t_parser;
 
@@ -86,12 +86,16 @@ void	open_and_parse_map(char **argv, t_mini_rt *mini_rt);
 // void	parse_map(char *map, t_parser *parser);
 
 //init functions
-void	init_amb_light(char **map_2d, char **info, t_mini_rt *mini_rt);
-void	init_camera(char **map_2d, char **info, t_mini_rt *mini_rt);
+void	init_amb_light(char **info, t_mini_rt *mini_rt);
+void	init_camera(char **info, t_mini_rt *mini_rt);
 
 //parse_utils
 bool	array_has_only_numbers(char **array);
 int		ft_2darray_size(char **array);
+void	ft_exit_miniRT(char *err_msg, int exit_value, char **array_to_free, t_mini_rt *mini_RT);
+
+//general utils
+double	ft_atof(const char *str);
 void	ft_exit(char *err_msg, int exit_value);
 void	ft_exit_v2(char *msg, int exit_val, void *to_free, int fd);
 void	ft_exit_v3(char *err_msg, int exit_value, char **array_to_free);
