@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 02:37:02 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/11 11:48:01 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/11 13:16:17 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ typedef struct s_scene
 	t_light		light;
 	t_ambilight	ambilight;
 	t_object	*objects; //dynamically allocated number_of_objects times the t_object struct
-	int			objects_nb;
+	int			objects_nb; //Flavia is using that equal to 1
+	int			objs_count;
 	t_viewport	viewport;
 }	t_scene;
 

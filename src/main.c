@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/11 11:38:17 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/11 12:49:54 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,11 @@ void print_obj_data(t_object *obj)
 int	main(int argc, char **argv)
 {
 	t_mini_rt	mini_rt;
-	int			fd; 
 
 	/* ***************** PARSING PART ***************** */
 	if (argc != 2)
-		ft_error_exit("expected two arguments in the format:\n./miniRT map.rt", 0);
-	if (ft_strncmp((argv[1] + (ft_strlen(argv[1]) - 3)), ".rt", 4) != 0)
-		ft_error_exit("not a .rt file", 0);
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-		ft_error_exit("failed to open the file.", 1);
-	read_and_save_map(fd, &mini_rt); // fd closes here
+		ft_exit("expected two arguments in the format:\n./miniRT map.rt", 0);
+	open_and_parse_map(argv, &mini_rt); // fd closes here
 	// printf("The map i read:\n%s\n", mini_rt.parser.map);
 	// parse_map(mini_rt.parser.map, &mini_rt.parser.map_2d);
 	

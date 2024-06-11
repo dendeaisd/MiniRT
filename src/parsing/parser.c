@@ -6,47 +6,11 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:18:17 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/11 11:46:17 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/11 13:47:12 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-
-
-// static void	extract_elem_info(char **info)
-// static void	extract_elem_info(t_scene *scene, char **info, int **occurences)
-// {
-// 	// // printing for verification:
-// 	// int i = -1;
-// 	// printf("The elements of the line:\n");
-// 	// while (info[++i])
-// 	// 	printf("info [%d]: %s\n", i, info[i]);
-// 	(void)scene;
-
-// 	int *array = *occurences;
-
-// 	if (ft_strncmp(info[0], "A", 2) == 0)
-// 		(array[0])++;
-// 	else if (ft_strncmp(info[0], "C", 2) == 0)
-// 		(array[1])++;
-// 	else if (ft_strncmp(info[0], "L", 2) == 0)
-// 		(array[2])++;
-// 	else if (!ft_strncmp(info[0], "sp", 3) || !ft_strncmp(info[0], "pl", 3)
-// 			|| !ft_strncmp(info[0], "cy", 3))
-// 		(array[3])++;
-// 	else
-// 	{
-// 		ft_putendl_fd(ERROR "Element can only be: A, C, L, sp, pl, or cy", 2);
-// 		return ;
-// 	}
-// 	// init_ambient_lighting(scene->light, info);
-// 	// init_camera(scene->camera, info);
-// 	// close(fd);
-// 	// fv_free_array(info); 
-// }
-
-
-
 
 /*
 *	Changes the line so that for example a line like:
@@ -56,22 +20,26 @@
 */
 static void modify_before_split(char **line)
 {
-	char *tmp;
+	char	*tmp;
+	bool	commented;
 	
 	tmp = *line;
+	commented = false;
+	// if (*tmp == '#')
+	// 	commented = true;
 	while (*tmp)
 	{
-		// if (*tmp == ',' || *tmp == '\t' || *tmp == '\n') //i don't need it now since i'm splitting according to the '\n'
-		if (*tmp == ',' || *tmp == '\t')
-			*tmp = ' ';
+		// if (commented == false)
+		// {
+			// if (*tmp == ',' || *tmp == '\t' || *tmp == '\n') //i don't need it now since i'm splitting according to the '\n'
+			if (*tmp == ',' || *tmp == '\t')
+				*tmp = ' ';
+		// }
+		// else
+		// 	*tmp = '\n';
 		tmp++;
 	}
 }
-
-// void allocate_objects(t_parser *parser)
-// {
-	
-// }
 
 static int	count_each_object(const char *map, const char *substr)
 {
@@ -89,47 +57,59 @@ static int	count_each_object(const char *map, const char *substr)
 	return (count);
 }
 
-int	find_objects_amount(const char *map)
+static void	count_elements(t_parser *parser)
 {
 	// const char	*tmp = map;
-	int	count;
+	int		count;
+	int		A;
+	int		C;
+	int		L;
 	
 	count = 0;
-	count += count_each_object(map, "sp");
-	count += count_each_object(map, "pl");
-	count += count_each_object(map, "cy");
-	
-	return count;
+	count += count_each_object(parser->map, "sp");
+	count += count_each_object(parser->map, "pl");
+	count += count_each_object(parser->map, "cy");
+	parser->objs_count = count;
+	A = count_each_object(parser->map, "A ");
+	C = count_each_object(parser->map, "C ");
+	L = count_each_object(parser->map, "L ");
+	if (A != 1 || C != 1 || L != 1)
+		ft_exit("Ambient lightning (A), Camera (C) and Light(L) must be declared once.", 0);
 }
 
-static void	parse_element(char **info, t_parser *parser)
+static void	parse_element(char **map_2d, char **info, t_mini_rt *mini_rt)
 {
+	static int obj_cur_index = 0;
+	
 	if (!ft_strncmp(info[0], "A", 2) && ft_2darray_size(info) == 5)
 	{
-		parser->A++;
+		// parser->A++;
 	}
 	else if (!ft_strncmp(info[0], "C", 2) && ft_2darray_size(info) == 8)
 	{
-		parser->C++;
+		// parser->C++;
 	}
 	else if (!ft_strncmp(info[0], "L", 2) && ft_2darray_size(info) == 8)
 	{
-		parser->L++;
+		// parser->L++;
 	}
 	else if (!ft_strncmp(info[0], "sp", 3) && ft_2darray_size(info) == 8)
 	{
-		// parser->objects_num++;
+		obj_cur_index++;
 	}
 	else if (!ft_strncmp(info[0], "pl", 3) && ft_2darray_size(info) == 10)
 	{
-		// parser->objects_num++;
+		obj_cur_index++;
 	}
 	else if (!ft_strncmp(info[0], "cy", 3) && ft_2darray_size(info) == 12)
 	{
-		// parser->objects_num++;
+		obj_cur_index++;
 	}
 	else
-		ft_putendl_fd(ERROR "Element can only be: A, C, L, sp, pl, or cy", 2);
+	{
+		fv_free_array(info);
+		ft_exit_v4("Element can only be one of the following: A, C, L, sp, pl, or cy", 0, mini_rt->scene.objects, map_2d);
+	}
 }
 
 static void	parse_map(t_mini_rt *mini_rt)
@@ -139,42 +119,48 @@ static void	parse_map(t_mini_rt *mini_rt)
 	char	**elem_info;
 	// int		i;
 
-	// check_characters();
-	// (void)parser;
-	// printf("\nCount of objects is: %d\n", find_objects_amount(map));
+	count_elements(&mini_rt->parser);
+	printf("\nCount of objects is: %d\n", mini_rt->parser.objs_count);
+	// mini_rt->scene.objects = (t_object *)ft_calloc((mini_rt->parser.objs_count + 1), sizeof(t_object));
+	mini_rt->scene.objects = (t_object *)malloc((mini_rt->parser.objs_count) * sizeof(t_object));
+	if (mini_rt->scene.objects == NULL)
+		ft_exit("malloc for objects failed", 1);
 	
-	mini_rt->scene.objects = (t_object *)malloc(find_objects_amount(mini_rt->parser.map) * sizeof(t_object));
 	map_2d = ft_split(mini_rt->parser.map, '\n'); // First split for the 1D map to split it to its lines
 	if (map_2d == NULL)
-		ft_error_exit("malloc for split failed", 1);
+		ft_exit_v2("malloc for split failed", 1, mini_rt->scene.objects, -1);
+
 	line = -1;
 	while (map_2d[++line])
 	{
-		// printf("%s\n", map_2d[line]);
+		if (map_2d[line][0] == '#')
+			continue ;
 		modify_before_split(&(map_2d[line]));
 		elem_info = ft_split(map_2d[line], ' '); //second split to divide the numbers/info of each element(in each line)
-		// printf("object is %s and size is %d\n", elem_info[0], ft_2darray_size(elem_info));
 		if (!elem_info)
-			ft_exit_v3("malloc for split failed", 1, map_2d);
-		parse_element(elem_info, &mini_rt->parser);
-		// here i need to parse every element and init it
-		// i = -1;
-		// while (elem_info[++i]
+			ft_exit_v4("malloc for split failed", 1, mini_rt->scene.objects, map_2d);
+		parse_element(map_2d, elem_info, mini_rt);
+		
 		fv_free_array(elem_info);
 	}
 	fv_free_array(map_2d);
 }
 
-
 //my so_long_version
-void	read_and_save_map(int fd, t_mini_rt *mini_rt)
+void	open_and_parse_map(char **argv, t_mini_rt *mini_rt)
 {
+	int		fd; 
 	char	*line;
 
+	if (ft_strncmp((argv[1] + (ft_strlen(argv[1]) - 3)), ".rt", 4) != 0)
+		ft_exit("not a .rt file", 0);
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+		ft_exit("failed to open the file.", 1);
 	line = get_next_line(fd);
 	if (!line || !line[0])
 		ft_exit_v2("empty .rt file", 0, line, fd);
-	if (ft_strlen(line) > 1000)
+	if (ft_strlen(line) > 1024)
 		ft_exit_v2("invalid map.", 0, line, fd);
 	ft_strlcpy(mini_rt->parser.map, line, ft_strlen(line) + 1);
 	while (line != NULL)
@@ -183,7 +169,8 @@ void	read_and_save_map(int fd, t_mini_rt *mini_rt)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		ft_strlcat(mini_rt->parser.map, line, 1024);
+		if (line[0] != '#')
+			ft_strlcat(mini_rt->parser.map, line, 1024);
 	}
 	close(fd);
 	parse_map(mini_rt);

@@ -6,7 +6,7 @@
 #    By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/21 18:58:12 by fvoicu            #+#    #+#              #
-#    Updated: 2024/06/09 12:57:37 by mevangel         ###   ########.fr        #
+#    Updated: 2024/06/11 13:00:08 by mevangel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRCS		:= $(wildcard src/*.c \
 						src/vector/*.c \
 						src/objects/*.c \
 						src/parsing/*.c \
-						src/init/*.c) 
+						src/init/*.c \
+						src/utils/*.c)
 OBJS		:= ${SRCS:.c=.o}
 
 all: libft libmlx $(NAME)
@@ -31,8 +32,13 @@ all: libft libmlx $(NAME)
 libft:
 	@make -C $(LIB)
 
+# libmlx:
+# 	@if [ ! -d "./MLX42" ]; then git clone https://github.com/codam-coding-college/MLX42.git; fi
+# 	@cd MLX42 && cmake -B build
+# 	@cd MLX42 && cmake --build build -j4
+
 libmlx:
-	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4 
+	@if [ ! -d "./MLX42" ]; then cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4; fi
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)..."
