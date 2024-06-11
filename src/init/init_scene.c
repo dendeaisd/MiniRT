@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flaviav <flaviav@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 02:50:11 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/10 23:26:12 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/11 02:08:06 by flaviav          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_scene	*init_scene(void)
 	scene = malloc(sizeof(t_scene));
 	if (!scene)
 		return (NULL);
-	init_camera(&scene->camera, (t_vec){-1, 0, 0}, \
+	init_camera(&scene->camera, (t_vec){0, 0, 0}, \
 				(t_vec){0, 0, 1}, 70.f);
 	init_light(&scene->light, (t_vec){-40, 50, 0}, 0.6);
 	init_ambilight(&scene->ambilight, 0.2, \
@@ -61,9 +61,7 @@ static void	init_camera(t_camera *camera, t_vec position, \
 {
 	camera->position = position;
 	camera->orientation = orientation;
-	printf("before mult: %f %f %f\n", camera->orientation.x, camera->orientation.y, camera->orientation.z);
-	camera->orientation = vec_mul(camera->orientation, 1);
-	printf("after mult: %f %f %f\n", camera->orientation.x, camera->orientation.y, camera->orientation.z);
+	camera->orientation = vec_mul(camera->orientation, -1);
 	camera->fov = fov;
 	camera->ratio = 0.f;
 	camera->viewport.width = 0.f;

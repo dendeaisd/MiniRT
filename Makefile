@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+         #
+#    By: flaviav <flaviav@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/21 18:58:12 by fvoicu            #+#    #+#              #
-#    Updated: 2024/06/04 04:17:36 by fvoicu           ###   ########.fr        #
+#    Updated: 2024/06/11 00:22:15 by flaviav          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:= miniRT
-CFLAGS	:= -Wunreachable-code -Ofast -g -Wall -Wextra -Werror 
+CFLAGS	:= -Wunreachable-code -Ofast -g  
 LIBMLX	:= ./MLX42
 LIB			:= ./Lib
 CC			:= cc
