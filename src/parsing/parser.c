@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:18:17 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/11 13:47:12 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/11 14:04:44 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,12 @@
 static void modify_before_split(char **line)
 {
 	char	*tmp;
-	bool	commented;
 	
 	tmp = *line;
-	commented = false;
-	// if (*tmp == '#')
-	// 	commented = true;
 	while (*tmp)
 	{
-		// if (commented == false)
-		// {
-			// if (*tmp == ',' || *tmp == '\t' || *tmp == '\n') //i don't need it now since i'm splitting according to the '\n'
-			if (*tmp == ',' || *tmp == '\t')
-				*tmp = ' ';
-		// }
-		// else
-		// 	*tmp = '\n';
+		if (*tmp == ',' || *tmp == '\t')
+			*tmp = ' ';
 		tmp++;
 	}
 }
@@ -82,9 +72,7 @@ static void	parse_element(char **map_2d, char **info, t_mini_rt *mini_rt)
 	static int obj_cur_index = 0;
 	
 	if (!ft_strncmp(info[0], "A", 2) && ft_2darray_size(info) == 5)
-	{
-		// parser->A++;
-	}
+		init_amb_light(map_2d, info, mini_rt);
 	else if (!ft_strncmp(info[0], "C", 2) && ft_2darray_size(info) == 8)
 	{
 		// parser->C++;
@@ -133,14 +121,11 @@ static void	parse_map(t_mini_rt *mini_rt)
 	line = -1;
 	while (map_2d[++line])
 	{
-		if (map_2d[line][0] == '#')
-			continue ;
 		modify_before_split(&(map_2d[line]));
 		elem_info = ft_split(map_2d[line], ' '); //second split to divide the numbers/info of each element(in each line)
 		if (!elem_info)
 			ft_exit_v4("malloc for split failed", 1, mini_rt->scene.objects, map_2d);
 		parse_element(map_2d, elem_info, mini_rt);
-		
 		fv_free_array(elem_info);
 	}
 	fv_free_array(map_2d);
