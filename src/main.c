@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/11 12:49:54 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/11 17:21:55 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,9 @@ int	main(int argc, char **argv)
 	// printf("The map i read:\n%s\n", mini_rt.parser.map);
 	// parse_map(mini_rt.parser.map, &mini_rt.parser.map_2d);
 	
-	
-	// // To check the saving of the 2d map in the struct:
-	// int i = -1;
-	// while (mini_rt.parser.map_2d[++i])
-	// 	printf("line [%d]: %s\n", i, mini_rt.parser.map_2d[i]);
-	
-		
-	// parse_rt_file(&mini_rt.scene, argv[1]);
-
+	//in order to check if the ambilight values passed correctly:
+	// printf("For ambilight, currently save:")
+	printf("%s\n", SUCCESS);
 	return 0;
 	/* ************************************************* */
 	

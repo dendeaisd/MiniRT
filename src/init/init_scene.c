@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 02:50:11 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/31 18:17:01 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/11 16:26:03 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 //TO DO: implement a better way to manage the object allocation/initiation
 //		 in init_scene	
 
-static void	init_camera(t_camera *camera, t_vec position, \
+static void	fv_init_camera(t_camera *camera, t_vec position, \
 						t_vec orientation, float fov);
-static void	init_light(t_light *light, t_vec position, \
+static void	fv_init_light(t_light *light, t_vec position, \
 						float brightness);
-static void	init_ambilight(t_ambilight *ambilight, \
+static void	fv_init_ambilight(t_ambilight *ambilight, \
 							float ratio, t_vec color);
 
 t_scene	*init_scene(void)
@@ -30,10 +30,10 @@ t_scene	*init_scene(void)
 	scene = malloc(sizeof(t_scene));
 	if (!scene)
 		return (NULL);
-	init_camera(&scene->camera, (t_vec){-50, 0, 0}, \
+	fv_init_camera(&scene->camera, (t_vec){-50, 0, 0}, \
 				(t_vec){0, 0, 1}, 70.f);
-	init_light(&scene->light, (t_vec){-40, 50, 0}, 0.6);
-	init_ambilight(&scene->ambilight, 0.2, \
+	fv_init_light(&scene->light, (t_vec){-40, 50, 0}, 0.6);
+	fv_init_ambilight(&scene->ambilight, 0.2, \
 				(t_vec){255, 255, 255});
 	scene->objects_nb = 1;
 	scene->objects = malloc(sizeof(t_object) * scene->objects_nb);
@@ -56,7 +56,7 @@ void	destroy_scene(t_scene *scene)
 	}
 }
 
-static void	init_camera(t_camera *camera, t_vec position, \
+static void	fv_init_camera(t_camera *camera, t_vec position, \
 						t_vec orientation, float fov)
 {
 	camera->position = position;
@@ -64,14 +64,14 @@ static void	init_camera(t_camera *camera, t_vec position, \
 	camera->fov = fov;
 }
 
-static void	init_light(t_light *light, t_vec position, \
+static void	fv_init_light(t_light *light, t_vec position, \
 						float brightness)
 {
 	light->position = position;
 	light->brightness = brightness;
 }
 
-static void	init_ambilight(t_ambilight *ambilight, \
+static void	fv_init_ambilight(t_ambilight *ambilight, \
 							float ratio, t_vec color)
 {
 	ambilight->ratio = ratio;

@@ -6,13 +6,13 @@
 #    By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/21 18:58:12 by fvoicu            #+#    #+#              #
-#    Updated: 2024/06/11 13:00:08 by mevangel         ###   ########.fr        #
+#    Updated: 2024/06/11 16:04:08 by mevangel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:= miniRT
-CFLAGS	:= -Wunreachable-code -Ofast -g -Wall -Wextra -Werror 
-LIBMLX	:= ./MLX42
+CFLAGS		:= -Wunreachable-code -Ofast -g -Wall -Wextra -Werror 
+LIBMLX		:= ./MLX42
 LIB			:= ./Lib
 CC			:= cc
 # LSAN	:= -LLeakSanitizer -llsan
@@ -32,13 +32,13 @@ all: libft libmlx $(NAME)
 libft:
 	@make -C $(LIB)
 
-# libmlx:
-# 	@if [ ! -d "./MLX42" ]; then git clone https://github.com/codam-coding-college/MLX42.git; fi
-# 	@cd MLX42 && cmake -B build
-# 	@cd MLX42 && cmake --build build -j4
-
 libmlx:
-	@if [ ! -d "./MLX42" ]; then cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4; fi
+	@if [ ! -d "./MLX42" ]; then git clone https://github.com/codam-coding-college/MLX42.git; fi
+	@cd MLX42 && cmake -B build
+	@cd MLX42 && cmake --build build -j4
+
+# $(LIBMLX):
+# 	@if [ ! -d "./MLX42" ]; then cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4; fi
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)..."
@@ -54,6 +54,7 @@ clean:
 fclean: clean
 	@rm -rf $(NAME)
 	@make --directory=Lib/ fclean
+	
 re: clean all
 
 .PHONY: all, clean, fclean, re, libmlx

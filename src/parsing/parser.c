@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:18:17 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/11 14:04:44 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/11 17:18:49 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,7 @@ static void	parse_element(char **map_2d, char **info, t_mini_rt *mini_rt)
 	if (!ft_strncmp(info[0], "A", 2) && ft_2darray_size(info) == 5)
 		init_amb_light(map_2d, info, mini_rt);
 	else if (!ft_strncmp(info[0], "C", 2) && ft_2darray_size(info) == 8)
-	{
-		// parser->C++;
-	}
+		init_camera(map_2d, info, mini_rt);
 	else if (!ft_strncmp(info[0], "L", 2) && ft_2darray_size(info) == 8)
 	{
 		// parser->L++;
@@ -96,7 +94,7 @@ static void	parse_element(char **map_2d, char **info, t_mini_rt *mini_rt)
 	else
 	{
 		fv_free_array(info);
-		ft_exit_v4("Element can only be one of the following: A, C, L, sp, pl, or cy", 0, mini_rt->scene.objects, map_2d);
+		ft_exit_v4("invalid rt map.", 0, mini_rt->scene.objects, map_2d);
 	}
 }
 
@@ -108,7 +106,7 @@ static void	parse_map(t_mini_rt *mini_rt)
 	// int		i;
 
 	count_elements(&mini_rt->parser);
-	printf("\nCount of objects is: %d\n", mini_rt->parser.objs_count);
+	// printf("\nCount of objects is: %d\n", mini_rt->parser.objs_count);
 	// mini_rt->scene.objects = (t_object *)ft_calloc((mini_rt->parser.objs_count + 1), sizeof(t_object));
 	mini_rt->scene.objects = (t_object *)malloc((mini_rt->parser.objs_count) * sizeof(t_object));
 	if (mini_rt->scene.objects == NULL)
