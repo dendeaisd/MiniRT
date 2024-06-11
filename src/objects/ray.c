@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flaviav <flaviav@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 01:23:56 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/11 02:24:31 by flaviav          ###   ########.fr       */
+/*   Updated: 2024/06/11 17:38:21 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,48 +33,40 @@ t_vec	pixel_to_viewport(int x, int y, t_viewport *viewport, \
 
 	viewport_x = (2.f * ((x + 0.5f) / (float)window->width) - 1.f) * \
 							(viewport->width / 2.f);
-	viewport_y = (1.f - 2.f* ((y + 0.5) / (float)window->height)) * \
+	viewport_y = (1.f - 2.f * ((y + 0.5) / (float)window->height)) * \
 							(viewport->height / 2.f);
 	viewport_z = -1.f;
 	return ((t_vec){viewport_x, viewport_y, viewport_z});
 }
 
-// t_ray	generate_ray(t_scene *scene, t_window *window, int x, int y)
-// {
-// 	t_camera	*camera;
-// 	t_vec		viewport_point;
-// 	t_vec		ray_direction;
+t_vec	transform_viewport_point(t_vec viewport_point, \
+						t_vec right, t_vec up, t_vec forward)
+{
+	t_vec	transformed_viewport_point;
 
-// 	camera = &scene->camera;
-// 	viewport_point = pixel_to_viewport(x, y, &camera->viewport, window);
-// 	ray_direction = vec_sub(viewport_point, camera->position);
-// 	// ray_direction = vec_sub(camera->position, viewport_point);	
-// 	ray_direction = vec_unit(ray_direction);
-// 	return ((t_ray){camera->position, ray_direction});
-// }
+	right = vec_unit(vec_cross(forward, (t_vec){0, -1, 1}));
+	up = vec_cross(right, forward);
+	transformed_viewport_point = vec_add(\
+		vec_add(\
+			vec_mul(right, viewport_point.x), \
+			vec_mul(up, viewport_point.y)), \
+			vec_mul(forward, viewport_point.z));
+	return (transformed_viewport_point);
+}
 
-t_ray generate_ray(t_scene *scene, t_window *window, int x, int y) {
-    t_camera    *camera;
-    t_vec       viewport_point;
-    t_vec       ray_direction;
+t_ray	generate_ray(t_scene *scene, t_window *window, int x, int y)
+{
+	t_camera	*camera;
+	t_vec		viewport_point;
+	t_vec		ray_direction;
+	t_vec		right;
+	t_vec		up;
 
-    camera = &scene->camera;
-
-    viewport_point = pixel_to_viewport(x, y, &camera->viewport, window);
-
-    // Assuming camera->orientation is the forward vector
-    t_vec forward = vec_unit(camera->orientation);
-    t_vec right = vec_unit(vec_cross(forward, (t_vec){0, -1, 0})); // Assuming (0, -1, 0) as world up vector
-    t_vec up = vec_cross(right, forward);
-
-    // Transform viewport point to world space using camera orientation
-    t_vec transformed_viewport_point;
-    transformed_viewport_point.x = viewport_point.x * right.x + viewport_point.y * up.x + viewport_point.z * forward.x;
-    transformed_viewport_point.y = viewport_point.x * right.y + viewport_point.y * up.y + viewport_point.z * forward.y;
-    transformed_viewport_point.z = viewport_point.x * right.z + viewport_point.y * up.z + viewport_point.z * forward.z;
-
-    // Calculate ray direction in world space
-    ray_direction = vec_sub(transformed_viewport_point, camera->position);
-    ray_direction = vec_unit(ray_direction); // Normalize direction
-    return (t_ray){camera->position, ray_direction};
+	camera = &scene->camera;
+	viewport_point = pixel_to_viewport(x, y, &camera->viewport, window);
+	viewport_point = transform_viewport_point(viewport_point, right, up, \
+							vec_unit(scene->camera.orientation));
+	ray_direction = vec_unit(\
+						vec_sub(viewport_point, camera->position));
+	return ((t_ray){camera->position, ray_direction});
 }
