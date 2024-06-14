@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:54:35 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/11 19:23:10 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/14 16:06:50 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,15 @@ void	init_camera(char **info, t_mini_rt *mini_rt)
 	if (ft_atof(info[7]) < 0 || ft_atof(info[7]) > 180)
 		ft_exit_miniRT("camera must have a field of view in range of 0 to 180 degrees", 0, info, mini_rt);
 	mini_rt->scene.camera.fov = (float)ft_atof(info[7]);
+}
+
+/*
+*	Example: L   -40.0,50.0,0.0   0.6  ( 10,0,255 )
+*	x,y,z coordinates of the light point
+*	light brightness ratio in range [0.0,1.0] -> now 0.6
+*	( bonus part: R,G,B colors in range 0-255 )
+*/
+void	init_light(char **info, t_mini_rt *mini_rt)
+{
+	
 }

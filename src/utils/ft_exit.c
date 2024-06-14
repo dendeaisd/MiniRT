@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 12:04:57 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/11 13:31:34 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/14 15:42:23 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	ft_exit_v2(char *msg, int exit_val, void *to_free, int fd)
 {
 	ft_putstr_fd("\033[31mError:\033[37m ", 2);
 	ft_putendl_fd(msg, 2);
-	free(to_free);
+	if (to_free)
+		free(to_free);
 	if (fd > 2)
 		close(fd);
 	if (exit_val == 1)

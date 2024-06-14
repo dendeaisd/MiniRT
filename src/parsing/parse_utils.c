@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:35:19 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/11 19:25:08 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/14 15:57:03 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,36 @@ int	ft_2darray_size(char **array)
 	while (array[i])
 		i++;
 	return(i);
+}
+
+/*
+*	returns true in strings like: 1,  2.0405 235
+*	returns false in strings like:
+*	0..2452
+*	.352
+*	++141
+*/
+static bool	ft_str_is_number(const char *str)
+{
+	bool found_dot;
+	
+	if (!str)
+		return (false);
+	if (*str == '+' || *str == '-')
+		str++;
+	if (!ft_isdigit((int)*str))
+		return (false);
+	found_dot = false;
+	while (*(++str))
+	{
+		if (found_dot == true && *str == '.')
+			return (false);
+		if (*str == '.')
+			found_dot = true;
+		else if (!ft_isdigit((int)*str))
+			return (false);
+	}
+	return (true);
 }
 
 bool	array_has_only_numbers(char **array)

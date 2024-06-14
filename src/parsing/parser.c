@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:18:17 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/11 18:55:26 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/14 16:09:49 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,32 +41,33 @@ static int	count_each_object(const char *map, const char *substr)
 	while (tmp != NULL)
 	{
 		count++;
-		tmp++; // substr is "sp" or "pl" or "cy"
+		tmp++;
 		tmp = ft_strnstr(tmp, substr, ft_strlen(tmp));
 	}
 	return (count);
 }
 
-static void	count_elements(t_parser *parser)
+static void	count_elements(t_parser *parser, t_mini_rt *mini_rt)
 {
-	// const char	*tmp = map;
-	int		count;
-	int		A;
-	int		C;
-	int		L;
-	
+	int	count;
+	int	A;
+	int	C;
+	int	L;
+
 	count = 0;
 	count += count_each_object(parser->map, "sp");
 	count += count_each_object(parser->map, "pl");
 	count += count_each_object(parser->map, "cy");
 	parser->objs_count = count;
 	//? should i pass this count to the mini_rt->scene->objects_nb ?
+	mini_rt->scene.objects_nb = count;
 	A = count_each_object(parser->map, "A");
 	C = count_each_object(parser->map, "C");
 	L = count_each_object(parser->map, "L");
 	if (A != 1 || C != 1 || L != 1)
 		ft_exit("Ambient lightning (A), Camera (C) and Light(L) must be declared once.", 0);
 }
+
 
 static void	parse_element(char **info, t_mini_rt *mini_rt)
 {
@@ -76,10 +77,8 @@ static void	parse_element(char **info, t_mini_rt *mini_rt)
 		init_amb_light(info, mini_rt);
 	else if (!ft_strncmp(info[0], "C", 2) && ft_2darray_size(info) == 8)
 		init_camera(info, mini_rt);
-	else if (!ft_strncmp(info[0], "L", 2) && ft_2darray_size(info) == 8)
-	{
-		// parser->L++;
-	}
+	else if (!ft_strncmp(info[0], "L", 2) && (ft_2darray_size(info) == 5 || ft_2darray_size(info) == 8)) //5 in mandatory, 8 in bonus
+		init_light(info, mini_rt);
 	else if (!ft_strncmp(info[0], "sp", 3) && ft_2darray_size(info) == 8)
 	{
 		obj_cur_index++;
@@ -102,7 +101,7 @@ static void	parse_map(t_mini_rt *mini_rt)
 	char	**elem_info;
 	// int		i;
 
-	count_elements(&mini_rt->parser);
+	count_elements(&mini_rt->parser, mini_rt);
 	// printf("\nCount of objects is: %d\n", mini_rt->parser.objs_count);
 	// mini_rt->scene.objects = (t_object *)ft_calloc((mini_rt->parser.objs_count + 1), sizeof(t_object));
 	mini_rt->scene.objects = (t_object *)malloc((mini_rt->parser.objs_count) * sizeof(t_object));
@@ -129,19 +128,19 @@ static void	parse_map(t_mini_rt *mini_rt)
 //my so_long_version
 void	open_and_parse_map(char **argv, t_mini_rt *mini_rt)
 {
-	int		fd; 
+	int		fd;
 	char	*line;
 
 	if (ft_strncmp((argv[1] + (ft_strlen(argv[1]) - 3)), ".rt", 4) != 0)
 		ft_exit("not a .rt file", 0);
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
-		ft_exit("failed to open the file.", 1);
+		ft_exit("failed to open the file", 1);
 	line = get_next_line(fd);
 	if (!line || !line[0])
 		ft_exit_v2("empty .rt file", 0, line, fd);
 	if (ft_strlen(line) > 1024)
-		ft_exit_v2("invalid map.", 0, line, fd);
+		ft_exit_v2("invalid map", 0, line, fd);
 	ft_strlcpy(mini_rt->parser.map, line, ft_strlen(line) + 1);
 	while (line != NULL)
 	{

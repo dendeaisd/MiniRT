@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/11 19:26:45 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/14 15:57:54 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,6 @@ void	ft_exit_v2(char *msg, int exit_val, void *to_free, int fd);
 void	ft_exit_v3(char *err_msg, int exit_value, char **array_to_free);
 void	ft_exit_v4(char *err_msg, int exit_value, void *to_free, char **array_to_free);
 
-bool	ft_str_is_number(const char *str);
+// bool	ft_str_is_number(const char *str);
 
 #endif
