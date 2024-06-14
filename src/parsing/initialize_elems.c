@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:54:35 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/14 18:50:58 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/14 19:57:45 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,35 @@ void	init_camera(char **info, t_mini_rt *mini_rt)
 	mini_rt->scene.camera.fov = (float)ft_atof(info[7]);
 }
 
-// /*
-// *	Example: L   -40.0,50.0,0.0   0.6  ( 10,0,255 )
-// *	x,y,z coordinates of the light point
-// *	light brightness ratio in range [0.0,1.0] -> now 0.6
-// *	( bonus part: R,G,B colors in range 0-255 )
-// */
-// void	init_light(char **info, t_mini_rt *mini_rt)
-// {
+/*
+*	Example: L   -40.0, 50.0, 0.0   0.6  ( 10,0,255 )
+*	x,y,z coordinates of the light point
+*	light brightness ratio in range [0.0,1.0] -> now 0.6
+*	( bonus part: R,G,B colors in range 0-255 )
+*/
+void	init_light(char **info, t_mini_rt *mini_rt)
+{
+	float	brightness;
 	
-// }
+	if (array_has_only_numbers(info + 1) == false)
+		ft_exit_miniRT("invalid input for Light", 0, info, mini_rt);
+	mini_rt->scene.light.position.x = (float)ft_atof(info[1]);
+	mini_rt->scene.light.position.y = (float)ft_atof(info[2]);
+	mini_rt->scene.light.position.z = (float)ft_atof(info[3]);
+	
+	brightness = (float)ft_atof(info[4]);
+	if (brightness < 0 || brightness > 1)
+		ft_exit_miniRT("light must have a brightness ratio between 0.0 and 1.0", 0, info, mini_rt);
+	mini_rt->scene.light.brightness = brightness;
+
+	if (ft_2darray_size(info) == 5) //mandatory part that has no color:
+		mini_rt->scene.light.color = (t_color){255, 255, 255}; //sets the color to white, if no values are provided
+	else
+	{
+		if (invalid_color(info + 5))
+			ft_exit_miniRT("invalid color for Light", 0, info, mini_rt);
+		mini_rt->scene.light.color.r = ft_atoi(info[5]);
+		mini_rt->scene.light.color.g = ft_atoi(info[6]);
+		mini_rt->scene.light.color.b = ft_atoi(info[7]);
+	}
+}

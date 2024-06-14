@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 02:37:02 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/11 18:16:21 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/14 20:47:48 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ typedef struct s_light
 {
 	t_vec		position;
 	float		brightness;
+	t_color		color;
 }	t_light;
 
 typedef struct s_ambilight
 {
 	float		ratio;
-	t_color		color;
+	t_color		color; 
 }	t_ambilight;
 
 typedef struct s_viewport
@@ -50,7 +51,7 @@ typedef struct s_scene
 	t_viewport	viewport;
 }	t_scene;
 
-t_scene	*init_scene(void);
-void	destroy_scene(t_scene *scene);
+// t_scene	*init_scene(void);
+// void	destroy_scene(t_scene *scene);
 
 #endif

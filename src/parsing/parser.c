@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:18:17 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/14 18:38:00 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/14 20:21:14 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,7 @@ static void	parse_element(char **info, t_mini_rt *mini_rt)
 	else if (!ft_strncmp(info[0], "C", 2) && ft_2darray_size(info) == 8)
 		init_camera(info, mini_rt);
 	else if (!ft_strncmp(info[0], "L", 2) && (ft_2darray_size(info) == 5 || ft_2darray_size(info) == 8)) //5 in mandatory, 8 in bonus
-		// init_light(info, mini_rt);
-	{
-		;
-	}
+		init_light(info, mini_rt);
 	else if (!ft_strncmp(info[0], "sp", 3) && ft_2darray_size(info) == 8)
 	{
 		obj_cur_index++;

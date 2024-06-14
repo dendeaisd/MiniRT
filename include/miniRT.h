@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/14 15:57:54 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/14 19:58:38 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	open_and_parse_map(char **argv, t_mini_rt *mini_rt);
 //init functions
 void	init_amb_light(char **info, t_mini_rt *mini_rt);
 void	init_camera(char **info, t_mini_rt *mini_rt);
+void	init_light(char **info, t_mini_rt *mini_rt);
 
 //parse_utils
 bool	array_has_only_numbers(char **array);

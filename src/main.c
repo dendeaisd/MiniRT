@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/14 15:42:23 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/14 20:27:02 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	main(int argc, char **argv)
 
 	
 	printf("%s\n", SUCCESS);
-	return 0;
+    // printf("hello world\n");
+	return (0);
 	/* ************************************************* */
 	
 	// mini_rt = init_mini_rt(WIDTH, HEIGHT); 
