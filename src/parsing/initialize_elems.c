@@ -6,23 +6,31 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:54:35 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/14 16:06:50 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/14 18:50:58 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+/**
+*	@brief Checks the r, g, b values of the color and accepts only integer values
+*	in the range [0-255]. Rejects negative numbers or floats and protects from
+*	overflow in ft_atoi.
+*	@param color_arr: the array of the three strings for the r,g,b values.
+*	@returns true: if the the three r,g,b values don't meet the requirements for
+*	valid color.
+*/
 bool	invalid_color(char **color_arr)
 {
-	int		i;
-	double	tmp;
+	int	i;
+	int	tmp;
 
 	i = -1;
 	while (++i < 3)
 	{
-		// printf("string color[%d]: %s\n", i, color_arr[i]);
+		if (ft_strchr(color_arr[i], '.') || color_arr[i][0] == '-')
+			return (true);
 		tmp = ft_atoi(color_arr[i]);
-		// printf("color[%d]: %f\n", i, tmp);
 		if (tmp < 0 || tmp > 255)
 			return (true);
 	}
@@ -87,13 +95,13 @@ void	init_camera(char **info, t_mini_rt *mini_rt)
 	mini_rt->scene.camera.fov = (float)ft_atof(info[7]);
 }
 
-/*
-*	Example: L   -40.0,50.0,0.0   0.6  ( 10,0,255 )
-*	x,y,z coordinates of the light point
-*	light brightness ratio in range [0.0,1.0] -> now 0.6
-*	( bonus part: R,G,B colors in range 0-255 )
-*/
-void	init_light(char **info, t_mini_rt *mini_rt)
-{
+// /*
+// *	Example: L   -40.0,50.0,0.0   0.6  ( 10,0,255 )
+// *	x,y,z coordinates of the light point
+// *	light brightness ratio in range [0.0,1.0] -> now 0.6
+// *	( bonus part: R,G,B colors in range 0-255 )
+// */
+// void	init_light(char **info, t_mini_rt *mini_rt)
+// {
 	
-}
+// }
