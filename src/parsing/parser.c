@@ -6,31 +6,18 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:18:17 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/16 16:38:39 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/16 17:51:53 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-/*
-*	Changes the line so that for example a line like:
-*	L	0,0,-5 	0.4		255,255,255
-*	Becomes: L	0 0 -5 0.4 255 255 255
-*	So that the numbers can be properly splited after.
-*/
-static void modify_before_split(char **line)
-{
-	char	*tmp;
-	
-	tmp = *line;
-	while (*tmp)
-	{
-		if (*tmp == ',' || *tmp == '\t')
-			*tmp = ' ';
-		tmp++;
-	}
-}
-
+/**
+ * @brief Counts the occurence of the 'substr' string in the bigger 'map' string.
+ * @param map: the string where to check.
+ * @param substr: the string whose occurences are looked inside 'map'.
+ * @returns The number it counted.
+ */
 static int	count_each_object(const char *map, const char *substr)
 {
 	const char	*tmp = map;
@@ -47,6 +34,13 @@ static int	count_each_object(const char *map, const char *substr)
 	return (count);
 }
 
+/**
+ * @brief Counts the occurences of the strings "sp", "pl" and "cy" (the "objects" of the scene)
+ * to save the number of objects in total, and checks if the strings "A", "C" and "L" occur only
+ * one time in the map, since Ambient lightning (A), Camera (C) and Light(L) must be declared once.
+ * @param scene: passed in order to modify the objects_nb that it carries
+ * @param map_1d: the firstly read 1D map, allocated on the stack.
+ */
 static void	count_elements(t_scene *scene, char *map_1d)
 {
 	int	count;
@@ -66,7 +60,17 @@ static void	count_elements(t_scene *scene, char *map_1d)
 		ft_exit("Ambient lightning (A), Camera (C) and Light(L) must be declared once.", 0);
 }
 
-
+/**
+ * @brief It parses every line (char **info) of the map, checking the first string every time
+ * which is the identifier of the element, and according to that it initializes the corresponding
+ * element or object. (For the objects it uses the static variable so that the object is properly
+ * placed in the dynamically allocated array of objects pointed to by "scene->objects".) It also
+ * checks for the proper amount of arguments/information for every element/object. If the number
+ * is not the correcct or the identifier is none of the expected 6, it exits.
+ * @param info: the 2d array of the strings that the current line of the rt map contains.
+ * @param scene: the struct that contains the variables to store the read data.
+ * @param map_2d: the 2d array of the rt map file, to be freed in case of exit call. 
+ */
 static void	parse_element(char **info, t_scene *scene, char **map_2d)
 {
 	static int obj_cur_index = -1;
@@ -87,6 +91,14 @@ static void	parse_element(char **info, t_scene *scene, char **map_2d)
 		ft_exit_miniRT("invalid rt map.", info, map_2d, scene);
 }
 
+/**
+ * @brief It counts how many elements/objects there are counting the strings "A", "C", "L",
+ * "sp", "pl", "cy" in the map_1d, and then allocates accordingly number of objects times
+ * the t_object struct. It parses the map one line at a time, annd then splits each line
+ * to its content, to store the corresponding values/characteristics of each element/object.
+ * @param scene: the struct that carries all the necessary values and structs to modify/save.
+ * @param map_1d: the readen from the fd map, saved as one string.
+ */
 static void	parse_map(t_scene *scene, char *map_1d)
 {
 	int		line;
@@ -112,7 +124,6 @@ static void	parse_map(t_scene *scene, char *map_1d)
 	}
 	fv_free_array(map_2d);
 }
-
 
 /**
  * @brief Opens the file of the map, passed as 2nd argument, and saves its content on the

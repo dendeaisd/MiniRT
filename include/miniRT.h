@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/16 16:56:09 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/16 17:51:49 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	add_plane(int obj_index, char **info, t_scene *scene, char **map_2d);
 void	add_cylinder(int obj_index, char **info, t_scene *scene, char **map_2d);
 
 //parsing utils
+void	modify_before_split(char **line);
 bool	array_has_only_numbers(char **array);
 int		ft_2darray_size(char **array);
 void	ft_exit_miniRT(char *err_msg, char **array1, char **array2, t_scene *scene);
