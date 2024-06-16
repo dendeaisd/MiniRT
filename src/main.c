@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/16 12:10:22 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/16 12:27:25 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,33 @@ static void	ft_print_all_data(t_mini_rt *miniRT)
 
 	printf("4. OBJECTS:\n");
 
-	// int i = -1;
-	// while(++i < miniRT->parser.objs_count)
-	// {
-	// 	if ()
-	// }
+	int i = -1;
+	while(++i < miniRT->parser.objs_count)
+	{
+		if (miniRT->scene.objects[i].type == SPHERE)
+		{
+			printf("Object no.%d is a SPHERE with:\n", i + 1);
+			printf("    - [x,y,z] coordinates of its center: [%f,%f,%f]\n", miniRT->scene.objects[i].data.sphere.center.x, miniRT->scene.objects[i].data.sphere.center.y, miniRT->scene.objects[i].data.sphere.center.z);
+			printf("    - diameter: %f\n", miniRT->scene.objects[i].data.sphere.diameter);
+			printf("    - RGB color values: %d, %d, %d\n", miniRT->scene.objects[i].data.sphere.color.r, miniRT->scene.objects[i].data.sphere.color.g, miniRT->scene.objects[i].data.sphere.color.b);
+		}
+		else if (miniRT->scene.objects[i].type == PLANE)
+		{
+			printf("Object no.%d is a PLANE with:\n", i + 1);
+			printf("    - [x,y,z] coordinates of a point in it: [%f,%f,%f]\n", miniRT->scene.objects[i].data.plane.point.x, miniRT->scene.objects[i].data.plane.point.y, miniRT->scene.objects[i].data.plane.point.z);
+			printf("    - 3d normalized normal vector with [x,y,z]: [%f,%f,%f]\n", miniRT->scene.objects[i].data.plane.normal.x, miniRT->scene.objects[i].data.plane.normal.y, miniRT->scene.objects[i].data.plane.normal.z);
+			printf("    - RGB color values: %d, %d, %d\n", miniRT->scene.objects[i].data.plane.color.r, miniRT->scene.objects[i].data.plane.color.g, miniRT->scene.objects[i].data.plane.color.b);
+		}
+		else
+		{
+			printf("Object no.%d is a CYLINDER with:\n", i + 1);
+			printf("    - center of [x,y,z] coordinates: [%f,%f,%f]\n", miniRT->scene.objects[i].data.cylinder.center.x, miniRT->scene.objects[i].data.cylinder.center.y, miniRT->scene.objects[i].data.cylinder.center.z);
+			printf("    - 3d normalized normal vector of axis with [x,y,z]: [%f,%f,%f]\n", miniRT->scene.objects[i].data.cylinder.axis.x, miniRT->scene.objects[i].data.cylinder.axis.y, miniRT->scene.objects[i].data.cylinder.axis.z);
+			printf("    - diameter: %f\n", miniRT->scene.objects[i].data.cylinder.diameter);
+			printf("    - height: %f\n", miniRT->scene.objects[i].data.cylinder.height);
+			printf("    - RGB color values: %d, %d, %d\n", miniRT->scene.objects[i].data.cylinder.color.r, miniRT->scene.objects[i].data.cylinder.color.g, miniRT->scene.objects[i].data.cylinder.color.b);
+		}
+	}
 }
 
 int	main(int argc, char **argv)
