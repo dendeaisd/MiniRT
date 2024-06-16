@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/16 11:55:20 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/16 16:56:09 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include "scene.h"
 # include "ray.h"
 
-
 # define WIDTH	800
 # define HEIGHT	600
 
@@ -37,18 +36,10 @@ typedef struct s_window
 	int				height;
 }	t_window;
 
-typedef struct s_parser
-{
-	char	map[1024];
-	char	**map_2d;
-	int 	objs_count;
-}	t_parser;
-
 typedef struct s_mini_rt
 {
 	t_window		*window;
 	t_scene			scene;
-	t_parser		parser;
 }	t_mini_rt;
 
 t_mini_rt	*init_mini_rt(int width, int height);
@@ -77,34 +68,26 @@ t_vec	pixel_to_viewport(int x, int y, t_viewport *viewport, \
 # define SUCCESS "\x1B[32mNo parsing errors! \x1B[0m"
 
 
-// void	parse_rt_file(t_scene *scene, char *file);
-// void	read_and_save_map(int fd, t_parser *parser);
-void	open_and_parse_map(char **argv, t_mini_rt *mini_rt);
-// void	read_and_save_map(int fd, t_mini_rt *mini_rt);
-// void	parse_map(char *map, char ***ref_2d);
-// void	parse_map(char *map);
-// void	parse_map(char *map, t_parser *parser);
+void	open_and_parse_map(char **argv, t_scene *scene);
 
 //init functions
-void	init_amb_light(char **info, t_mini_rt *mini_rt);
-void	init_camera(char **info, t_mini_rt *mini_rt);
-void	init_light(char **info, t_mini_rt *mini_rt);
-void	add_sphere(int obj_index, char **info, t_mini_rt *mini_rt);
-void	add_plane(int obj_index, char **info, t_mini_rt *mini_rt);
-void	add_cylinder(int obj_index, char **info, t_mini_rt *mini_rt);
+void	init_amb_light(char **info, t_scene *scene, char **map_2d);
+void	init_camera(char **info, t_scene *scene, char **map_2d);
+void	init_light(char **info, t_scene *scene, char **map_2d);
+void	add_sphere(int obj_index, char **info, t_scene *scene, char **map_2d);
+void	add_plane(int obj_index, char **info, t_scene *scene, char **map_2d);
+void	add_cylinder(int obj_index, char **info, t_scene *scene, char **map_2d);
 
-//parse_utils
+//parsing utils
 bool	array_has_only_numbers(char **array);
 int		ft_2darray_size(char **array);
-void	ft_exit_miniRT(char *err_msg, int exit_value, char **array_to_free, t_mini_rt *mini_RT);
+void	ft_exit_miniRT(char *err_msg, char **array1, char **array2, t_scene *scene);
 
 //general utils
-double	ft_atof(const char *str);
+float	ft_atof(const char *str);
 void	ft_exit(char *err_msg, int exit_value);
 void	ft_exit_v2(char *msg, int exit_val, void *to_free, int fd);
 void	ft_exit_v3(char *err_msg, int exit_value, char **array_to_free);
 void	ft_exit_v4(char *err_msg, int exit_value, void *to_free, char **array_to_free);
-
-// bool	ft_str_is_number(const char *str);
 
 #endif

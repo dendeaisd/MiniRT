@@ -6,15 +6,15 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 22:57:14 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/11 19:25:57 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/16 16:55:46 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "miniRT.h"
 
-static double	parse_integer_part(const char **str)
+static float	parse_integer_part(const char **str)
 {
-	double	result;
+	float	result;
 
 	result = 0.0;
 	while (**str >= '0' && **str <= '9')
@@ -25,10 +25,10 @@ static double	parse_integer_part(const char **str)
 	return (result);
 }
 
-static double	parse_fractional_part(const char **str)
+static float	parse_fractional_part(const char **str)
 {
-	double	fraction;
-	double	result;
+	float	fraction;
+	float	result;
 
 	fraction = 0.1;
 	result = 0.0;
@@ -45,11 +45,11 @@ static double	parse_fractional_part(const char **str)
 	return (result);
 }
 
-double	ft_atof(const char *str)
+float	ft_atof(const char *str)
 {
-	double	sign;
-	double	fraction;
-	double	result;
+	float	sign;
+	float	fraction;
+	float	result;
 
 	sign = 1.0;
 	fraction = 0.1;

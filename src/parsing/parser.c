@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:18:17 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/16 11:55:34 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/16 16:38:39 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	count_each_object(const char *map, const char *substr)
 	return (count);
 }
 
-static void	count_elements(t_parser *parser, t_mini_rt *mini_rt)
+static void	count_elements(t_scene *scene, char *map_1d)
 {
 	int	count;
 	int	A;
@@ -55,75 +55,78 @@ static void	count_elements(t_parser *parser, t_mini_rt *mini_rt)
 	int	L;
 
 	count = 0;
-	count += count_each_object(parser->map, "sp");
-	count += count_each_object(parser->map, "pl");
-	count += count_each_object(parser->map, "cy");
-	parser->objs_count = count;
-	//? should i pass this count to the mini_rt->scene->objects_nb ?
-	mini_rt->scene.objects_nb = count;
-	A = count_each_object(parser->map, "A");
-	C = count_each_object(parser->map, "C");
-	L = count_each_object(parser->map, "L");
+	count += count_each_object(map_1d, "sp");
+	count += count_each_object(map_1d, "pl");
+	count += count_each_object(map_1d, "cy");
+	scene->objects_nb = count;
+	A = count_each_object(map_1d, "A");
+	C = count_each_object(map_1d, "C");
+	L = count_each_object(map_1d, "L");
 	if (A != 1 || C != 1 || L != 1)
 		ft_exit("Ambient lightning (A), Camera (C) and Light(L) must be declared once.", 0);
 }
 
 
-static void	parse_element(char **info, t_mini_rt *mini_rt)
+static void	parse_element(char **info, t_scene *scene, char **map_2d)
 {
 	static int obj_cur_index = -1;
 	
 	if (!ft_strncmp(info[0], "A", 2) && ft_2darray_size(info) == 5)
-		init_amb_light(info, mini_rt);
+		init_amb_light(info, scene, map_2d);
 	else if (!ft_strncmp(info[0], "C", 2) && ft_2darray_size(info) == 8)
-		init_camera(info, mini_rt);
+		init_camera(info, scene, map_2d);
 	else if (!ft_strncmp(info[0], "L", 2) && (ft_2darray_size(info) == 5 || ft_2darray_size(info) == 8)) //5 in mandatory, 8 in bonus
-		init_light(info, mini_rt);
+		init_light(info, scene, map_2d);
 	else if (!ft_strncmp(info[0], "sp", 3) && ft_2darray_size(info) == 8)
-		add_sphere(++obj_cur_index, info, mini_rt);
+		add_sphere(++obj_cur_index, info, scene, map_2d);
 	else if (!ft_strncmp(info[0], "pl", 3) && ft_2darray_size(info) == 10)
-		add_plane(++obj_cur_index, info, mini_rt);
+		add_plane(++obj_cur_index, info, scene, map_2d);
 	else if (!ft_strncmp(info[0], "cy", 3) && ft_2darray_size(info) == 12)
-		add_cylinder(++obj_cur_index, info, mini_rt);
+		add_cylinder(++obj_cur_index, info, scene, map_2d);
 	else
-		ft_exit_miniRT("invalid rt map.", 0, info, mini_rt);
+		ft_exit_miniRT("invalid rt map.", info, map_2d, scene);
 }
 
-static void	parse_map(t_mini_rt *mini_rt)
+static void	parse_map(t_scene *scene, char *map_1d)
 {
 	int		line;
 	char	**elem_info;
-	// int		i;
+	char	**map_2d;
 
-	count_elements(&mini_rt->parser, mini_rt);
-	// printf("\nCount of objects is: %d\n", mini_rt->parser.objs_count);
-	// mini_rt->scene.objects = (t_object *)ft_calloc((mini_rt->parser.objs_count + 1), sizeof(t_object));
-	mini_rt->scene.objects = (t_object *)malloc((mini_rt->parser.objs_count) * sizeof(t_object));
-	if (mini_rt->scene.objects == NULL)
+	count_elements(scene, map_1d);
+	scene->objects = (t_object *)malloc((scene->objects_nb) * sizeof(t_object));
+	if (scene->objects == NULL)
 		ft_exit("malloc for objects failed", 1);
-	
-	mini_rt->parser.map_2d = ft_split(mini_rt->parser.map, '\n'); // First split for the 1D map to split it to its lines
-	if (mini_rt->parser.map_2d == NULL)
-		ft_exit_v2("malloc for split failed", 1, mini_rt->scene.objects, -1);
-
+	map_2d = ft_split(map_1d, '\n'); // First split for the 1D map to split it to its lines
+	if (map_2d == NULL)
+		ft_exit_v2("malloc for split failed", 1, scene->objects, -1);
 	line = -1;
-	while (mini_rt->parser.map_2d[++line])
+	while (map_2d[++line])
 	{
-		modify_before_split(&(mini_rt->parser.map_2d[line]));
-		elem_info = ft_split(mini_rt->parser.map_2d[line], ' '); //second split to divide the numbers/info of each element(in each line)
+		modify_before_split(&(map_2d[line]));
+		elem_info = ft_split(map_2d[line], ' '); //second split to divide the numbers/info of each element(in each line)
 		if (!elem_info)
-			ft_exit_v4("malloc for split failed", 1, mini_rt->scene.objects, mini_rt->parser.map_2d);
-		parse_element(elem_info, mini_rt);
+			ft_exit_v4("malloc for split failed", 1, scene->objects, map_2d);
+		parse_element(elem_info, scene, map_2d);
 		fv_free_array(elem_info);
 	}
-	fv_free_array(mini_rt->parser.map_2d);
+	fv_free_array(map_2d);
 }
 
-//my so_long_version
-void	open_and_parse_map(char **argv, t_mini_rt *mini_rt)
+
+/**
+ * @brief Opens the file of the map, passed as 2nd argument, and saves its content on the
+ * stack (char map[1024], parser struct), ignoring the commented lines (starting with '#')
+ * and checking for empty files, wrong file extension or invalid size. It closes the 
+ * corresponding fd at the end, and sends the readen for parsing.
+ * @param argv: it carries the relative path to the .rt file as argv[1]
+ * @param scene: the struct that carries the variables for the map to be used.
+ */
+void	open_and_parse_map(char **argv, t_scene *scene)
 {
 	int		fd;
 	char	*line;
+	char	map[1024];
 
 	if (ft_strncmp((argv[1] + (ft_strlen(argv[1]) - 3)), ".rt", 4) != 0)
 		ft_exit("not a .rt file", 0);
@@ -131,11 +134,9 @@ void	open_and_parse_map(char **argv, t_mini_rt *mini_rt)
 	if (fd == -1)
 		ft_exit("failed to open the file", 1);
 	line = get_next_line(fd);
-	if (!line || !line[0])
-		ft_exit_v2("empty .rt file", 0, line, fd);
-	if (ft_strlen(line) > 1024)
-		ft_exit_v2("invalid map", 0, line, fd);
-	ft_strlcpy(mini_rt->parser.map, line, ft_strlen(line) + 1);
+	if (!line || !line[0] || ft_strlen(line) > 1024)
+		ft_exit_v2("invalid .rt file", 0, line, fd);
+	ft_strlcpy(map, line, ft_strlen(line) + 1);
 	while (line != NULL)
 	{
 		free(line);
@@ -143,41 +144,8 @@ void	open_and_parse_map(char **argv, t_mini_rt *mini_rt)
 		if (line == NULL)
 			break ;
 		if (line[0] != '#')
-			ft_strlcat(mini_rt->parser.map, line, 1024);
+			ft_strlcat(map, line, 1024);
 	}
 	close(fd);
-	parse_map(mini_rt);
+	parse_map(scene, map);
 }
-
-
-// // the first first version of reading the file. Worked but unpractical for after.
-// void	parse_rt_file(t_scene *scene, char *file)
-// {
-// 	int		fd;
-// 	char	*line;
-// 	char	**elem_info;
-// 	int		occurences[4] = {0};
-
-// 	fd = open(file, O_RDONLY);
-// 	if (fd == -1)
-// 		ft_error_exit("failed to open the file.", 1, 0);
-// 	while (true)
-// 	{
-// 		line = get_next_line(fd);
-// 		if (line == NULL || *line == '\0')
-// 			break ;
-// 		if (ft_strncmp(line, "\n", 2) != 0)
-// 		{
-// 			modify_before_split(&line);
-// 			elem_info = ft_split(line, ' ');
-// 			free(line);
-// 			if (!elem_info)
-// 				ft_error_exit("malloc for ft_split failed.", 1, fd);
-// 			extract_elem_info(scene, elem_info, &occurences);
-// 			// extract_elem_info(elem_info);
-// 			fv_free_array(elem_info);
-// 		}
-// 	}
-// 	close(fd);
-// 	check_occurences(occurences);
-// }
