@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:18:17 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/14 20:21:14 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/16 11:55:34 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	count_elements(t_parser *parser, t_mini_rt *mini_rt)
 
 static void	parse_element(char **info, t_mini_rt *mini_rt)
 {
-	static int obj_cur_index = 0;
+	static int obj_cur_index = -1;
 	
 	if (!ft_strncmp(info[0], "A", 2) && ft_2darray_size(info) == 5)
 		init_amb_light(info, mini_rt);
@@ -80,17 +80,11 @@ static void	parse_element(char **info, t_mini_rt *mini_rt)
 	else if (!ft_strncmp(info[0], "L", 2) && (ft_2darray_size(info) == 5 || ft_2darray_size(info) == 8)) //5 in mandatory, 8 in bonus
 		init_light(info, mini_rt);
 	else if (!ft_strncmp(info[0], "sp", 3) && ft_2darray_size(info) == 8)
-	{
-		obj_cur_index++;
-	}
+		add_sphere(++obj_cur_index, info, mini_rt);
 	else if (!ft_strncmp(info[0], "pl", 3) && ft_2darray_size(info) == 10)
-	{
-		obj_cur_index++;
-	}
+		add_plane(++obj_cur_index, info, mini_rt);
 	else if (!ft_strncmp(info[0], "cy", 3) && ft_2darray_size(info) == 12)
-	{
-		obj_cur_index++;
-	}
+		add_cylinder(++obj_cur_index, info, mini_rt);
 	else
 		ft_exit_miniRT("invalid rt map.", 0, info, mini_rt);
 }

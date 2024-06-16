@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:54:35 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/14 19:57:45 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/16 12:09:02 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,4 +126,68 @@ void	init_light(char **info, t_mini_rt *mini_rt)
 		mini_rt->scene.light.color.g = ft_atoi(info[6]);
 		mini_rt->scene.light.color.b = ft_atoi(info[7]);
 	}
+}
+
+void	add_sphere(int obj_index, char **info, t_mini_rt *mini_rt)
+{
+	if (array_has_only_numbers(info + 1) == false)
+		ft_exit_miniRT("invalid input for sphere", 0, info, mini_rt);
+	mini_rt->scene.objects[obj_index].type = SPHERE;
+	mini_rt->scene.objects[obj_index].data.sphere.center.x = (float)ft_atof(info[1]);
+	mini_rt->scene.objects[obj_index].data.sphere.center.y = (float)ft_atof(info[2]);
+	mini_rt->scene.objects[obj_index].data.sphere.center.z = (float)ft_atof(info[3]);
+	mini_rt->scene.objects[obj_index].data.sphere.diameter = (float)ft_atof(info[4]);
+
+	if (invalid_color(info + 5))
+		ft_exit_miniRT("invalid color for sphere", 0, info, mini_rt);
+	mini_rt->scene.objects[obj_index].data.sphere.color.r = (float)ft_atof(info[5]);
+	mini_rt->scene.objects[obj_index].data.sphere.color.g = (float)ft_atof(info[6]);
+	mini_rt->scene.objects[obj_index].data.sphere.color.b = (float)ft_atof(info[7]);
+}
+
+void	add_plane(int obj_index, char **info, t_mini_rt *mini_rt)
+{
+	if (array_has_only_numbers(info + 1) == false)
+		ft_exit_miniRT("invalid input for plane", 0, info, mini_rt);
+	mini_rt->scene.objects[obj_index].type = PLANE;
+	
+	// x,y,z coordinates of a point in the plane:
+	mini_rt->scene.objects[obj_index].data.plane.point.x = (float)ft_atof(info[1]);
+	mini_rt->scene.objects[obj_index].data.plane.point.y = (float)ft_atof(info[2]);
+	mini_rt->scene.objects[obj_index].data.plane.point.z = (float)ft_atof(info[3]);
+	// x,y,z of the 3d normalized normal vector:
+	mini_rt->scene.objects[obj_index].data.plane.normal.x = (float)ft_atof(info[4]);
+	mini_rt->scene.objects[obj_index].data.plane.normal.y = (float)ft_atof(info[5]);
+	mini_rt->scene.objects[obj_index].data.plane.normal.z = (float)ft_atof(info[6]);
+	// color of the plane:
+	if (invalid_color(info + 7))
+		ft_exit_miniRT("invalid color for plane", 0, info, mini_rt);
+	mini_rt->scene.objects[obj_index].data.plane.color.r = (float)ft_atof(info[7]);
+	mini_rt->scene.objects[obj_index].data.plane.color.g = (float)ft_atof(info[8]);
+	mini_rt->scene.objects[obj_index].data.plane.color.b = (float)ft_atof(info[9]);
+}
+
+void	add_cylinder(int obj_index, char **info, t_mini_rt *mini_rt)
+{
+	if (array_has_only_numbers(info + 1) == false)
+		ft_exit_miniRT("invalid input for cylinder", 0, info, mini_rt);
+	mini_rt->scene.objects[obj_index].type = CYLINDER;
+	//x,y,z of the center of the cylinder:
+	mini_rt->scene.objects[obj_index].data.cylinder.center.x = (float)ft_atof(info[1]);
+	mini_rt->scene.objects[obj_index].data.cylinder.center.y = (float)ft_atof(info[2]);
+	mini_rt->scene.objects[obj_index].data.cylinder.center.z = (float)ft_atof(info[3]);
+	//3d normalized vector of axis of the cylinder:
+	mini_rt->scene.objects[obj_index].data.cylinder.axis.x = (float)ft_atof(info[4]);
+	mini_rt->scene.objects[obj_index].data.cylinder.axis.y = (float)ft_atof(info[5]);
+	mini_rt->scene.objects[obj_index].data.cylinder.axis.z = (float)ft_atof(info[6]);
+	//cylinder diameter:
+	mini_rt->scene.objects[obj_index].data.cylinder.diameter = (float)ft_atof(info[7]);
+	//cylinder height:
+	mini_rt->scene.objects[obj_index].data.cylinder.height = (float)ft_atof(info[8]);
+	// color of the cylinder:
+	if (invalid_color(info + 9))
+		ft_exit_miniRT("invalid color for cylinder", 0, info, mini_rt);
+	mini_rt->scene.objects[obj_index].data.cylinder.color.r = (float)ft_atof(info[9]);
+	mini_rt->scene.objects[obj_index].data.cylinder.color.g = (float)ft_atof(info[10]);
+	mini_rt->scene.objects[obj_index].data.cylinder.color.b = (float)ft_atof(info[11]);
 }

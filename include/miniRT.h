@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/14 19:58:38 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/16 11:55:20 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,9 @@ void	open_and_parse_map(char **argv, t_mini_rt *mini_rt);
 void	init_amb_light(char **info, t_mini_rt *mini_rt);
 void	init_camera(char **info, t_mini_rt *mini_rt);
 void	init_light(char **info, t_mini_rt *mini_rt);
+void	add_sphere(int obj_index, char **info, t_mini_rt *mini_rt);
+void	add_plane(int obj_index, char **info, t_mini_rt *mini_rt);
+void	add_cylinder(int obj_index, char **info, t_mini_rt *mini_rt);
 
 //parse_utils
 bool	array_has_only_numbers(char **array);

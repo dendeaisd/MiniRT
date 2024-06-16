@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 01:54:16 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/04 04:22:19 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/16 11:53:13 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ typedef struct s_sphere
 {
 	t_vec	center;
 	float	diameter;
-	t_vec	color;
+	t_color	color;
 }	t_sphere;
 
 typedef struct s_plane
 {
 	t_vec	point;
 	t_vec	normal;
-	t_vec	color;
+	t_color	color;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -42,7 +42,7 @@ typedef struct s_cylinder
 	t_vec	axis;
 	float	diameter;
 	float	height;
-	t_vec	color;
+	t_color	color;
 }	t_cylinder;
 
 typedef union u_obj_data
