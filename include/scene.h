@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 02:37:02 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/17 15:35:29 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/17 21:00:22 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,19 @@
 # define SCENE_H
 # include "object.h"
 
+typedef struct s_viewport
+{
+	float		width;
+	float		height;
+}	t_viewport;
+
 typedef struct s_camera
 {
 	t_vec		position;
 	t_vec		orientation;
 	float		fov;
+	float		ratio;		//! addition from Flavia
+	t_viewport	viewport;	//! addition from Flavia
 }	t_camera;
 
 typedef struct s_light
@@ -34,11 +42,6 @@ typedef struct s_ambilight
 	t_color		color;
 }	t_ambilight;
 
-typedef struct s_viewport
-{
-	float		width;
-	float		height;
-}	t_viewport;
 
 typedef struct s_scene
 {

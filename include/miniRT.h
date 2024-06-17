@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/17 20:48:00 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/17 20:56:17 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,17 @@ void		init_light(char **info, t_scene *scene, char **map_2d);
 void		add_sphere(int obj_index, char **info, t_scene *scene, char **map_2d);
 void		add_plane(int obj_index, char **info, t_scene *scene, char **map_2d);
 void		add_cylinder(int obj_index, char **info, t_scene *scene, char **map_2d);
+
+// From FLAVIA. We need name for the category here... *********************** *
+unsigned int	get_pixel_color(int obj_idx, t_scene *scene);
+void			render_scene(t_mini_rt *mini_rt);
+
+t_ray	generate_ray(t_scene *scene, t_window *window, int x, int y);
+float	calc_aspect_ratio(int width, int height);
+void	calc_viewport_dim(t_camera *camera, float aspect_ratio, \
+						t_viewport *viewport);
+t_vec	pixel_to_viewport(int x, int y, t_viewport *viewport, \
+						t_window *window);
 
 /* ***************************    General Utils    ************************** */
 float	ft_atof(const char *str);
