@@ -3,34 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   init_window.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 22:50:37 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/30 23:42:33 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/17 20:43:03 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_window	*init_window(int width, int height)
+void	init_window(t_mini_rt *mini_rt, int width, int height)
 {
-	t_window	*window;
-
-	window = malloc(sizeof(t_window));
-	if (!window)
-		return (NULL);
-	window->mlx = mlx_init(width, \
-				height, "miniRT", true);
-	if (!window->mlx)
-		return (free(window), NULL);
-	window->img = mlx_new_image(window->mlx, \
-				width, height);
-	if (!window->img)
-		return (mlx_terminate(window->mlx), \
-				free(window), NULL);
-	window->width = width;
-	window->height = height;
-	return (window);
+	mini_rt->window.mlx = mlx_init(width, height, "miniRT", true);
+	if (!mini_rt->window.mlx)
+		ft_exit_v2("failed to init mlx", 1, mini_rt->scene.objects, -1);
+	mini_rt->window.img = mlx_new_image(mini_rt->window.mlx, width, height);
+	if (!mini_rt->window.img)
+	{
+		mlx_terminate(mini_rt->window.mlx);
+		ft_exit_v2("failed to init image", 1, mini_rt->scene.objects, -1);
+	}
+	mini_rt->window.width = width;
+	mini_rt->window.height = height;
 }
 
 void	destroy_window(t_window *window)
@@ -41,6 +35,5 @@ void	destroy_window(t_window *window)
 			mlx_delete_image(window->mlx, window->img);
 		if (window->mlx)
 			mlx_terminate(window->mlx);
-		free(window);
 	}
 }
