@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 21:53:57 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/17 12:25:27 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/17 16:22:32 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,6 @@ void	setup_camera(t_camera *camera, int width, int height)
 	camera->ratio = calc_aspect_ratio(width, height);
 	calc_viewport_dim(camera, camera->ratio, \
 						&camera->viewport);
-}
-
-int	check_intersections(t_ray *ray, t_scene *scene)
-{
-	int		i;
-	float	t;
-
-	i = -1;
-	while (++i < scene->objects_nb)
-	{
-		if (intersect_sphere(ray, &scene->objects[i].data.sphere, &t))
-			return (i);
-	}
-	return (-1);
 }
 
 void	display_img(t_window *window)
