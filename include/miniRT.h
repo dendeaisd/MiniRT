@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/17 15:35:05 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/17 20:20:24 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,13 @@ int		ft_2darray_size(char **array);
 bool	invalid_color(char **color_arr);
 
 /* ********************    Initialization Functions    ********************** */
-void	init_amb_light(char **info, t_scene *scene, char **map_2d);
-void	init_camera(char **info, t_scene *scene, char **map_2d);
-void	init_light(char **info, t_scene *scene, char **map_2d);
-void	add_sphere(int obj_index, char **info, t_scene *scene, char **map_2d);
-void	add_plane(int obj_index, char **info, t_scene *scene, char **map_2d);
-void	add_cylinder(int obj_index, char **info, t_scene *scene, char **map_2d);
+t_window	*init_window(int width, int height);
+void		init_amb_light(char **info, t_scene *scene, char **map_2d);
+void		init_camera(char **info, t_scene *scene, char **map_2d);
+void		init_light(char **info, t_scene *scene, char **map_2d);
+void		add_sphere(int obj_index, char **info, t_scene *scene, char **map_2d);
+void		add_plane(int obj_index, char **info, t_scene *scene, char **map_2d);
+void		add_cylinder(int obj_index, char **info, t_scene *scene, char **map_2d);
 
 /* ***************************    General Utils    ************************** */
 float	ft_atof(const char *str);
