@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 21:53:57 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/17 19:04:14 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/17 21:15:42 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,19 +68,19 @@ void	render_scene(t_mini_rt *mini_rt)
 	int				i;
 	int				j;
 
-	setup_camera(&mini_rt->scene->camera, \
-			mini_rt->window->width, mini_rt->window->height);
+	setup_camera(&mini_rt->scene.camera, \
+			mini_rt->window.width, mini_rt->window.height);
 	j = -1;
-	while (++j < mini_rt->window->height)
+	while (++j < mini_rt->window.height)
 	{
 		i = -1;
-		while (++i < mini_rt->window->width)
+		while (++i < mini_rt->window.width)
 		{
-			ray = generate_ray(mini_rt->scene, mini_rt->window, i, j);
-			obj_idx = check_intersections(&ray, mini_rt->scene);
-			color = get_pixel_color(obj_idx, mini_rt->scene);
-			mlx_put_pixel(mini_rt->window->img, i, j, color);
+			ray = generate_ray(&mini_rt->scene, &mini_rt->window, i, j);
+			obj_idx = check_intersections(&ray, &mini_rt->scene);
+			color = get_pixel_color(obj_idx, &mini_rt->scene);
+			mlx_put_pixel(mini_rt->window.img, i, j, color);
 		}
 	}
-	display_img(mini_rt->window);
+	display_img(&mini_rt->window);
 }

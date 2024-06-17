@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:24:43 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/17 12:25:43 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/17 21:20:49 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static unsigned int	vec_to_color(t_vec color)
+static unsigned int	vec_to_color(t_color color)
 {
 	unsigned int	r;
 	unsigned int	g;
 	unsigned int	b;
 	unsigned int	a;
 	
-	r = (unsigned int)color.x;
-	g = (unsigned int)color.y;
-	b = (unsigned int)color.z;
+	r = (unsigned int)color.r;
+	g = (unsigned int)color.g;
+	b = (unsigned int)color.b;
 	a = 0xFF;
 	return((r << 24) | (g << 16) | (b << 8) | a);
 }
@@ -29,7 +29,7 @@ static unsigned int	vec_to_color(t_vec color)
 unsigned int	get_pixel_color(int obj_idx, t_scene *scene)
 {
 	t_object	*object;
-	t_vec		color;
+	t_color		color;
 
 	object = &scene->objects[obj_idx];
 	if (obj_idx == -1)

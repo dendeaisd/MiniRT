@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/17 20:56:17 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/17 22:27:04 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_vec	pixel_to_viewport(int x, int y, t_viewport *viewport, \
 float	ft_atof(const char *str);
 
 /* ******************************    Cleanup    ***************************** */
-void	destroy_window(t_window *window);
+void	cleanup_before_exit(t_mini_rt *mini_rt);
 
 void	ft_exit(char *err_msg, int exit_value);
 void	ft_exit_v2(char *msg, int exit_val, void *to_free, int fd);

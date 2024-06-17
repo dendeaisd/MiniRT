@@ -6,12 +6,12 @@
 #    By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/21 18:58:12 by fvoicu            #+#    #+#              #
-#    Updated: 2024/06/17 19:58:44 by mevangel         ###   ########.fr        #
+#    Updated: 2024/06/17 22:33:38 by mevangel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:= miniRT
-CFLAGS		:= -Wunreachable-code -Ofast -g -Wall -Wextra -Werror 
+CFLAGS		:= -Wunreachable-code -Ofast -g #-Wall -Wextra -Werror 
 LIBMLX		:= ./MLX42
 LIB			:= ./Lib
 CC			:= cc

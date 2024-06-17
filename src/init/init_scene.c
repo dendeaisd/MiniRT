@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialize_elems.c                                 :+:      :+:    :+:   */
+/*   init_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:54:35 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/17 15:08:42 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/17 22:16:13 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,12 @@ void	init_camera(char **info, t_scene *scene, char **map_2d)
 	if (ft_atof(info[7]) < 0 || ft_atof(info[7]) > 180)
 		ft_exit_mini_rt("camera must have a field of view in range of 0 to 180 degrees", map_2d, info, scene);
 	scene->camera.fov = ft_atof(info[7]);
+	
+	// The 4 additional lines Flavia had in her init_scene:
+	scene->camera.orientation = vec_mul(scene->camera.orientation, -1);
+	scene->camera.ratio = 0.f;
+	scene->camera.viewport.width = 0.f;
+	scene->camera.viewport.height = 0.f;
 }
 
 /*
