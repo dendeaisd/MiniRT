@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 12:04:57 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/14 15:42:23 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/17 15:43:36 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	ft_exit_v3(char *err_msg, int exit_value, char **array_to_free)
 		exit(EXIT_SUCCESS);
 }
 
-void	ft_exit_v4(char *err_msg, int exit_value, void *to_free, char **array_to_free)
+void	ft_exit_v4(char *err_msg, int exit_value, void *to_free,
+	char **array_to_free)
 {
 	ft_putstr_fd(ERROR, 2);
 	ft_putendl_fd(err_msg, 2);
@@ -60,4 +61,30 @@ void	ft_exit_v4(char *err_msg, int exit_value, void *to_free, char **array_to_fr
 		exit(EXIT_FAILURE);
 	else
 		exit(EXIT_SUCCESS);
+}
+
+/**
+ * @brief Exits the miniRT program, by doing the proper cleanup of two 2D
+ * arrays, one array of t_object structs, and printing a relative error 
+ * message to specify why it exited.
+ * @param err_msg: the message that is printed to specify the error occured
+ * @param array1: the first 2D array to be freed
+ * @param array2: the second 2D array to be freed
+ * @param scene: pointer to access the carried 'objects' pointer, to be freed
+ */
+void	ft_exit_mini_rt(char *err_msg, char **array1, char **array2,
+	t_scene *scene)
+{
+	if (err_msg)
+	{
+		ft_putstr_fd(ERROR, 2);
+		ft_putendl_fd(err_msg, 2);
+	}
+	if (array1)
+		fv_free_array(array1);
+	if (array2)
+		fv_free_array(array2);
+	if (scene->objects)
+		free(scene->objects);
+	exit(EXIT_SUCCESS);
 }

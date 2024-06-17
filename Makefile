@@ -6,7 +6,7 @@
 #    By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/21 18:58:12 by fvoicu            #+#    #+#              #
-#    Updated: 2024/06/11 16:04:08 by mevangel         ###   ########.fr        #
+#    Updated: 2024/06/17 14:35:33 by mevangel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS		:= $(wildcard src/*.c \
 						src/objects/*.c \
 						src/parsing/*.c \
 						src/init/*.c \
+						src/cleanup/*.c \
 						src/utils/*.c)
 OBJS		:= ${SRCS:.c=.o}
 

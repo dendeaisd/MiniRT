@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 00:56:30 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/01 00:55:09 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/17 15:18:25 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,5 @@ typedef struct s_ray
 	t_vec	origin;
 	t_vec	direction;
 }	t_ray;
-
 
 #endif

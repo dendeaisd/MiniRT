@@ -6,14 +6,14 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:18:17 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/16 17:51:53 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/17 15:49:14 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
 /**
- * @brief Counts the occurence of the 'substr' string in the bigger 'map' string.
+ * @brief Counts the occurence of the 'substr' string in the 'map' string.
  * @param map: the string where to check.
  * @param substr: the string whose occurences are looked inside 'map'.
  * @returns The number it counted.
@@ -22,7 +22,7 @@ static int	count_each_object(const char *map, const char *substr)
 {
 	const char	*tmp = map;
 	int			count;
-	
+
 	count = 0;
 	tmp = ft_strnstr(tmp, substr, ft_strlen(tmp));
 	while (tmp != NULL)
@@ -35,9 +35,10 @@ static int	count_each_object(const char *map, const char *substr)
 }
 
 /**
- * @brief Counts the occurences of the strings "sp", "pl" and "cy" (the "objects" of the scene)
- * to save the number of objects in total, and checks if the strings "A", "C" and "L" occur only
- * one time in the map, since Ambient lightning (A), Camera (C) and Light(L) must be declared once.
+ * @brief Counts the occurences of the strings "sp", "pl" and "cy" (the
+ * "objects" of the scene)to save the number of objects in total, and 
+ * checks if the strings "A", "C" and "L" occur only one time in the map,
+ * since Ambient lightning (A), Camera (C) and Light(L) must be declared once.
  * @param scene: passed in order to modify the objects_nb that it carries
  * @param map_1d: the firstly read 1D map, allocated on the stack.
  */
@@ -88,7 +89,7 @@ static void	parse_element(char **info, t_scene *scene, char **map_2d)
 	else if (!ft_strncmp(info[0], "cy", 3) && ft_2darray_size(info) == 12)
 		add_cylinder(++obj_cur_index, info, scene, map_2d);
 	else
-		ft_exit_miniRT("invalid rt map.", info, map_2d, scene);
+		ft_exit_mini_rt("invalid rt map.", info, map_2d, scene);
 }
 
 /**
