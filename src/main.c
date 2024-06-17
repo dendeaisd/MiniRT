@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/11 16:13:14 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/17 16:20:58 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	main(void)
 		return (fprintf(stderr, "Failed to init miniRT\n"), \
 				EXIT_FAILURE);
 	render_scene(mini_rt);
-	// printf("camera : %f %f %f\n", mini_rt->scene->camera.position.x, mini_rt->scene->camera.position.y, mini_rt->scene->camera.position.z);
 	mlx_loop(mini_rt->window->mlx);
 	destroy_mini_rt(mini_rt);
 	return (EXIT_SUCCESS);

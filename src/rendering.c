@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 21:53:57 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/17 12:25:27 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/17 19:04:14 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,6 @@ void	setup_camera(t_camera *camera, int width, int height)
 						&camera->viewport);
 }
 
-int	check_intersections(t_ray *ray, t_scene *scene)
-{
-	int		i;
-	float	t;
-
-	i = -1;
-	while (++i < scene->objects_nb)
-	{
-		if (intersect_sphere(ray, &scene->objects[i].data.sphere, &t))
-			return (i);
-	}
-	return (-1);
-}
-
 void	display_img(t_window *window)
 {
 	if (mlx_image_to_window(window->mlx, window->img, 0, 0) == -1)
@@ -43,6 +29,35 @@ void	display_img(t_window *window)
 		mlx_terminate(window->mlx);
 		fprintf(stderr, "Error displaying image\n");
 	}
+}
+
+int	check_intersections(t_ray *ray, t_scene *scene)
+{
+	float	closest_dist;
+	int		closest_idx;
+	bool	hit;
+	int		i;
+	float	t;
+
+	i = -1;
+	closest_dist = INFINITY;
+	closest_idx = -1;
+	while (++i < scene->objects_nb)
+	{
+		hit = false;
+		if (scene->objects[i].type == SPHERE)
+			hit = intersect_sphere(ray, &scene->objects[i].data.sphere, &t);
+		else if (scene->objects[i].type == PLANE)
+			hit = intersect_plane(ray, &scene->objects[i].data.plane, &t);
+		else if (scene->objects[i].type == CYLINDER)
+			hit = intersect_cylinder(ray, &scene->objects[i].data.cylinder, &t);
+		if (hit && t < closest_dist)
+		{
+			closest_idx = i;
+			closest_dist = t;
+		}
+	}
+	return (closest_idx);
 }
 
 void	render_scene(t_mini_rt *mini_rt)

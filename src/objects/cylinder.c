@@ -6,8 +6,13 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 04:27:51 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/04 04:28:00 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/17 18:57:23 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+bool	intersect_cylinder(t_ray *ray, t_cylinder *cylinder, float *t)
+{
+    return (false);
+}
