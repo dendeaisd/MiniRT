@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 21:53:57 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/17 21:15:42 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/17 23:09:18 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void	setup_camera(t_camera *camera, int width, int height)
+{
+	camera->ratio = calc_aspect_ratio(width, height);
+	calc_viewport_dim(camera, camera->ratio, \
+						&camera->viewport);
+}
+
+void	display_img(t_window *window)
+{
+	if (mlx_image_to_window(window->mlx, window->img, 0, 0) == -1)
+	{
 void	setup_camera(t_camera *camera, int width, int height)
 {
 	camera->ratio = calc_aspect_ratio(width, height);

@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/17 22:27:45 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/17 23:08:53 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ void print_obj_data(t_object *obj)
 	switch (obj->type)
 	{
 		case SPHERE:
+			printf("center: %f,", obj->data.sphere.center.x);
+			printf("%f,", obj->data.sphere.center.y);
+			printf("%f\n", obj->data.sphere.center.z);
 			printf("center: %f,", obj->data.sphere.center.x);
 			printf("%f,", obj->data.sphere.center.y);
 			printf("%f\n", obj->data.sphere.center.z);
