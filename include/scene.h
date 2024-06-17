@@ -6,19 +6,13 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 02:37:02 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/17 23:07:29 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/17 23:24:38 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCENE_H
 # define SCENE_H
 # include "object.h"
-
-typedef struct s_viewport
-{
-	float		width;
-	float		height;
-}	t_viewport;
 
 typedef struct s_viewport
 {
