@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 22:50:37 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/17 22:23:01 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/17 22:43:37 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,3 @@ void	init_window(t_mini_rt *mini_rt, int width, int height)
 	mini_rt->window.width = width;
 	mini_rt->window.height = height;
 }
-
-
