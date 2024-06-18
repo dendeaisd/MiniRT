@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:24:43 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/18 18:47:46 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/18 22:56:33 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_color	calc_diffuse_light(t_light light, t_vec hit_point, t_vec normal)
 	float	dot_product;
 
 	light_dir = vec_unit(vec_sub(light.position, hit_point));
-	light_dir = vec_mul(light_dir, -1);
+	// light_dir = vec_mul(light_dir, -1);
 	dot_product = fmax(vec_dot(normal, light_dir), 0.f);
 	return ((t_color){
 		.r = (light.color.r * dot_product * light.brightness),

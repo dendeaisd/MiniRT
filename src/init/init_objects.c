@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_objects.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:54:35 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/17 15:07:04 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/18 23:39:03 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	add_sphere(int obj_index, char **info, t_scene *scene, char **map_2d)
 		ft_exit_mini_rt("invalid color for sphere", map_2d, info, scene);
 	scene->objects[obj_index].data.sphere.color.r = ft_atof(info[5]);
 	scene->objects[obj_index].data.sphere.color.g = ft_atof(info[6]);
-	scene->objects[obj_index].data.sphere.color.b = ft_atof(info[7]);
+	scene->objects[obj_index].data.sphere.color.b = ft_atof(info[7]); 
+	
 }
 
 void	add_plane(int obj_index, char **info, t_scene *scene, char **map_2d)
