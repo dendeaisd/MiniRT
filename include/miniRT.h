@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/17 23:06:42 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/18 18:24:15 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,11 @@ void		add_plane(int obj_index, char **info, t_scene *scene, char **map_2d);
 void		add_cylinder(int obj_index, char **info, t_scene *scene, char **map_2d);
 
 // From FLAVIA. We need name for the category here... *********************** *
-unsigned int	get_pixel_color(int obj_idx, t_scene *scene);
+unsigned int	vec_to_color(t_color color);
+unsigned int	get_pixel_color(int obj_idx, t_scene *scene, \
+						t_ray ray, float distance);
 void			render_scene(t_mini_rt *mini_rt);
+
 
 t_ray	generate_ray(t_scene *scene, t_window *window, int x, int y);
 float	calc_aspect_ratio(int width, int height);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 21:53:57 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/17 23:29:35 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/18 18:27:18 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,15 @@ void	display_img(t_window *window)
 	}
 }
 
-int	check_intersections(t_ray *ray, t_scene *scene)
+int	check_intersections(t_ray *ray, t_scene *scene, float *closest_dist)
 {
-	float	closest_dist;
 	int		closest_idx;
 	bool	hit;
 	int		i;
 	float	t;
 
 	i = -1;
-	closest_dist = INFINITY;
+	*closest_dist = INFINITY;
 	closest_idx = -1;
 	while (++i < scene->objects_nb)
 	{
@@ -51,10 +50,10 @@ int	check_intersections(t_ray *ray, t_scene *scene)
 			hit = intersect_plane(ray, &scene->objects[i].data.plane, &t);
 		else if (scene->objects[i].type == CYLINDER)
 			hit = intersect_cylinder(ray, &scene->objects[i].data.cylinder, &t);
-		if (hit && t < closest_dist)
+		if (hit && t < *closest_dist)
 		{
 			closest_idx = i;
-			closest_dist = t;
+			*closest_dist = t;
 		}
 	}
 	return (closest_idx);
@@ -65,6 +64,7 @@ void	render_scene(t_mini_rt *mini_rt)
 	t_ray			ray;
 	unsigned int	color;
 	int				obj_idx;
+	float			closest_dist;
 	int				i;
 	int				j;
 
@@ -77,8 +77,11 @@ void	render_scene(t_mini_rt *mini_rt)
 		while (++i < mini_rt->window.width)
 		{
 			ray = generate_ray(&mini_rt->scene, &mini_rt->window, i, j);
-			obj_idx = check_intersections(&ray, &mini_rt->scene);
-			color = get_pixel_color(obj_idx, &mini_rt->scene);
+			obj_idx = check_intersections(&ray, &mini_rt->scene, &closest_dist);
+			if (obj_idx != -1)
+				color = get_pixel_color(obj_idx, &mini_rt->scene, ray, closest_dist);
+			else
+				color = vec_to_color((t_color){0, 0, 0});
 			mlx_put_pixel(mini_rt->window.img, i, j, color);
 		}
 	}
