@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:24:43 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/18 20:33:59 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/18 20:47:39 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,15 @@ bool	is_in_shadow(t_vec hit_point, t_light light, t_scene scene)
 {
 	t_vec	light_dir;
 	float	light_dist;
+	float	epsilon;
 	t_ray	shadow_ray;
 	
+	epsilon = 0.001f;
 	light_dir = vec_sub(light.position, hit_point);
 	light_dist = vec_len(light_dir);
 	light_dir = vec_unit(light_dir);
 	shadow_ray = (t_ray) {
-		.origin = vec_add(hit_point, vec_scale(light_dir, 0.001f)),
+		.origin = vec_add(hit_point, vec_scale(light_dir, epsilon)),
 		.direction = light_dir
 	};
 	float	t;
@@ -87,7 +89,7 @@ t_color	calc_diffuse_light(t_scene scene, t_light light, t_vec hit_point, t_vec 
 	if (is_in_shadow(hit_point, light, scene))
 		return ((t_color){0, 0, 0});
 	light_dir = vec_unit(vec_sub(light.position, hit_point));
-	light_dir = vec_mul(light_dir, -1);
+	// light_dir = vec_mul(light_dir, -1);
 	dot_product = fmax(vec_dot(normal, light_dir), 0.f);
 	return ((t_color){
 		.r = (light.color.r * dot_product * light.brightness),

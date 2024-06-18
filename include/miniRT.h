@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/18 20:40:32 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/18 20:45:02 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void		add_cylinder(int obj_index, char **info, t_scene *scene, char **map_2d);
 // From FLAVIA. We need name for the category here... *********************** *
 
 float	vec_len(t_vec v);
+t_vec	vec_scale(t_vec v, float scalar);
 
 bool			intersect(t_ray *ray, t_object object, float *t);
 unsigned int	vec_to_color(t_color color);
