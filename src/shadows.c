@@ -6,11 +6,25 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 19:46:32 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/18 20:09:18 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/18 20:41:24 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+bool	is_occluded(t_ray shadow_ray, t_scene scene, float light_dist)
+{
+	float	t;
+	int		i;
+
+	i = -1;
+	while (++i < scene.objects_nb)
+	{
+		if (intersect(&shadow_ray, scene.objects[i], &t) && t < light_dist)
+			return (true);
+	}
+	return (false);
+}
 
 t_vec	sample_sphere_surface(t_light light)
 {
@@ -48,8 +62,10 @@ float	calc_soft_shadow(t_vec hit_point, t_scene scene, \
 	{
 		light_pos = sample_sphere_surface(light);
 		to_light = vec_unit(vec_sub(light_pos, hit_point));
+		float light_dis = vec_len(to_light);
+		to_light = vec_unit(to_light);
 		shadow_ray = (t_ray){hit_point, to_light};
-		if (is_occluded(shadow_ray, scene))
+		if (is_occluded(shadow_ray, scene, light_dis))
 			shadow_num++;
 	}
 	return (1.f - ((float)shadow_num / (float)sample_nb));

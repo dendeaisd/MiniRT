@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/18 18:24:15 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/18 20:40:32 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@
 # include "scene.h"
 # include "ray.h"
 
-# define WIDTH	800
-# define HEIGHT	600
+# define WIDTH			800
+# define HEIGHT			600
+# define LIGHT_RADIUS	5.0
 
-# define ERROR "\x1B[31mError: \x1B[0m"
+# define ERROR 			"\x1B[31mError: \x1B[0m"
 
 typedef struct s_window
 {
@@ -61,6 +62,10 @@ void		add_plane(int obj_index, char **info, t_scene *scene, char **map_2d);
 void		add_cylinder(int obj_index, char **info, t_scene *scene, char **map_2d);
 
 // From FLAVIA. We need name for the category here... *********************** *
+
+float	vec_len(t_vec v);
+
+bool			intersect(t_ray *ray, t_object object, float *t);
 unsigned int	vec_to_color(t_color color);
 unsigned int	get_pixel_color(int obj_idx, t_scene *scene, \
 						t_ray ray, float distance);

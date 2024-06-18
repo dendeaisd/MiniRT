@@ -6,12 +6,31 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:24:43 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/18 20:12:43 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/18 20:33:59 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+float	vec_len(t_vec v)
+{
+	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
+}
+
+t_vec	vec_scale(t_vec v, float scalar)
+{
+	return((t_vec){v.x * scalar, v.y * scalar, v.z * scalar});
+}
+bool	intersect(t_ray *ray, t_object object, float *t)
+{
+	if (object.type == SPHERE)
+		return (intersect_sphere(ray, &object.data.sphere, t));
+	else if(object.type == PLANE)
+		return (intersect_plane(ray, &object.data.plane, t));
+	else if(object.type == CYLINDER)
+		return (intersect_cylinder(ray, &object.data.cylinder, t));
+	return(false);
+}
 unsigned int	vec_to_color(t_color color)
 {
 	unsigned int	r;
@@ -37,14 +56,36 @@ t_color	apply_ambilight(t_ambilight ambilight, t_color color)
 
 bool	is_in_shadow(t_vec hit_point, t_light light, t_scene scene)
 {
-	t_vec 
+	t_vec	light_dir;
+	float	light_dist;
+	t_ray	shadow_ray;
+	
+	light_dir = vec_sub(light.position, hit_point);
+	light_dist = vec_len(light_dir);
+	light_dir = vec_unit(light_dir);
+	shadow_ray = (t_ray) {
+		.origin = vec_add(hit_point, vec_scale(light_dir, 0.001f)),
+		.direction = light_dir
+	};
+	float	t;
+	int		i;
+	
+	i = -1;
+	while (++i < scene.objects_nb)
+	{
+		if (intersect(&shadow_ray, scene.objects[i], &t) && t < light_dist )
+			return (true);
+	}
+	return (false);
 }
 
-t_color	calc_diffuse_light(t_light light, t_vec hit_point, t_vec normal)
+t_color	calc_diffuse_light(t_scene scene, t_light light, t_vec hit_point, t_vec normal)
 {
 	t_vec	light_dir;
 	float	dot_product;
 
+	if (is_in_shadow(hit_point, light, scene))
+		return ((t_color){0, 0, 0});
 	light_dir = vec_unit(vec_sub(light.position, hit_point));
 	light_dir = vec_mul(light_dir, -1);
 	dot_product = fmax(vec_dot(normal, light_dir), 0.f);
@@ -87,7 +128,7 @@ unsigned int	get_pixel_color(int obj_idx, t_scene *scene, \
 	else
 		color = (t_color){0, 0, 0};
 	ambilight = apply_ambilight(scene->ambilight, color);
-	diffuse = calc_diffuse_light(scene->light, hit_point, normal);
+	diffuse = calc_diffuse_light(*scene, scene->light, hit_point, normal);
 	total_color = (t_color){
 		.r = fmin(ambilight.r + diffuse.r, 255),
 		.g = fmin(ambilight.g + diffuse.g, 255),
