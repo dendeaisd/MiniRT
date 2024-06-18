@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:24:43 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/18 20:47:39 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/18 22:48:57 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,7 @@ t_vec	vec_scale(t_vec v, float scalar)
 {
 	return((t_vec){v.x * scalar, v.y * scalar, v.z * scalar});
 }
-bool	intersect(t_ray *ray, t_object object, float *t)
-{
-	if (object.type == SPHERE)
-		return (intersect_sphere(ray, &object.data.sphere, t));
-	else if(object.type == PLANE)
-		return (intersect_plane(ray, &object.data.plane, t));
-	else if(object.type == CYLINDER)
-		return (intersect_cylinder(ray, &object.data.cylinder, t));
-	return(false);
-}
+
 unsigned int	vec_to_color(t_color color)
 {
 	unsigned int	r;
@@ -103,12 +94,12 @@ unsigned int	get_pixel_color(int obj_idx, t_scene *scene, \
 						t_ray ray, float distance)
 {
 	t_object	*object;
-	t_color		color;
+	t_color		color = {0, 0, 0};;
 	t_color		ambilight;
 	t_color		diffuse;
 	t_color		total_color;
 	t_vec		hit_point;
-	t_vec		normal;
+	t_vec		normal = {0, 0, 0};
 	
 	normal = (t_vec){0, 0, 0};
 	object = &scene->objects[obj_idx];

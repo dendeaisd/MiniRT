@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 21:53:57 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/18 18:27:18 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/18 22:29:50 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,17 @@ void	display_img(t_window *window)
 	}
 }
 
+bool	intersect(t_ray *ray, t_object object, float *t)
+{
+	if (object.type == SPHERE)
+		return (intersect_sphere(ray, &object.data.sphere, t));
+	else if(object.type == PLANE)
+		return (intersect_plane(ray, &object.data.plane, t));
+	else if(object.type == CYLINDER)
+		return (intersect_cylinder(ray, &object.data.cylinder, t));
+	return(false);
+}
+
 int	check_intersections(t_ray *ray, t_scene *scene, float *closest_dist)
 {
 	int		closest_idx;
@@ -43,13 +54,7 @@ int	check_intersections(t_ray *ray, t_scene *scene, float *closest_dist)
 	closest_idx = -1;
 	while (++i < scene->objects_nb)
 	{
-		hit = false;
-		if (scene->objects[i].type == SPHERE)
-			hit = intersect_sphere(ray, &scene->objects[i].data.sphere, &t);
-		else if (scene->objects[i].type == PLANE)
-			hit = intersect_plane(ray, &scene->objects[i].data.plane, &t);
-		else if (scene->objects[i].type == CYLINDER)
-			hit = intersect_cylinder(ray, &scene->objects[i].data.cylinder, &t);
+		hit = intersect(ray, scene->objects[i], &t);
 		if (hit && t < *closest_dist)
 		{
 			closest_idx = i;
