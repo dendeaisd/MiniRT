@@ -6,23 +6,11 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 01:23:56 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/18 23:45:42 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/19 17:54:36 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-
-float	calc_aspect_ratio(int width, int height)
-{
-	return ((float)width / (float)height);
-}
-
-void	calc_viewport_dim(t_camera *camera, float aspect_ratio, \
-						t_viewport *viewport)
-{
-	viewport->height = 2.f * tanf(camera->fov * M_PI / 360.f);
-	viewport->width = viewport->height * aspect_ratio;
-}
 
 t_vec	pixel_to_viewport(int x, int y, t_viewport *viewport, \
 						t_window *window)

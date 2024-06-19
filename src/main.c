@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/17 23:08:53 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/19 17:52:56 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int argc, char **argv)
 {
 	t_mini_rt	mini_rt;
 
-	atexit(check_leaks); //! to be removed later
+	// atexit(check_leaks); //! to be removed later
 	if (argc != 2)
 		ft_exit("expected two arguments: ./miniRT map*.rt", 0);
 	open_and_parse_map(argv, &mini_rt.scene);

@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:54:35 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/18 23:39:03 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/19 18:09:15 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,11 @@ void	add_sphere(int obj_index, char **info, t_scene *scene, char **map_2d)
 	scene->objects[obj_index].data.sphere.center.y = ft_atof(info[2]);
 	scene->objects[obj_index].data.sphere.center.z = ft_atof(info[3]);
 	scene->objects[obj_index].data.sphere.diameter = ft_atof(info[4]);
-
 	if (invalid_color(info + 5))
 		ft_exit_mini_rt("invalid color for sphere", map_2d, info, scene);
 	scene->objects[obj_index].data.sphere.color.r = ft_atof(info[5]);
 	scene->objects[obj_index].data.sphere.color.g = ft_atof(info[6]);
-	scene->objects[obj_index].data.sphere.color.b = ft_atof(info[7]); 
-	
+	scene->objects[obj_index].data.sphere.color.b = ft_atof(info[7]);
 }
 
 void	add_plane(int obj_index, char **info, t_scene *scene, char **map_2d)
@@ -46,7 +44,7 @@ void	add_plane(int obj_index, char **info, t_scene *scene, char **map_2d)
 	while (++i < 7)
 	{
 		if (ft_atof(info[i]) < -1 || ft_atof(info[i]) > 1)
-			ft_exit_mini_rt("plane must have x, y, z coordinates of 3d normalized normal vector in range [-1,1]", map_2d, info, scene);
+			ft_exit_mini_rt("plane must have x, y, z coordinates of 3d normalized normal vector in range [-1,1]" , map_2d, info, scene);
 	}
 	scene->objects[obj_index].data.plane.normal.x = ft_atof(info[4]);
 	scene->objects[obj_index].data.plane.normal.y = ft_atof(info[5]);
