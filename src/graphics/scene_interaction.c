@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   scene_interaction.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:24:43 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/19 18:52:31 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/20 00:28:23 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_vec	calc_normal(t_object *object, t_vec hit_point)
 		normal = object->data.plane.normal;
 	else if (object->type == CYLINDER)
 		normal = (t_vec){0, 0, 0};
-	return (normal);
+	return (vec_unit(normal));
 }
 
 void	fetch_properties(t_object *object, t_vec hit_point, \
