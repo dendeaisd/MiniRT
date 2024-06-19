@@ -6,20 +6,13 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 21:53:57 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/18 18:27:18 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/19 18:51:21 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include <stdio.h>
 #include <stdlib.h>
-
-void	setup_camera(t_camera *camera, int width, int height)
-{
-	camera->ratio = calc_aspect_ratio(width, height);
-	calc_viewport_dim(camera, camera->ratio, \
-						&camera->viewport);
-}
 
 void	display_img(t_window *window)
 {
@@ -59,6 +52,7 @@ int	check_intersections(t_ray *ray, t_scene *scene, float *closest_dist)
 	return (closest_idx);
 }
 
+//TODO: *too many vars in this function*
 void	render_scene(t_mini_rt *mini_rt)
 {
 	t_ray			ray;
@@ -79,7 +73,8 @@ void	render_scene(t_mini_rt *mini_rt)
 			ray = generate_ray(&mini_rt->scene, &mini_rt->window, i, j);
 			obj_idx = check_intersections(&ray, &mini_rt->scene, &closest_dist);
 			if (obj_idx != -1)
-				color = get_pixel_color(obj_idx, &mini_rt->scene, ray, closest_dist);
+				color = get_pixel_color(obj_idx, &mini_rt->scene, \
+									ray, closest_dist);
 			else
 				color = vec_to_color((t_color){0, 0, 0});
 			mlx_put_pixel(mini_rt->window.img, i, j, color);

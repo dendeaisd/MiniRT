@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flaviav <flaviav@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 00:27:21 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/11 01:56:37 by flaviav          ###   ########.fr       */
+/*   Updated: 2024/06/19 18:10:30 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ float	calculate_discriminant(t_ray *ray, t_sphere *sphere, \
 
 	sphere_offset = vec_sub(ray->origin, sphere->center);
 	radius = sphere->diameter / 2;
-	a = 1.f; //a is normalized ==> always 1
-	*b = 2.f * vec_dot(sphere_offset , ray->direction);
+	a = 1.f;
+	*b = 2.f * vec_dot(sphere_offset, ray->direction);
 	*c = vec_dot(sphere_offset, sphere_offset) \
 		- radius * radius;
 	return (*b * *b - 4 * a * *c);
@@ -49,11 +49,11 @@ bool	find_closest_hit(float t0, float t1, float *t)
 	{
 		if (t0 < t1)
 			*t = t0;
-		else 
+		else
 			*t = t1;
 		return (true);
 	}
-	else if(t0 > 0)
+	else if (t0 > 0)
 		return (*t = t0, true);
 	else if (t1 > 0)
 		return (*t = t1, true);

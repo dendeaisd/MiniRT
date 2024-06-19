@@ -6,7 +6,7 @@
 #    By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/21 18:58:12 by fvoicu            #+#    #+#              #
-#    Updated: 2024/06/18 18:27:36 by fvoicu           ###   ########.fr        #
+#    Updated: 2024/06/19 17:52:13 by fvoicu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ LIB_M		:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 SRCS		:= $(wildcard src/*.c \
 						src/vector/*.c \
 						src/objects/*.c \
+						src/graphics/*.c \
 						src/parsing/*.c \
 						src/init/*.c \
 						src/cleanup/*.c \

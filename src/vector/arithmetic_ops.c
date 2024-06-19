@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 21:38:27 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/05/23 22:30:03 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/19 22:00:26 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,9 @@ t_vec	vec_div(t_vec a, float scalar)
 	return ((t_vec){a.x / scalar, \
 					a.y / scalar, \
 					a.z / scalar});
+}
+
+float	vec_len(t_vec v)
+{
+	return (sqrtf(v.x * v.x + v.y * v.y + v.z * v.z));
 }

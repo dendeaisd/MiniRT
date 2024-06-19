@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/18 18:24:15 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/20 00:04:52 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,20 @@ void		add_plane(int obj_index, char **info, t_scene *scene, char **map_2d);
 void		add_cylinder(int obj_index, char **info, t_scene *scene, char **map_2d);
 
 // From FLAVIA. We need name for the category here... *********************** *
-unsigned int	vec_to_color(t_color color);
+
+void			setup_camera(t_camera *camera, int width, int height);
+t_ray			generate_ray(t_scene *scene, t_window *window, int x, int y);
 unsigned int	get_pixel_color(int obj_idx, t_scene *scene, \
 						t_ray ray, float distance);
 void			render_scene(t_mini_rt *mini_rt);
 
 
-t_ray	generate_ray(t_scene *scene, t_window *window, int x, int y);
-float	calc_aspect_ratio(int width, int height);
-void	calc_viewport_dim(t_camera *camera, float aspect_ratio, \
-						t_viewport *viewport);
-t_vec	pixel_to_viewport(int x, int y, t_viewport *viewport, \
-						t_window *window);
+/**Light**/
+unsigned int	vec_to_color(t_color color);
+t_color			cast_light(t_scene *scene, t_color obj_color, \
+						t_vec hit_point, t_vec normal);
+bool	cast_shadow(t_scene *scene, t_vec hit_point, \
+						t_light light, t_vec normal);
 
 /* ***************************    General Utils    ************************** */
 float	ft_atof(const char *str);

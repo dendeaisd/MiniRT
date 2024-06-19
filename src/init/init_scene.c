@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:54:35 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/17 23:09:54 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/18 23:39:37 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	init_camera(char **info, t_scene *scene, char **map_2d)
 	scene->camera.fov = ft_atof(info[7]);
 	
 	// The 4 additional lines Flavia had in her init_scene:
-	scene->camera.orientation = vec_mul(scene->camera.orientation, -1);
+	// scene->camera.orientation = vec_mul(scene->camera.orientation, -1);
 	scene->camera.ratio = 0.f;
 	scene->camera.viewport.width = 0.f;
 	scene->camera.viewport.height = 0.f;
@@ -107,4 +107,5 @@ void	init_light(char **info, t_scene *scene, char **map_2d)
 		scene->light.color.g = ft_atoi(info[6]);
 		scene->light.color.b = ft_atoi(info[7]);
 	}
+	// scene->light.position = vec_mul(scene->light.position, -1);
 }
