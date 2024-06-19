@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:03:24 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/19 18:50:48 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/20 00:06:04 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ unsigned int	vec_to_color(t_color color)
 	return ((r << 24) | (g << 16) | (b << 8) | a);
 }
 
-t_color	apply_ambilight(t_ambilight ambilight, t_color color)
+static t_color	apply_ambilight(t_ambilight ambilight, t_color color)
 {
 	return ((t_color){
 		.r = fmin(color.r + (ambilight.color.r * ambilight.ratio), 255),
@@ -35,7 +35,7 @@ t_color	apply_ambilight(t_ambilight ambilight, t_color color)
 	});
 }
 
-t_color	calc_diffuse_light(t_light light, t_vec hit_point, t_vec normal)
+static t_color	calc_diffuse_light(t_light light, t_vec hit_point, t_vec normal)
 {
 	t_vec	light_dir;
 	float	dot_product;
@@ -55,9 +55,12 @@ t_color	cast_light(t_scene *scene, t_color obj_color, \
 	t_color	ambilight;
 	t_color	diffuse_light;
 	t_color	total_color;
-
+	
+	diffuse_light = (t_color){0, 0, 0};
 	ambilight = apply_ambilight(scene->ambilight, obj_color);
-	diffuse_light = calc_diffuse_light(scene->light, hit_point, normal);
+	if (!cast_shadow(scene, hit_point, scene->light, normal))
+		diffuse_light = calc_diffuse_light(scene->light, \
+								hit_point, normal);
 	total_color = (t_color){
 		.r = fmin(ambilight.r + diffuse_light.r, 255),
 		.g = fmin(ambilight.g + diffuse_light.g, 255),

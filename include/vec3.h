@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec3.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:35:02 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/17 23:07:49 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/19 22:00:42 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ t_vec	vec_div(t_vec a, float scalar);
 float	vec_dot(t_vec a, t_vec b);
 t_vec	vec_cross(t_vec a, t_vec b);
 t_vec	vec_unit(t_vec a);
-
+float	vec_len(t_vec v);
 
 #endif
