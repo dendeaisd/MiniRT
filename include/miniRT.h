@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/19 18:05:46 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/19 18:50:23 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void			render_scene(t_mini_rt *mini_rt);
 
 /**Light**/
 unsigned int	vec_to_color(t_color color);
-t_color			apply_ambilight(t_ambilight ambilight, t_color color);
-t_color			calc_diffuse_light(t_light light, t_vec hit_point, t_vec normal);
+t_color			cast_light(t_scene *scene, t_color obj_color, \
+						t_vec hit_point, t_vec normal);
 
 /* ***************************    General Utils    ************************** */
 float	ft_atof(const char *str);

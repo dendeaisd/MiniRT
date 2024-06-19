@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 21:53:57 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/19 18:07:30 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/19 18:51:21 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ void	render_scene(t_mini_rt *mini_rt)
 			ray = generate_ray(&mini_rt->scene, &mini_rt->window, i, j);
 			obj_idx = check_intersections(&ray, &mini_rt->scene, &closest_dist);
 			if (obj_idx != -1)
-				color = get_pixel_color(obj_idx, &mini_rt->scene, ray, closest_dist);
+				color = get_pixel_color(obj_idx, &mini_rt->scene, \
+									ray, closest_dist);
 			else
 				color = vec_to_color((t_color){0, 0, 0});
 			mlx_put_pixel(mini_rt->window.img, i, j, color);
