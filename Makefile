@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/21 18:58:12 by fvoicu            #+#    #+#              #
-#    Updated: 2024/06/19 17:52:13 by fvoicu           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME		:= miniRT
 CFLAGS		:= -Wunreachable-code -Ofast -g
 LIBMLX		:= ./MLX42
@@ -17,6 +5,7 @@ LIB			:= ./Lib
 CC			:= cc
 # LSAN	:= -LLeakSanitizer -llsan
 
+OBJ_DIR	=	./objs/
 HEADERS	:= -I ./include -I $(LIB)/Libft -I $(LIBMLX)/include
 LIB_M		:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 SRCS		:= $(wildcard src/*.c \
@@ -27,7 +16,7 @@ SRCS		:= $(wildcard src/*.c \
 						src/init/*.c \
 						src/cleanup/*.c \
 						src/utils/*.c)
-OBJS		:= ${SRCS:.c=.o}
+OBJS		:= $(patsubst src/%.c,$(OBJ_DIR)src/%.o,$(SRCS))
 
 all: libft libmlx $(NAME)
 
@@ -37,14 +26,15 @@ libft:
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4 
 
-%.o: %.c
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)..."
-
 $(NAME): $(OBJS)
 	@$(CC) $(OBJS) $(LIB)/lib.a $(LIB_M) $(HEADERS) -o $(NAME)
 
+$(OBJ_DIR)src/%.o: src/%.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)...\n"
+
 clean:
-	@rm -rf $(OBJS)
+	@rm -rf $(OBJ_DIR)
 	@rm -rf $(LIBMLX)/build
 	@make --directory=Lib/ clean
 
@@ -54,4 +44,4 @@ fclean: clean
 	
 re: clean all
 
-.PHONY: all, clean, fclean, re, libmlx
+.PHONY: all clean fclean re libmlx libft
