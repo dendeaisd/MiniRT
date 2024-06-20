@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/20 00:04:52 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/20 16:39:52 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void			render_scene(t_mini_rt *mini_rt);
 unsigned int	vec_to_color(t_color color);
 t_color			cast_light(t_scene *scene, t_color obj_color, \
 						t_vec hit_point, t_vec normal);
-bool	cast_shadow(t_scene *scene, t_vec hit_point, \
+bool			cast_shadow(t_scene *scene, t_vec hit_point, \
 						t_light light, t_vec normal);
 
 /* ***************************    General Utils    ************************** */
