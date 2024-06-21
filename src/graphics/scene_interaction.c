@@ -6,13 +6,26 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:24:43 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/20 01:16:37 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/20 20:15:39 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-//TODO: calculate cylinder normal
+t_vec	cylinder_normal(t_vec center, t_vec axis, t_vec hit_point)
+{
+	t_vec	closest_to_axis;
+	t_vec	to_hit;
+	t_vec	normal;
+
+	to_hit = vec_sub(hit_point, center);
+	closest_to_axis = vec_add(center, \
+				vec_mul(axis, \
+				vec_dot(to_hit, axis)));
+	normal = vec_sub(hit_point, closest_to_axis);
+	return (normal);
+}
+
 t_vec	calc_normal(t_object *object, t_vec hit_point)
 {
 	t_vec	normal;
@@ -23,7 +36,8 @@ t_vec	calc_normal(t_object *object, t_vec hit_point)
 	else if (object->type == PLANE)
 		normal = object->data.plane.normal;
 	else if (object->type == CYLINDER)
-		normal = (t_vec){0, 0, 0};
+		normal = cylinder_normal(object->data.cylinder.center, \
+							object->data.cylinder.axis, hit_point);
 	return (vec_unit(normal));
 }
 

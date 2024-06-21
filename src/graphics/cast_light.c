@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:03:24 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/20 01:40:31 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/21 18:58:20 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ static t_color	calc_diffuse_light(t_light light, t_vec hit_point, t_vec normal)
 // 	};
 // 	return (total_color);
 // }
-t_color scale_color(t_color color, float factor) {
+t_color scale_color(t_color color, float factor)
+{
 	t_color	result;
 
 	result.r = fmin(255, color.r * factor);
@@ -82,7 +83,6 @@ float calculate_brightness_factor(t_scene *scene, t_vec hit_point, t_vec normal)
 {
 	t_vec	light_dir = vec_sub(scene->light.position, hit_point);
 	float	distance = vec_len(light_dir);
-	light_dir = light_dir;
 
 	float	dot_product = vec_dot(normal, light_dir);
 	dot_product = fmax(0.0, dot_product);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 01:54:16 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/17 23:07:12 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/20 20:11:17 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ bool	intersect_sphere(t_ray * ray, t_sphere * sphere, float *t);
 bool    intersect_plane(t_ray *ray, t_plane *plane, float *t);
 
 // *CYLINDER*//
-bool	intersect_cylinder(t_ray *ray, t_cylinder *cylinder, float *t);
+// bool	intersect_cylinder(t_ray *ray, t_cylinder *cylinder, float *t);
+bool intersect_cylinder(t_ray *ray, t_cylinder *cylinder, float *t);
 
+// t_vec	cylinder_normal(t_vec center, t_vec axis, t_vec hit_point);
+// bool intersect_inifinite(t_ray *ray, t_cylinder *cylinder, float *t);
 #endif
