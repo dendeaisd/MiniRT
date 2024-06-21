@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/20 00:04:52 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/21 18:01:30 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,14 @@ t_color			cast_light(t_scene *scene, t_color obj_color, \
 bool	cast_shadow(t_scene *scene, t_vec hit_point, \
 						t_light light, t_vec normal);
 
+/* ***************************      Movements      ************************** */
+void	ft_keyhook(mlx_key_data_t keydata, void *param);
+
 /* ***************************    General Utils    ************************** */
 float	ft_atof(const char *str);
 
 /* ******************************    Cleanup    ***************************** */
-void	cleanup_before_exit(t_mini_rt *mini_rt);
+void	cleanup_and_exit(t_mini_rt *mini_rt, bool do_exit);
 
 void	ft_exit(char *err_msg, int exit_value);
 void	ft_exit_v2(char *msg, int exit_val, void *to_free, int fd);

@@ -14,6 +14,7 @@ SRCS		:= $(wildcard src/*.c \
 						src/graphics/*.c \
 						src/parsing/*.c \
 						src/init/*.c \
+						src/translation/*.c \
 						src/cleanup/*.c \
 						src/utils/*.c)
 OBJS		:= $(patsubst src/%.c,$(OBJ_DIR)src/%.o,$(SRCS))
