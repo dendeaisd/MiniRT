@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec3.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:35:02 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/19 22:00:42 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/20 18:17:31 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ typedef struct s_vec
 	float	y;
 	float	z;
 }	t_vec;
-
-
 
 t_vec	vec_add(t_vec a, t_vec b);
 t_vec	vec_sub(t_vec a, t_vec b);
