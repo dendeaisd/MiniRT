@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 22:50:37 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/17 22:43:37 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/21 19:08:22 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_window(t_mini_rt *mini_rt, int width, int height)
 {
-	mini_rt->window.mlx = mlx_init(width, height, "miniRT", true);
+	mini_rt->window.mlx = mlx_init(width, height, "miniRT", false);
 	if (!mini_rt->window.mlx)
 		ft_exit_v2("failed to init mlx", 1, mini_rt->scene.objects, -1);
 	mini_rt->window.img = mlx_new_image(mini_rt->window.mlx, width, height);

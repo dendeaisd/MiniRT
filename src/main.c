@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/21 18:21:18 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/21 18:56:34 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ int	main(int argc, char **argv)
 	//from now on, the only thing from parsing that needs to be freed is the 'mini_rt->scene->objects' pointer
 	init_window(&mini_rt, WIDTH, HEIGHT);
 	// print_obj_data(mini_rt.scene.objects);
-	render_scene(&mini_rt);
+	// render_scene(&mini_rt);
+	// init_hooks(&mini_rt);
 	mlx_key_hook(mini_rt.window.mlx, &ft_keyhook, &mini_rt);
+	mlx_loop_hook(mini_rt.window.mlx, &render_scene, &mini_rt);
 	mlx_loop(mini_rt.window.mlx);
 	cleanup_and_exit(&mini_rt, false);
 	return (EXIT_SUCCESS);

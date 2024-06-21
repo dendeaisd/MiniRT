@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 21:53:57 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/19 18:51:21 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/21 18:57:32 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	check_intersections(t_ray *ray, t_scene *scene, float *closest_dist)
 }
 
 //TODO: *too many vars in this function*
-void	render_scene(t_mini_rt *mini_rt)
+void	render_scene(void *param)
 {
 	t_ray			ray;
 	unsigned int	color;
@@ -61,7 +61,9 @@ void	render_scene(t_mini_rt *mini_rt)
 	float			closest_dist;
 	int				i;
 	int				j;
+	t_mini_rt		*mini_rt;
 
+	mini_rt = param;
 	setup_camera(&mini_rt->scene.camera, \
 			mini_rt->window.width, mini_rt->window.height);
 	j = -1;

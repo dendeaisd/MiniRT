@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 12:04:57 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/21 18:16:33 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/21 19:10:14 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	move_camera(t_mini_rt *mini_rt, char direction)
 {
 	if (direction == 'l')
-		mini_rt->scene.camera.position.x -= 100.f;
+		mini_rt->scene.camera.position.x -= 0.1f;
 	else if (direction == 'r')
-		mini_rt->scene.camera.position.x += 100.f;
+		mini_rt->scene.camera.position.x += 0.1f;
 	else if (direction == 'u')
-		mini_rt->scene.camera.position.y += 100.f;
+		mini_rt->scene.camera.position.y += 0.1f;
 	else
-		mini_rt->scene.camera.position.y -= 100.f;
+		mini_rt->scene.camera.position.y -= 0.1f;
 }
 
 void	ft_keyhook(mlx_key_data_t keydata, void *param)
@@ -53,3 +53,8 @@ void	ft_keyhook(mlx_key_data_t keydata, void *param)
 	// if ((keydata.key == MLX_KEY_D) || (keydata.key == MLX_KEY_RIGHT))
 	// 	ft_do_move(game, game->p_x + 1, game->p_y, 'D');
 }
+
+// void	init_hooks(t_mini_rt *mini_rt)
+// {
+	
+// }
