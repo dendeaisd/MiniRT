@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/20 16:39:52 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/22 05:05:49 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <math.h>
 # include <fcntl.h>
 # include <stdbool.h>
+# include <pthread.h>
 
 # include "libft.h"
 # include "scene.h"
@@ -43,6 +44,13 @@ typedef struct s_mini_rt
 	t_window		window;
 	t_scene			scene;
 }	t_mini_rt;
+
+typedef struct s_thread_data
+{
+	t_mini_rt		*mini_rt;
+	int				th_idx;
+	int				th_nb;
+}	t_thread_data;
 
 /* ****************************   PARSING PART   **************************** */
 void	open_and_parse_map(char **argv, t_scene *scene);
