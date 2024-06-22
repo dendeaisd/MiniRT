@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 21:53:57 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/22 05:53:46 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/22 05:55:27 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ void	*thread_render(void *arg)
 	return (NULL);
 }
 
-//TODO: replace variable lenght array
 void	render_scene(t_mini_rt *mini_rt)
 {
 	const int		threads_nb = 12;
