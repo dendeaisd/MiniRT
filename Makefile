@@ -1,5 +1,5 @@
 NAME		:= miniRT
-CFLAGS		:= -Wunreachable-code -Ofast -g -Wall -Wextra -Werror
+CFLAGS		:= -mavx -Wunreachable-code -Ofast -g -Wall -Wextra -Werror
 LIBMLX		:= ./MLX42
 LIB			:= ./Lib
 CC			:= cc
@@ -8,14 +8,16 @@ CC			:= cc
 OBJ_DIR	=	./objs/
 HEADERS	:= -I ./include -I $(LIB)/Libft -I $(LIBMLX)/include
 LIB_M		:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+# SRCS		:= $(wildcard src/*.c \
+# 						src/vector/simd/*.c \
+# 						src/objects/*.c \
+# 						src/graphics/*.c \
+# 						src/parsing/*.c \
+# 						src/init/*.c \
+# 						src/cleanup/*.c \
+# 						src/utils/*.c)
 SRCS		:= $(wildcard src/*.c \
-						src/vector/*.c \
-						src/objects/*.c \
-						src/graphics/*.c \
-						src/parsing/*.c \
-						src/init/*.c \
-						src/cleanup/*.c \
-						src/utils/*.c)
+						src/vector/simd/*.c)
 OBJS		:= $(patsubst src/%.c,$(OBJ_DIR)src/%.o,$(SRCS))
 
 all: libft libmlx $(NAME)

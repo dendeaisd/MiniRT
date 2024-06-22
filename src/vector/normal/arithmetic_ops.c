@@ -6,11 +6,11 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 21:38:27 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/19 22:00:26 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/22 06:19:18 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/vec3.h"
+#include "../../../include/vec3.h"
 
 /**
  * @brief Adds 2 vectors component-wise.

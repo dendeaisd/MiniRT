@@ -6,13 +6,14 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 21:53:57 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/22 05:55:27 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/22 06:01:24 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include <stdio.h>
 #include <stdlib.h>
+//TODO: too many funcs in file, othewise normed
 
 void	display_img(t_window *window)
 {
