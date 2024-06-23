@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:24:43 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/20 20:15:39 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/23 04:02:54 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ unsigned int	get_pixel_color(int obj_idx, t_scene *scene, \
 	color = (t_color){0, 0, 0};
 	normal = (t_vec){0, 0, 0};
 	fetch_properties(object, hit_point, &color, &normal);
-	total_color = cast_light(scene, color, hit_point, normal);
+	total_color = cast_light(scene, color, hit_point, normal, \
+						vec_unit(vec_sub(scene->camera.position, hit_point)));
 	return (vec_to_color(total_color));
 }

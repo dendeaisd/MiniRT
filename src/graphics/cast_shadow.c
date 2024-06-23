@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:47:26 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/20 19:37:11 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/23 04:07:23 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ bool	shadow_intersect(t_ray *ray, t_scene *scene, float light_dist)
 	float	t;
 	int		i;
 	bool	hit;
-	
+
 	i = -1;
 	while (++i < scene->objects_nb)
 	{
@@ -32,16 +32,15 @@ bool	shadow_intersect(t_ray *ray, t_scene *scene, float light_dist)
 		if (hit && t > 0.0001f && t < light_dist)
 			return (true);
 	}
-	return (false);	
+	return (false);
 }
 
-bool	cast_shadow(t_scene *scene, t_vec hit_point, t_light light, t_vec normal)
+bool	cast_shadow(t_scene *scene, t_vec hit_point, \
+							t_light light, t_vec normal)
 {
 	t_ray	shadow_ray;
 	t_vec	light_dir;
 	float	light_dist;
-
-	
 
 	light_dir = vec_sub(light.position, hit_point);
 	light_dist = vec_len(light_dir);
