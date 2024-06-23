@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/23 01:50:24 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/23 02:00:08 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,9 @@ int main(void)
 // 		printf("AVX is not supported.\n");
 // 	return 0;
     t_vec a = {1.0f, 2.0f, 3.0f};
-    t_vec b = {4.0f, 5.0f, 6.0f};
-    t_vec result = vec_sub(a, b);
+    // t_vec b = {4.0f, 5.0f, 6.0f};
+	float s = 2.f;
+    t_vec result = vec_div(a, s);
 
     printf("Result of vec_add:\n");
     printf("x: %f\n", result.x);
@@ -83,3 +84,4 @@ int main(void)
 
     return 0;
 }
+
