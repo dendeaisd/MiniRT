@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_light.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:03:24 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/22 04:53:55 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/24 00:58:37 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,3 @@ t_color cast_light(t_scene *scene, t_color obj_color, t_vec hit_point, t_vec nor
 
 	return (total_color);
 }
-
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_shadow.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:47:26 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/20 19:37:11 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/24 00:59:30 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ bool	cast_shadow(t_scene *scene, t_vec hit_point, t_light light, t_vec normal)
 	t_ray	shadow_ray;
 	t_vec	light_dir;
 	float	light_dist;
-
-	
 
 	light_dir = vec_sub(light.position, hit_point);
 	light_dist = vec_len(light_dir);

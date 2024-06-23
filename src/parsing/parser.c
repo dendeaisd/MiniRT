@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:18:17 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/20 18:29:29 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/23 21:21:34 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ static void	count_elements(t_scene *scene, char *map_1d)
 	c = count_each_object(map_1d, "C");
 	l = count_each_object(map_1d, "L");
 	if (a != 1 || c != 1 || l != 1)
-		ft_exit("Ambient lightning (A), Camera (C) and Light(L) must be \
-			declared once.", 0);
+		ft_exit("Ambient lightning (A), Camera (C) and Light(L) must be "
+			"declared once.", 0);
 }
 
 /**

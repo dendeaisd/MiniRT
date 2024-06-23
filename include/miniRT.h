@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/22 05:05:49 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/24 00:49:39 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ bool			cast_shadow(t_scene *scene, t_vec hit_point, \
 float	ft_atof(const char *str);
 
 /* ******************************    Cleanup    ***************************** */
-void	cleanup_before_exit(t_mini_rt *mini_rt);
+void	cleanup_and_exit(int fd_to, char *message, t_mini_rt *mini_rt);
 
 void	ft_exit(char *err_msg, int exit_value);
 void	ft_exit_v2(char *msg, int exit_val, void *to_free, int fd);
