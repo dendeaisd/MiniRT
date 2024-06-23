@@ -6,11 +6,19 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:03:24 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/23 05:57:11 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/23 06:50:56 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+t_color clamp_color(t_color color)
+{
+	color.r = fmin(fmax(color.r, 0), 255);
+	color.g = fmin(fmax(color.g, 0), 255);
+	color.b = fmin(fmax(color.b, 0), 255);
+	return color;
+}
 
 unsigned int	vec_to_color(t_color color)
 {
@@ -28,10 +36,13 @@ unsigned int	vec_to_color(t_color color)
 
 static t_color	apply_ambilight(t_ambilight ambilight, t_color color)
 {
+	float	scale;
+
+	scale = 0.5f;
 	return ((t_color){
-		.r = fmin(color.r + (ambilight.color.r * ambilight.ratio), 255),
-		.g = fmin(color.g + (ambilight.color.g * ambilight.ratio), 255),
-		.b = fmin(color.b + (ambilight.color.b * ambilight.ratio), 255)
+		.r = fmin(color.r + (ambilight.color.r * ambilight.ratio * scale), 255),
+		.g = fmin(color.g + (ambilight.color.g * ambilight.ratio * scale), 255),
+		.b = fmin(color.b + (ambilight.color.b * ambilight.ratio * scale), 255)
 	});
 }
 
@@ -104,8 +115,10 @@ float	calculate_brightness_factor(t_scene *scene, \
 
 	light_dir = vec_sub(scene->light.position, hit_point);
 	distance = vec_len(light_dir);
+	light_dir = vec_mul(light_dir, 1.0 / distance);
 	dot_product = fmax(0, vec_dot(normal, light_dir));
-	attenuation = 1.0 / (1.f + 0.07f * distance + 0.005f * distance * distance);
+	attenuation = 1.0 / (1.f + 1.0f * distance + 0.02f * distance + 0.01f * distance * distance);
+	// attenuation = 1.0 / (1.f + 1.0f * distance + 0.05f * distance * distance);
 	return (dot_product * attenuation);
 }
 
@@ -129,6 +142,17 @@ t_color	cast_light(t_scene *scene, t_color obj_color, \
 		diffuse_light = scale_color(diffuse_light, brightness_factor);
 		specular_light = calc_specular_light(scene->light, \
 						hit_point, normal, view_dir, 32);
+	}
+	   else
+	{
+		float shadow_factor = 0.5f;
+		ambilight.r = fmin(ambilight.r * shadow_factor, 255);
+		ambilight.g = fmin(ambilight.g * shadow_factor, 255);
+		ambilight.b = fmin(ambilight.b * shadow_factor, 255);
+
+		obj_color.r = fmin(obj_color.r * shadow_factor, 255);
+		obj_color.g = fmin(obj_color.g * shadow_factor, 255);
+		obj_color.b = fmin(obj_color.b * shadow_factor, 255);
 	}
 	total_color = (t_color){
 		.r = fmin(255, ambilight.r + diffuse_light.r + specular_light.r),
