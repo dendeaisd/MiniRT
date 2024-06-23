@@ -6,12 +6,11 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 06:19:10 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/23 02:17:02 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/23 02:44:07 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/vec3.h"
-#include <immintrin.h> 
 
 t_vec	vec_add(t_vec a, t_vec b)
 {

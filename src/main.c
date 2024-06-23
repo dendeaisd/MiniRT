@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/23 02:15:38 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/23 02:29:51 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,30 +58,24 @@ void print_obj_data(t_object *obj)
 #include <cpuid.h>
 #endif
 
-int main(void)
+
+int main()
 {
-// 	int info[4];
-// #if defined(_MSC_VER)
-// 	__cpuid(info, 1);
-// #else
-// 	__cpuid(1, info[0], info[1], info[2], info[3]);
-// #endif
-
-// 	if (info[2] & ((int)1 << 28))
-// 		printf("AVX is supported!\n");
-// 	else
-// 		printf("AVX is not supported.\n");
-// 	return 0;
+    // Test vectors
     t_vec a = {1.0f, 2.0f, 3.0f};
-    // t_vec b = {4.0f, 5.0f, 6.0f};
-	// float s = 2.f;
-    float result = vec_len(a);
+    t_vec b = {4.0f, 5.0f, 6.0f};
 
-    printf("Result of vec_add:\n");
-    printf("len: %f\n", result);
-    // printf("x: %f\n", result.x);
-    // printf("y: %f\n", result.y);
-    // printf("z: %f\n", result.z);
+    // Compute dot product
+    float dot_product = vec_dot(a, b);
+    printf("Dot product: %f\n", dot_product);
+
+    // Compute cross product
+    t_vec cross_product = vec_cross(a, b);
+    printf("Cross product: (%f, %f, %f)\n", cross_product.x, cross_product.y, cross_product.z);
+
+    // Compute unit vector
+    t_vec unit_vector = vec_unit(a);
+    printf("Unit vector: (%f, %f, %f)\n", unit_vector.x, unit_vector.y, unit_vector.z);
 
     return 0;
 }
