@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/19 17:52:56 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/23 02:45:30 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,3 +51,4 @@ int	main(int argc, char **argv)
 	cleanup_before_exit(&mini_rt);
 	return (EXIT_SUCCESS);
 }
+

@@ -6,13 +6,14 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 21:53:57 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/20 18:50:50 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/22 06:01:24 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include <stdio.h>
 #include <stdlib.h>
+//TODO: too many funcs in file, othewise normed
 
 void	display_img(t_window *window)
 {
@@ -52,33 +53,78 @@ int	check_intersections(t_ray *ray, t_scene *scene, float *closest_dist)
 	return (closest_idx);
 }
 
-//TODO: *too many vars in this function*
-void	render_scene(t_mini_rt *mini_rt)
+void	render_pixel(t_mini_rt *mini_rt, int i, int j)
 {
 	t_ray			ray;
-	unsigned int	color;
 	int				obj_idx;
 	float			closest_dist;
-	int				i;
-	int				j;
+	unsigned int	color;
 
-	setup_camera(&mini_rt->scene.camera, \
-			mini_rt->window.width, mini_rt->window.height);
-	j = -1;
-	while (++j < mini_rt->window.height)
+	ray = generate_ray(&mini_rt->scene, &mini_rt->window, i, j);
+	obj_idx = check_intersections(&ray, &mini_rt->scene, &closest_dist);
+	if (obj_idx != -1)
+		color = get_pixel_color(obj_idx, \
+			&mini_rt->scene, ray, closest_dist);
+	else
+		color = vec_to_color((t_color){0, 0, 0});
+	mlx_put_pixel(mini_rt->window.img, i, j, color);
+}
+
+void	render_rows(t_mini_rt *mini_rt, int start_row, int end_row)
+{
+	int	i;
+	int	j;
+
+	j = start_row;
+	while (j < end_row)
 	{
 		i = -1;
-		while (++i < mini_rt->window.width)
-		{
-			ray = generate_ray(&mini_rt->scene, &mini_rt->window, i, j);
-			obj_idx = check_intersections(&ray, &mini_rt->scene, &closest_dist);
-			if (obj_idx != -1)
-				color = get_pixel_color(obj_idx, &mini_rt->scene, \
-									ray, closest_dist);
-			else
-				color = vec_to_color((t_color){0, 0, 0});
-			mlx_put_pixel(mini_rt->window.img, i, j, color);
-		}
+		while (++i < mini_rt->window.mlx->width)
+			render_pixel(mini_rt, i, j);
+		++j;
 	}
+}
+
+void	*thread_render(void *arg)
+{
+	t_thread_data	*data;
+	int				rows_per_thread;
+	int				start_row;
+	int				end_row;
+
+	data = (t_thread_data *)arg;
+	rows_per_thread = data->mini_rt->window.mlx->height / data->th_nb;
+	start_row = data->th_idx * rows_per_thread;
+	if (data->th_idx == data->th_nb - 1)
+		end_row = data->mini_rt->window.mlx->height;
+	else
+		end_row = (data->th_idx + 1) * rows_per_thread;
+	render_rows(data->mini_rt, start_row, end_row);
+	free(data);
+	return (NULL);
+}
+
+void	render_scene(t_mini_rt *mini_rt)
+{
+	const int		threads_nb = 12;
+	pthread_t		*threads;
+	t_thread_data	*data;
+	int				i;
+
+	setup_camera(&mini_rt->scene.camera, \
+		mini_rt->window.mlx->width, mini_rt->window.mlx->height);
+	threads = (pthread_t *)malloc(threads_nb * sizeof(pthread_t));
+	i = -1;
+	while (++i < threads_nb)
+	{
+		data = (t_thread_data *)malloc(sizeof(t_thread_data));
+		data->mini_rt = mini_rt;
+		data->th_idx = i;
+		data->th_nb = threads_nb;
+		pthread_create(&threads[i], NULL, thread_render, data);
+	}
+	i = -1;
+	while (++i < threads_nb)
+		pthread_join(threads[i], NULL);
 	display_img(&mini_rt->window);
 }

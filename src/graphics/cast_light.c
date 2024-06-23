@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:03:24 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/21 18:58:20 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/22 04:53:55 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,6 @@ static t_color	calc_diffuse_light(t_light light, t_vec hit_point, t_vec normal)
 	});
 }
 
-// t_color	cast_light(t_scene *scene, t_color obj_color, \
-// 					t_vec hit_point, t_vec normal)
-// {
-// 	t_color	ambilight;
-// 	t_color	diffuse_light;
-// 	t_color	total_color;
-	
-// 	diffuse_light = (t_color){0, 0, 0};
-// 	ambilight = apply_ambilight(scene->ambilight, obj_color);
-// 	if (!cast_shadow(scene, hit_point, scene->light, normal))
-// 		diffuse_light = calc_diffuse_light(scene->light, \
-// 								hit_point, normal);
-// 	total_color = (t_color){
-// 		.r = fmin(ambilight.r + diffuse_light.r, 255),
-// 		.g = fmin(ambilight.g + diffuse_light.g, 255),
-// 		.b = fmin(ambilight.b + diffuse_light.b, 255)
-// 	};
-// 	return (total_color);
-// }
 t_color scale_color(t_color color, float factor)
 {
 	t_color	result;
