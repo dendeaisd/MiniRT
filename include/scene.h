@@ -3,16 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 02:37:02 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/17 23:24:38 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/23 04:42:46 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCENE_H
 # define SCENE_H
 # include "object.h"
+
+# define SPOTLIGHT_DIRECTION (t_vec){0.0f, 0.0f, 0.0f} // Default direction towards center
+# define SPOTLIGHT_CUTOFF_ANGLE cos(M_PI / 6) // 30 degrees
+# define SPOTLIGHT_OUTER_CUTOFF_ANGLE cos(M_PI / 4) // 45 degrees
+
+// # define SPOTLIGHT_CUTOFF_ANGLE cos(M_PI / 12) //15
+// # define SPOTLIGHT_OUTER_CUTOFF_ANGLE cos(M_PI / 9) // 20 degrees
+
+// # define SPOTLIGHT_CUTOFF_ANGLE cos(M_PI / 4) //45
+// # define SPOTLIGHT_OUTER_CUTOFF_ANGLE cos(M_PI / 3) //60
+
 
 typedef struct s_viewport
 {

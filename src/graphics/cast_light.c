@@ -6,13 +6,12 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:03:24 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/23 04:13:48 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/23 05:57:11 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-//TODO: add clamp color func 
 unsigned int	vec_to_color(t_color color)
 {
 	unsigned int	r;
@@ -36,18 +35,53 @@ static t_color	apply_ambilight(t_ambilight ambilight, t_color color)
 	});
 }
 
+static float	calc_spotlight_effect(t_vec light_dir)
+{
+	t_vec	spotlight_dir;
+	float	theta;
+	float	epsilon;
+	float	intensity;
+
+	spotlight_dir = vec_unit(SPOTLIGHT_DIRECTION);
+	theta = vec_dot(light_dir, spotlight_dir);
+	epsilon = SPOTLIGHT_CUTOFF_ANGLE - SPOTLIGHT_OUTER_CUTOFF_ANGLE;
+	intensity = (theta - SPOTLIGHT_OUTER_CUTOFF_ANGLE) / epsilon;
+	intensity = fmax(fmin(intensity, 1.0), 0.0);
+	return (intensity);
+}
+
 static t_color	calc_diffuse_light(t_light light, t_vec hit_point, t_vec normal)
 {
 	t_vec	light_dir;
 	float	dot_product;
+	float	intensity;
 
 	light_dir = vec_unit(vec_sub(light.position, hit_point));
 	dot_product = fmax(vec_dot(normal, light_dir), 0.f);
+	intensity = calc_spotlight_effect(light_dir);
 	return ((t_color){
-		.r = (light.color.r * dot_product * light.brightness),
-		.g = (light.color.g * dot_product * light.brightness),
-		.b = (light.color.b * dot_product * light.brightness)
-	});
+		.r = (light.color.r * dot_product * light.brightness * intensity),
+		.g = (light.color.g * dot_product * light.brightness * intensity),
+		.b = (light.color.b * dot_product * light.brightness * intensity)});
+}
+
+static t_color	calc_specular_light(t_light light, t_vec hit_point, \
+						t_vec normal, t_vec view_dir, float shininess)
+{
+	t_vec	light_dir;
+	t_vec	reflect_dir;
+	float	spec;
+	float	intensity;
+
+	light_dir = vec_unit(vec_sub(light.position, hit_point));
+	reflect_dir = vec_sub(vec_mul(normal, 2 \
+					* vec_dot(normal, light_dir)), light_dir);
+	spec = pow(fmax(vec_dot(view_dir, reflect_dir), 0.0), shininess);
+	intensity = calc_spotlight_effect(light_dir);
+	return ((t_color){
+		.r = light.color.r * spec * light.brightness * intensity,
+		.g = light.color.g * spec * light.brightness * intensity,
+		.b = light.color.b * spec * light.brightness * intensity});
 }
 
 t_color	scale_color(t_color color, float factor)
@@ -73,24 +107,6 @@ float	calculate_brightness_factor(t_scene *scene, \
 	dot_product = fmax(0, vec_dot(normal, light_dir));
 	attenuation = 1.0 / (1.f + 0.07f * distance + 0.005f * distance * distance);
 	return (dot_product * attenuation);
-}
-
-static t_color	calc_specular_light(t_light light, t_vec hit_point, \
-							t_vec normal, t_vec view_dir, float shininess)
-{
-	t_vec	light_dir;
-	t_vec	reflect_dir;
-	float	spec;
-
-	light_dir = vec_unit(vec_sub(light.position, hit_point));
-	reflect_dir = vec_sub(\
-				vec_mul(normal, 2 * \
-				vec_dot(normal, light_dir)), light_dir);
-	spec = pow(fmax(vec_dot(view_dir, reflect_dir), 0.0), shininess);
-	return ((t_color){
-		.r = light.color.r * spec * light.brightness,
-		.g = light.color.g * spec * light.brightness,
-		.b = light.color.b * spec * light.brightness});
 }
 
 t_color	cast_light(t_scene *scene, t_color obj_color, \
