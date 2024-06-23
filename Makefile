@@ -8,16 +8,14 @@ CC			:= cc
 OBJ_DIR	=	./objs/
 HEADERS	:= -I ./include -I $(LIB)/Libft -I $(LIBMLX)/include
 LIB_M		:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-# SRCS		:= $(wildcard src/*.c \
-# 						src/vector/simd/*.c \
-# 						src/objects/*.c \
-# 						src/graphics/*.c \
-# 						src/parsing/*.c \
-# 						src/init/*.c \
-# 						src/cleanup/*.c \
-# 						src/utils/*.c)
 SRCS		:= $(wildcard src/*.c \
-						src/vector/simd/*.c)
+						src/vector/simd/*.c \
+						src/objects/*.c \
+						src/graphics/*.c \
+						src/parsing/*.c \
+						src/init/*.c \
+						src/cleanup/*.c \
+						src/utils/*.c)
 OBJS		:= $(patsubst src/%.c,$(OBJ_DIR)src/%.o,$(SRCS))
 
 all: libft libmlx $(NAME)
