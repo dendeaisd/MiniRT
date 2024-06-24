@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:54:35 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/19 18:09:15 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/24 04:41:49 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,37 @@ void	add_cylinder(int obj_index, char **info, t_scene *scene, char **map_2d)
 	scene->objects[obj_index].data.cylinder.color.r = ft_atof(info[9]);
 	scene->objects[obj_index].data.cylinder.color.g = ft_atof(info[10]);
 	scene->objects[obj_index].data.cylinder.color.b = ft_atof(info[11]);
+}
+
+void	add_cone(int obj_index, char **info, t_scene *scene, char **map_2d)
+{
+	int	i;
+
+	if (array_has_only_numbers(info + 1) == false)
+		ft_exit_mini_rt("invalid input for cone", map_2d, info, scene);
+	scene->objects[obj_index].type = CONE;
+	//x,y,z of the center of the cone:
+	scene->objects[obj_index].data.cone.center.x = ft_atof(info[1]);
+	scene->objects[obj_index].data.cone.center.y = ft_atof(info[2]);
+	scene->objects[obj_index].data.cone.center.z = ft_atof(info[3]);
+	//3d normalized vector of axis of the cone:
+	i = 3;
+	while (++i < 7)
+	{
+		if (ft_atof(info[i]) < -1 || ft_atof(info[i]) > 1)
+			ft_exit_mini_rt("cone must have x, y, z coordinates of 3d normalized vector of axis in range [-1,1]", map_2d, info, scene);
+	}
+	scene->objects[obj_index].data.cone.axis.x = ft_atof(info[4]);
+	scene->objects[obj_index].data.cone.axis.y = ft_atof(info[5]);
+	scene->objects[obj_index].data.cone.axis.z = ft_atof(info[6]);
+	//cone diameter:
+	scene->objects[obj_index].data.cone.diameter = ft_atof(info[7]);
+	//cone height:
+	scene->objects[obj_index].data.cone.height = ft_atof(info[8]);
+	// color of the cone:
+	if (invalid_color(info + 9))
+		ft_exit_mini_rt("invalid color for cone", map_2d, info, scene);
+	scene->objects[obj_index].data.cone.color.r = ft_atof(info[9]);
+	scene->objects[obj_index].data.cone.color.g = ft_atof(info[10]);
+	scene->objects[obj_index].data.cone.color.b = ft_atof(info[11]);
 }

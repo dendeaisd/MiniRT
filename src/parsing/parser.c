@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:18:17 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/20 18:29:29 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/24 04:42:35 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,14 @@ static void	count_elements(t_scene *scene, char *map_1d)
 	count += count_each_object(map_1d, "sp");
 	count += count_each_object(map_1d, "pl");
 	count += count_each_object(map_1d, "cy");
+	count += count_each_object(map_1d, "cn");
 	scene->objects_nb = count;
 	a = count_each_object(map_1d, "A");
 	c = count_each_object(map_1d, "C");
 	l = count_each_object(map_1d, "L");
 	if (a != 1 || c != 1 || l != 1)
-		ft_exit("Ambient lightning (A), Camera (C) and Light(L) must be \
-			declared once.", 0);
+		ft_exit("Ambient lightning (A), Camera (C) and Light(L) must be "
+			"declared once.", 0);
 }
 
 /**
@@ -92,6 +93,8 @@ static void	parse_element(char **info, t_scene *scene, char **map_2d)
 		add_plane(++obj_cur_index, info, scene, map_2d);
 	else if (!ft_strncmp(info[0], "cy", 3) && ft_2darray_size(info) == 12)
 		add_cylinder(++obj_cur_index, info, scene, map_2d);
+	else if (!ft_strncmp(info[0], "cn", 3) && ft_2darray_size(info) == 12)
+		add_cone(++obj_cur_index, info, scene, map_2d);
 	else
 		ft_exit_mini_rt("invalid rt map.", info, map_2d, scene);
 }

@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 01:54:16 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/20 20:11:17 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/24 06:46:23 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ typedef enum e_obj_type
 {
 	SPHERE,
 	PLANE,
-	CYLINDER
+	CYLINDER,
+	CONE
 }	t_obj_type;
 
 typedef struct s_sphere
@@ -52,11 +53,21 @@ typedef struct s_cylinder
 	t_color	color;
 }	t_cylinder;
 
+typedef struct s_cone
+{
+	t_vec	center;
+	t_vec	axis;
+	float	diameter;
+	float	height;
+	t_color	color;
+}	t_cone;
+
 typedef union u_obj_data
 {
 	t_sphere	sphere;
 	t_plane		plane;
 	t_cylinder	cylinder;
+	t_cone		cone;
 }	t_obj_data;
 
 typedef struct s_object
@@ -78,8 +89,11 @@ bool    intersect_plane(t_ray *ray, t_plane *plane, float *t);
 
 // *CYLINDER*//
 // bool	intersect_cylinder(t_ray *ray, t_cylinder *cylinder, float *t);
+bool	hit_cy_caps(t_ray *ray, t_cylinder *cylinder, float *t);
 bool intersect_cylinder(t_ray *ray, t_cylinder *cylinder, float *t);
+bool	intersect_disk(t_ray *ray, t_plane *disk, float *t, float radius);
 
+bool	intersect_cone(t_ray *ray, t_cone *cone, float *t);
 // t_vec	cylinder_normal(t_vec center, t_vec axis, t_vec hit_point);
 // bool intersect_inifinite(t_ray *ray, t_cylinder *cylinder, float *t);
 #endif

@@ -6,11 +6,24 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 04:27:51 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/21 22:07:25 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/24 07:27:34 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+bool	solve_quadratic_siuuu(float b, float a, float discriminant, float *t0, float *t1)
+{
+	float	sqrt_disc;
+
+	if (discriminant < 0)
+		return (false);
+	sqrt_disc = sqrtf(discriminant);
+	*t0 = *t1 = (-b - sqrt_disc) / (2 * a);
+	if (discriminant > 0)
+		*t1 = (-b + sqrt_disc) / (2 * a);
+	return (true);
+}
 
 void	calculate_cylinder_coefficients(t_ray *ray, t_cylinder *cylinder, float *coefficients)
 {
@@ -74,21 +87,24 @@ bool	check_cylinder_body_hits(t_ray *ray, t_cylinder *cylinder, float t0, float 
 
 bool	check_cylinder_body(t_ray *ray, t_cylinder *cylinder, float *coefficients, float *t)
 {
+	float a = coefficients[0];
 	float b = coefficients[1];
 	float discriminant = coefficients[1] * coefficients[1] - 4 * coefficients[0] * coefficients[2];
 	float t0, t1;
-	if (discriminant < 0 || !solve_quadratic(b, discriminant, &t0, &t1))
+	if (discriminant < 0 || !solve_quadratic_siuuu(b, a, discriminant, &t0, &t1))
 		return (false);
 	return check_cylinder_body_hits(ray, cylinder, t0, t1, t);
 }
 
 bool	intersect_cylinder(t_ray *ray, t_cylinder *cylinder, float *t)
 {
+	t_cylinder tmp = *cylinder;
 	float coefficients[3]; //a, b, c
-	calculate_cylinder_coefficients(ray, cylinder, coefficients);
-	if (check_parallel_and_caps(ray, cylinder, coefficients, t))
+	tmp.axis = vec_unit(cylinder->axis);
+	calculate_cylinder_coefficients(ray, &tmp, coefficients);
+	if (hit_cy_caps(ray, &tmp, t))
 		return (true);
-	if (check_cylinder_body(ray, cylinder, coefficients, t))
+	if (check_cylinder_body(ray, &tmp, coefficients, t))
 		return (true);
 	return (false);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flaviav <flaviav@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/24 16:33:24 by flaviav          ###   ########.fr       */
+/*   Updated: 2024/06/25 01:29:28 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void		init_light(char **info, t_scene *scene, char **map_2d);
 void		add_sphere(int obj_index, char **info, t_scene *scene, char **map_2d);
 void		add_plane(int obj_index, char **info, t_scene *scene, char **map_2d);
 void		add_cylinder(int obj_index, char **info, t_scene *scene, char **map_2d);
+void		add_cone(int obj_index, char **info, t_scene *scene, char **map_2d);
 
 // From FLAVIA. We need name for the category here... *********************** *
 
@@ -91,7 +92,7 @@ bool			cast_shadow(t_scene *scene, t_vec hit_point, \
 float	ft_atof(const char *str);
 
 /* ******************************    Cleanup    ***************************** */
-void	cleanup_before_exit(t_mini_rt *mini_rt);
+void	cleanup_and_exit(int fd_to, char *message, t_mini_rt *mini_rt);
 
 void	ft_exit(char *err_msg, int exit_value);
 void	ft_exit_v2(char *msg, int exit_val, void *to_free, int fd);

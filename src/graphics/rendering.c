@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 21:53:57 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/22 06:01:24 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/24 04:45:39 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 //TODO: too many funcs in file, othewise normed
-
-void	display_img(t_window *window)
-{
-	if (mlx_image_to_window(window->mlx, window->img, 0, 0) == -1)
-	{
-		mlx_delete_image(window->mlx, window->img);
-		mlx_terminate(window->mlx);
-		fprintf(stderr, "Error displaying image\n");
-	}
-}
 
 int	check_intersections(t_ray *ray, t_scene *scene, float *closest_dist)
 {
@@ -44,6 +34,8 @@ int	check_intersections(t_ray *ray, t_scene *scene, float *closest_dist)
 			hit = intersect_plane(ray, &scene->objects[i].data.plane, &t);
 		else if (scene->objects[i].type == CYLINDER)
 			hit = intersect_cylinder(ray, &scene->objects[i].data.cylinder, &t);
+		else if (scene->objects[i].type == CONE)
+			hit = intersect_cone(ray, &scene->objects[i].data.cone, &t);
 		if (hit && t < *closest_dist)
 		{
 			closest_idx = i;
@@ -126,5 +118,7 @@ void	render_scene(t_mini_rt *mini_rt)
 	i = -1;
 	while (++i < threads_nb)
 		pthread_join(threads[i], NULL);
-	display_img(&mini_rt->window);
+	if (mlx_image_to_window(mini_rt->window.mlx, mini_rt->window.img, 0, 0) < 0)
+		cleanup_and_exit(2, "failed to display image", mini_rt);
+	free(threads); //! we want that!
 }
