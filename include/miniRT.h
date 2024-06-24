@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flaviav <flaviav@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/23 03:28:06 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/24 16:33:24 by flaviav          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,9 @@ void			render_scene(t_mini_rt *mini_rt);
 
 /**Light**/
 unsigned int	vec_to_color(t_color color);
-// t_color			cast_light(t_scene *scene, t_color obj_color, \
-// 						t_vec hit_point, t_vec normal);
+/* t_color			cast_light(t_scene *scene, t_color obj_color, \
+ 						t_vec hit_point, t_vec normal); */
+
 t_color			cast_light(t_scene *scene, t_color obj_color, \
 						t_vec hit_point, t_vec normal, t_vec view_dir);
 bool			cast_shadow(t_scene *scene, t_vec hit_point, \
