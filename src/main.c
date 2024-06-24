@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/24 04:40:24 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/24 05:01:08 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void print_obj_data(t_object *obj)
 			printf("axis : %f, %f, %f\n", obj->data.cone.axis.x, obj->data.cone.axis.y, obj->data.cone.axis.z);
 			printf("diameter: %f", obj->data.cone.diameter);
 			printf("height: %f", obj->data.cone.height);
+			printf("color %d %d %d\n", obj->data.cone.color.r, obj->data.cone.color.g, obj->data.cone.color.b);
 		break;
 		default:
 			printf("Object was not initialized.\n");

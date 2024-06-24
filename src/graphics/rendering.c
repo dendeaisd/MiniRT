@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 21:53:57 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/24 00:57:35 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/24 04:45:39 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	check_intersections(t_ray *ray, t_scene *scene, float *closest_dist)
 			hit = intersect_plane(ray, &scene->objects[i].data.plane, &t);
 		else if (scene->objects[i].type == CYLINDER)
 			hit = intersect_cylinder(ray, &scene->objects[i].data.cylinder, &t);
+		else if (scene->objects[i].type == CONE)
+			hit = intersect_cone(ray, &scene->objects[i].data.cone, &t);
 		if (hit && t < *closest_dist)
 		{
 			closest_idx = i;

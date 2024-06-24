@@ -6,13 +6,12 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 04:27:51 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/24 03:36:26 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/24 07:27:34 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
- 
 bool	solve_quadratic_siuuu(float b, float a, float discriminant, float *t0, float *t1)
 {
 	float	sqrt_disc;
@@ -101,9 +100,9 @@ bool	intersect_cylinder(t_ray *ray, t_cylinder *cylinder, float *t)
 {
 	t_cylinder tmp = *cylinder;
 	float coefficients[3]; //a, b, c
-	tmp.axis = vec_unit(cylinder->axis); 
+	tmp.axis = vec_unit(cylinder->axis);
 	calculate_cylinder_coefficients(ray, &tmp, coefficients);
-	if (check_parallel_and_caps(ray, &tmp, coefficients, t))
+	if (hit_cy_caps(ray, &tmp, t))
 		return (true);
 	if (check_cylinder_body(ray, &tmp, coefficients, t))
 		return (true);
