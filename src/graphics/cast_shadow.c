@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_shadow.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:47:26 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/24 00:59:30 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/24 04:48:09 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ bool	shadow_intersect(t_ray *ray, t_scene *scene, float light_dist)
 			hit = intersect_plane(ray, &scene->objects[i].data.plane, &t);
 		else if (scene->objects[i].type == CYLINDER)
 			hit = intersect_cylinder(ray, &scene->objects[i].data.cylinder, &t);
+		else if (scene->objects[i].type == CONE)
+			hit = intersect_cone(ray, &scene->objects[i].data.cone, &t);
 		if (hit && t > 0.0001f && t < light_dist)
 			return (true);
 	}
-	return (false);	
+	return (false);
 }
 
 bool	cast_shadow(t_scene *scene, t_vec hit_point, t_light light, t_vec normal)

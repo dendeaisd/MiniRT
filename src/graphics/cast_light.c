@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_light.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:03:24 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/24 00:58:37 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/24 06:58:21 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,14 @@ t_color cast_light(t_scene *scene, t_color obj_color, t_vec hit_point, t_vec nor
 {
 	t_color	ambilight = apply_ambilight(scene->ambilight, obj_color);
 	t_color	diffuse_light = {0, 0, 0};
+	t_color	total_color;
 
 	if (!cast_shadow(scene, hit_point, scene->light, normal)) {
 		float brightness_factor = calculate_brightness_factor(scene, hit_point, normal);
 		diffuse_light = calc_diffuse_light(scene->light, hit_point, normal);
 		diffuse_light = scale_color(diffuse_light, brightness_factor);
 	}
-	t_color	total_color = {
+	total_color = (t_color){
 		.r = fmin(255, ambilight.r + diffuse_light.r),
 		.g = fmin(255, ambilight.g + diffuse_light.g),
 		.b = fmin(255, ambilight.b + diffuse_light.b)
