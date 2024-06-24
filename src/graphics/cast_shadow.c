@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:47:26 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/25 01:31:37 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/25 01:34:43 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ bool	shadow_intersect(t_ray *ray, t_scene *scene, float light_dist)
 		if (hit && t > 0.0001f && t < light_dist)
 			return (true);
 	}
-	return (false);
 	return (false);
 }
 
