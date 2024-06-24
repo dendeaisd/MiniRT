@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 01:54:16 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/20 20:11:17 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/24 04:22:07 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ typedef enum e_obj_type
 {
 	SPHERE,
 	PLANE,
-	CYLINDER
+	CYLINDER,
+	CONE
 }	t_obj_type;
 
 typedef struct s_sphere
@@ -52,11 +53,21 @@ typedef struct s_cylinder
 	t_color	color;
 }	t_cylinder;
 
+typedef struct s_cone
+{
+	t_vec	center;
+	t_vec	axis;
+	float	diameter;
+	float	height;
+	t_color	color;
+}	t_cone;
+
 typedef union u_obj_data
 {
 	t_sphere	sphere;
 	t_plane		plane;
 	t_cylinder	cylinder;
+	t_cone		cone;
 }	t_obj_data;
 
 typedef struct s_object

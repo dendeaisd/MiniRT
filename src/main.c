@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/24 00:49:48 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/24 04:40:24 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ void print_obj_data(t_object *obj)
 			printf("%f\n", obj->data.sphere.center.z);
 			printf("Diameter: %f",obj->data.sphere.diameter);
 			break;
+		case CONE:
+			printf("center : %f, %f, %f\n", obj->data.cone.center.x, obj->data.cone.center.y, obj->data.cone.center.z);
+			printf("axis : %f, %f, %f\n", obj->data.cone.axis.x, obj->data.cone.axis.y, obj->data.cone.axis.z);
+			printf("diameter: %f", obj->data.cone.diameter);
+			printf("height: %f", obj->data.cone.height);
+		break;
 		default:
 			printf("Object was not initialized.\n");
 	}
@@ -39,7 +45,7 @@ int	main(int argc, char **argv)
 {
 	t_mini_rt	mini_rt;
 
-	atexit(check_leaks); //! to be removed later
+	// atexit(check_leaks); //! to be removed later
 	if (argc != 2)
 		ft_exit("expected two arguments in the format:"
 			" ./miniRT map.rt", 0);
