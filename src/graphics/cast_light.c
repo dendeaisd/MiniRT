@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:03:24 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/24 02:30:49 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/24 03:55:22 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ t_color cast_light(t_scene *scene, t_color obj_color, t_vec hit_point, t_vec nor
 			diffuse_light = calc_diffuse_light(scene->lights[i], hit_point, normal);
 			diffuse_light = scale_color(diffuse_light, brightness_factor);
 		}
-		
 	}
+	// currently the following happens only for the last light element, and not all of them:
 	t_color	total_color = {
 		.r = fmin(255, ambilight.r + diffuse_light.r),
 		.g = fmin(255, ambilight.g + diffuse_light.g),
