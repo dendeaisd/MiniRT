@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:54:35 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/18 23:39:37 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/24 02:48:01 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,30 +82,31 @@ void	init_camera(char **info, t_scene *scene, char **map_2d)
 *	light brightness ratio in range [0.0,1.0] -> now 0.6
 *	( bonus part: R,G,B colors in range 0-255 )
 */
-void	init_light(char **info, t_scene *scene, char **map_2d)
+void	add_light(int index, char **info, t_scene *scene, char **map_2d)
 {
 	float	brightness;
 	
 	if (array_has_only_numbers(info + 1) == false)
-		ft_exit_mini_rt("invalid input for Light", map_2d, info, scene);
-	scene->light.position.x = ft_atof(info[1]);
-	scene->light.position.y = ft_atof(info[2]);
-	scene->light.position.z = ft_atof(info[3]);
+		ft_exit_mini_rt("invalid input for light", map_2d, info, scene);
+	scene->lights[index].position.x = ft_atof(info[1]);
+	scene->lights[index].position.y = ft_atof(info[2]);
+	scene->lights[index].position.z = ft_atof(info[3]);
 	
 	brightness = ft_atof(info[4]);
 	if (brightness < 0 || brightness > 1)
 		ft_exit_mini_rt("light must have a brightness ratio between 0.0 and 1.0", map_2d, info, scene);
-	scene->light.brightness = brightness;
+	scene->lights[index].brightness = brightness;
 
 	if (ft_2darray_size(info) == 5) //mandatory part that has no color:
-		scene->light.color = (t_color){255, 255, 255}; //sets the color to white, if no values are provided
+		scene->lights[index].color = (t_color){255, 255, 255}; //sets the color to white, if no values are provided
 	else
 	{
 		if (invalid_color(info + 5))
-			ft_exit_mini_rt("invalid color for Light", map_2d, info, scene);
-		scene->light.color.r = ft_atoi(info[5]);
-		scene->light.color.g = ft_atoi(info[6]);
-		scene->light.color.b = ft_atoi(info[7]);
+			ft_exit_mini_rt("invalid color for light", map_2d, info, scene);
+		scene->lights[index].color.r = ft_atoi(info[5]);
+		scene->lights[index].color.g = ft_atoi(info[6]);
+		scene->lights[index].color.b = ft_atoi(info[7]);
 	}
+	printf("hello form light with index %d\n", index);
 	// scene->light.position = vec_mul(scene->light.position, -1);
 }

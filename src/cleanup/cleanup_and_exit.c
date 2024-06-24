@@ -27,5 +27,7 @@ void	cleanup_and_exit(int fd_to, char *message, t_mini_rt *mini_rt)
 		mlx_terminate(mini_rt->window.mlx);
 	if (mini_rt->scene.objects)
 		free(mini_rt->scene.objects);
+	if (mini_rt->scene.lights)
+		free(mini_rt->scene.lights);
 	exit(EXIT_SUCCESS);
 }

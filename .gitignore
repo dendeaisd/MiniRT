@@ -3,3 +3,5 @@ objs/
 Lib/
 MLX42
 .dist
+src/ft_print_all_data.c
+.vscode

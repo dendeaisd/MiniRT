@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 12:04:57 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/17 15:43:36 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/24 01:59:29 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,7 @@ void	ft_exit_mini_rt(char *err_msg, char **array1, char **array2,
 		fv_free_array(array2);
 	if (scene->objects)
 		free(scene->objects);
+	if (scene->lights)
+		free(scene->lights);
 	exit(EXIT_SUCCESS);
 }

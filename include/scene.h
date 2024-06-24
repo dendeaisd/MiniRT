@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 02:37:02 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/17 23:24:38 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/24 01:53:08 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,12 @@ typedef struct s_ambilight
 typedef struct s_scene
 {
 	t_camera	camera;
-	t_light		light;
 	t_ambilight	ambilight;
+	t_light		*lights;
+	int			lights_nb;
 	t_object	*objects;
 	int			objects_nb;
-	t_viewport	viewport;
+	// t_viewport	viewport; //this is not called anywhere
 }	t_scene;
 
 #endif

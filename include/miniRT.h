@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/24 00:49:39 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/24 02:07:31 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ bool	invalid_color(char **color_arr);
 void		init_window(t_mini_rt *mini_rt, int width, int height);
 void		init_amb_light(char **info, t_scene *scene, char **map_2d);
 void		init_camera(char **info, t_scene *scene, char **map_2d);
-void		init_light(char **info, t_scene *scene, char **map_2d);
+void		add_light(int index, char **info, t_scene *scene, char **map_2d);
 void		add_sphere(int obj_index, char **info, t_scene *scene, char **map_2d);
 void		add_plane(int obj_index, char **info, t_scene *scene, char **map_2d);
 void		add_cylinder(int obj_index, char **info, t_scene *scene, char **map_2d);

@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:18:17 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/23 21:21:34 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/24 02:35:55 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@ static void	count_elements(t_scene *scene, char *map_1d)
 	if (a != 1 || c != 1 || l != 1)
 		ft_exit("Ambient lightning (A), Camera (C) and Light(L) must be "
 			"declared once.", 0);
+	l += count_each_object(map_1d, "lb");
+	scene->lights_nb = l;
+	printf("counted %d lights\n", scene->lights_nb); //!to be removed!
 }
 
 /**
@@ -78,6 +81,7 @@ static void	count_elements(t_scene *scene, char *map_1d)
 static void	parse_element(char **info, t_scene *scene, char **map_2d)
 {
 	static int	obj_cur_index = -1;
+	static int	light_index = 0;
 
 	if (!ft_strncmp(info[0], "A", 2) && ft_2darray_size(info) == 5)
 		init_amb_light(info, scene, map_2d);
@@ -85,7 +89,9 @@ static void	parse_element(char **info, t_scene *scene, char **map_2d)
 		init_camera(info, scene, map_2d);
 	else if (!ft_strncmp(info[0], "L", 2) && (ft_2darray_size(info) == 5
 			|| ft_2darray_size(info) == 8))
-		init_light(info, scene, map_2d);
+		add_light(0, info, scene, map_2d);
+	else if (!ft_strncmp(info[0], "lb", 3) && ft_2darray_size(info) == 8)
+		add_light(++light_index, info, scene, map_2d);
 	else if (!ft_strncmp(info[0], "sp", 3) && ft_2darray_size(info) == 8)
 		add_sphere(++obj_cur_index, info, scene, map_2d);
 	else if (!ft_strncmp(info[0], "pl", 3) && ft_2darray_size(info) == 10)
@@ -115,16 +121,19 @@ static void	parse_map(t_scene *scene, char *map_1d)
 	scene->objects = (t_object *)malloc((scene->objects_nb) * sizeof(t_object));
 	if (scene->objects == NULL)
 		ft_exit("malloc for objects failed", 1);
+	scene->lights = (t_light *)malloc((scene->lights_nb) * sizeof(t_light));
+	if (scene->lights == NULL)
+		ft_exit_v2("malloc for lights failed", 1, scene->objects, -1);
 	map_2d = ft_split(map_1d, '\n');
 	if (map_2d == NULL)
-		ft_exit_v2("malloc for split failed", 1, scene->objects, -1);
+		ft_exit_mini_rt("malloc for split failed", NULL, NULL, scene);
 	line = -1;
 	while (map_2d[++line])
 	{
 		modify_before_split(&(map_2d[line]));
 		elem_info = ft_split(map_2d[line], ' ');
 		if (!elem_info)
-			ft_exit_v4("malloc for split failed", 1, scene->objects, map_2d);
+			ft_exit_mini_rt("malloc for split failed", map_2d, NULL, scene);
 		parse_element(elem_info, scene, map_2d);
 		fv_free_array(elem_info);
 	}

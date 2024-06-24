@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:03:24 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/24 00:58:37 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/24 02:30:49 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ t_color scale_color(t_color color, float factor)
 	return (result);
 }
 
-float calculate_brightness_factor(t_scene *scene, t_vec hit_point, t_vec normal)
+float calculate_brightness_factor(t_light light, t_vec hit_point, t_vec normal)
 {
-	t_vec	light_dir = vec_sub(scene->light.position, hit_point);
+	t_vec	light_dir = vec_sub(light.position, hit_point);
 	float	distance = vec_len(light_dir);
 
 	float	dot_product = vec_dot(normal, light_dir);
@@ -76,11 +76,18 @@ t_color cast_light(t_scene *scene, t_color obj_color, t_vec hit_point, t_vec nor
 {
 	t_color	ambilight = apply_ambilight(scene->ambilight, obj_color);
 	t_color	diffuse_light = {0, 0, 0};
-
-	if (!cast_shadow(scene, hit_point, scene->light, normal)) {
-		float brightness_factor = calculate_brightness_factor(scene, hit_point, normal);
-		diffuse_light = calc_diffuse_light(scene->light, hit_point, normal);
-		diffuse_light = scale_color(diffuse_light, brightness_factor);
+	int		i;
+	
+	i = -1;
+	while (++i < scene->lights_nb)
+	{
+		if (!cast_shadow(scene, hit_point, scene->lights[i], normal))
+		{
+			float brightness_factor = calculate_brightness_factor(scene->lights[i], hit_point, normal);
+			diffuse_light = calc_diffuse_light(scene->lights[i], hit_point, normal);
+			diffuse_light = scale_color(diffuse_light, brightness_factor);
+		}
+		
 	}
 	t_color	total_color = {
 		.r = fmin(255, ambilight.r + diffuse_light.r),
