@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:18:17 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/24 02:35:55 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/24 03:59:04 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static void	count_elements(t_scene *scene, char *map_1d)
 			"declared once.", 0);
 	l += count_each_object(map_1d, "lb");
 	scene->lights_nb = l;
-	printf("counted %d lights\n", scene->lights_nb); //!to be removed!
 }
 
 /**

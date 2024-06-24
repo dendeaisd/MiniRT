@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:54:35 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/24 02:48:01 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/24 03:58:38 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,5 @@ void	add_light(int index, char **info, t_scene *scene, char **map_2d)
 		scene->lights[index].color.g = ft_atoi(info[6]);
 		scene->lights[index].color.b = ft_atoi(info[7]);
 	}
-	printf("hello form light with index %d\n", index);
 	// scene->light.position = vec_mul(scene->light.position, -1);
 }
