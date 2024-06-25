@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 06:09:13 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/23 02:43:41 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/24 01:30:54 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ t_vec	vec_unit(t_vec a)
 	t_vec	res;
 
 	length = vec_len(a);
+	if (length == 0)
+		return ((t_vec){0.f, 0.f, 0.f});
 	vec_a = _mm256_set_ps(0, 0, 0, 0, 0, a.z, a.y, a.x);
 	vec_leng = _mm256_set1_ps(length);
 	vec_res = _mm256_div_ps(vec_a, vec_leng);

@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/24 04:19:17 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/25 05:10:57 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,18 @@ void			render_scene(t_mini_rt *mini_rt);
 
 /**Light**/
 unsigned int	vec_to_color(t_color color);
-t_color			cast_light(t_scene *scene, t_color obj_color, \
-						t_vec hit_point, t_vec normal);
-bool			cast_shadow(t_scene *scene, t_vec hit_point, \
-						t_light light, t_vec normal);
+/* t_color			cast_light(t_scene *scene, t_color obj_color, \
+ 						t_vec hit_point, t_vec normal); */
+
+// t_color			cast_light(t_scene *scene, t_color obj_color, 
+						// t_vec hit_point, t_vec normal, t_vec view_dir);
+// t_color cast_light(t_scene *scene, t_object *hit_object, t_vec hit_point, t_vec normal, t_vec view_dir);
+t_color cast_light(t_scene *scene, t_object *hit_object, t_vec hit_point, t_vec normal, t_vec view_dir, t_color hit_color);
+float cast_object_shadows(t_scene *scene, t_object *hit_object, t_vec hit_point, t_vec light_dir);					
+// bool			cast_shadow(t_scene *scene, t_vec hit_point, \
+// 						t_light light, t_vec normal);
+float cast_shadow(t_scene *scene, t_vec hit_point, t_light light, t_vec normal);
+bool	shadow_intersect(t_ray *ray, t_scene *scene, float light_dist);						
 
 /* ***************************    General Utils    ************************** */
 float	ft_atof(const char *str);
