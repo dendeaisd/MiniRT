@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 12:04:57 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/25 21:29:30 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/25 22:24:55 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,33 +74,49 @@
 // 	render_scene(rt);
 // }
 
-static void	move_camera(void *param)
+static void	translate_camera(void *param)
 {
 	t_mini_rt	*rt;
 	
 	rt = (t_mini_rt *)param;
-	if (mlx_is_key_down(rt->window.mlx, MLX_KEY_RIGHT))
+	if ((mlx_is_key_down(rt->window.mlx, MLX_KEY_C)))
 	{
-		rt->scene.camera.position.x -= 0.05f;
-		rt->scene.camera.orientation.x += 0.05f;
+		if (mlx_is_key_down(rt->window.mlx, MLX_KEY_RIGHT))
+			rt->scene.camera.position.x -= 0.05f;
+		else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_LEFT))
+			rt->scene.camera.position.x += 0.05f;
+		else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_UP))
+			rt->scene.camera.position.y -= 0.05f;
+		else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_DOWN))
+			rt->scene.camera.position.y += 0.05f;
+		else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_KP_ADD))
+			rt->scene.camera.position.z -= 0.05f;
+		else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_KP_SUBTRACT))
+			rt->scene.camera.position.z += 0.05f;
+		render_scene(rt);
 	}
-	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_LEFT))
-	{
-		rt->scene.camera.position.x += 0.05f;
-		rt->scene.camera.orientation.x -= 0.05f;
-	}
-	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_UP))
-		rt->scene.camera.orientation.y += 0.05f;
-	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_DOWN))
-		rt->scene.camera.orientation.y -= 0.05f;
-	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_KP_ADD))
-		rt->scene.camera.position.z -= 0.05f;
-	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_KP_SUBTRACT))
-		rt->scene.camera.position.z += 0.05f;
-	render_scene(rt);
 }
 
-static void	ft_keyhook(mlx_key_data_t keydata, void *param)
+static void	rotate_camera(void *param)
+{
+	t_mini_rt	*rt;
+	
+	rt = (t_mini_rt *)param;
+	if ((mlx_is_key_down(rt->window.mlx, MLX_KEY_V)))
+	{
+		if (mlx_is_key_down(rt->window.mlx, MLX_KEY_LEFT))
+			rt->scene.camera.orientation.x -= 0.05f;
+		else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_RIGHT))
+			rt->scene.camera.orientation.x += 0.05f;
+		else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_UP))
+			rt->scene.camera.orientation.y += 0.05f;
+		else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_DOWN))
+			rt->scene.camera.orientation.y -= 0.05f;
+		render_scene(rt);
+	}
+}
+
+static void	escape(mlx_key_data_t keydata, void *param)
 {
 	t_mini_rt	*mini_rt;
 
@@ -109,21 +125,13 @@ static void	ft_keyhook(mlx_key_data_t keydata, void *param)
 	mini_rt = param;
 	if (keydata.key == MLX_KEY_ESCAPE)
 		cleanup_and_exit(1, NULL, mini_rt);
-	// // FOR THE CAMERA:
-	// if (keydata.key == MLX_KEY_UP)
-	// 	move_camera_v2(mini_rt, 'u');
-	// if (keydata.key == MLX_KEY_DOWN)
-	// 	move_camera_v2(mini_rt, 'd');
-	// if (keydata.key == MLX_KEY_LEFT)
-	// 	move_camera_v2(mini_rt, 'l');
-	// if (keydata.key == MLX_KEY_RIGHT)
-	// 	move_camera_v2(mini_rt, 'r');
-
 }
 
 void	handle_hooks(t_mini_rt *mini_rt)
 {
-	mlx_key_hook(mini_rt->window.mlx, ft_keyhook, mini_rt);
-	mlx_loop_hook(mini_rt->window.mlx, move_camera, mini_rt);
+	mlx_key_hook(mini_rt->window.mlx, escape, mini_rt);
+	mlx_loop_hook(mini_rt->window.mlx, translate_camera, mini_rt);
+	mlx_loop_hook(mini_rt->window.mlx, rotate_camera, mini_rt);
+	// mlx_loop_hook(mini_rt->window.mlx, translate_light, mini_rt);
 	// mlx_loop_hook(mini_rt->window.mlx, render_scene, mini_rt);
 }
