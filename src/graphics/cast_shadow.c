@@ -6,13 +6,12 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:47:26 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/25 03:47:24 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/25 05:12:46 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #define NUM_SHADOW_SAMPLES 32         // Number of samples per pixel
-#define PCF_FILTER_WIDTH 3         // Filter width (odd number)
 #define EPSILON 0.001f        
 
 bool	shadow_intersect(t_ray *ray, t_scene *scene, float light_dist)
@@ -46,7 +45,7 @@ float rand_float()
 }
 
 
-bool cast_shadow(t_scene *scene, t_vec hit_point, t_light light, t_vec normal)
+float cast_shadow(t_scene *scene, t_vec hit_point, t_light light, t_vec normal)
 {
 	t_ray shadow_ray;
 	t_vec light_dir, offset_dir;
@@ -103,7 +102,7 @@ float cast_object_shadows(t_scene *scene, t_object *hit_object, t_vec hit_point,
 		else if (scene->objects[i].type == CONE)
 			hit = intersect_cone(&shadow_ray, &scene->objects[i].data.cone, &t);
 
-		if (hit && t > EPSILON) // Check for positive intersection distance
+		if (hit && t > EPSILON)
 			return 1.0f;
 	}
 	return 0.0f;

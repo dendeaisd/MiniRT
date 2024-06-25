@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:03:24 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/25 03:47:34 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/25 05:12:19 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,32 +108,21 @@ t_color cast_light(t_scene *scene, t_object *hit_object, t_vec hit_point, t_vec 
 	ambilight = apply_ambilight(scene->ambilight, hit_color); 
 	diffuse_light = (t_color){0, 0, 0};
 	specular_light = (t_color){0, 0, 0};
-
-	// Light source shadow
 	shadow_factor = 1.0f - cast_shadow(scene, hit_point, scene->light, normal); 
-	light_dir = vec_unit(vec_sub(scene->light.position, hit_point)); // Direction towards light source
-
-
-	// Check if in shadow of light
+	light_dir = vec_unit(vec_sub(scene->light.position, hit_point));
 	if (shadow_factor > 0.0f)
 	{
 		diffuse_light = calc_diffuse_light(scene->light, hit_point, normal);
 		specular_light = calc_specular_light(scene->light, hit_point, normal, view_dir, 32);
 	}
-
-	// Check for shadows from other objects
 	shadow_factor *= (1.0f - cast_object_shadows(scene, hit_object, hit_point, light_dir)); 
-
-	// Apply shadow factor to direct lighting (diffuse and specular)
 	diffuse_light = scale_color(diffuse_light, shadow_factor);
 	specular_light = scale_color(specular_light, shadow_factor);
-
 	total_color = (t_color){
 		.r = fmin(255, ambilight.r + diffuse_light.r + specular_light.r),
 		.g = fmin(255, ambilight.g + diffuse_light.g + specular_light.g),
 		.b = fmin(255, ambilight.b + diffuse_light.b + specular_light.b)
 	};
-
 	total_color = gamma_correction(total_color, 1.2);
 	return clamp_color(total_color);
 }
