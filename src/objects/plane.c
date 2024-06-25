@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 04:17:56 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/17 22:43:46 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/25 19:53:20 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+void make_helper_plane(t_cylinder *cylinder, t_plane *to_init, bool is_top)
+{
+  t_vec center;
+  t_vec normal;
+
+  normal = cylinder->axis;
+  center = cylinder->center;
+  if (is_top == true)
+	  center = vec_add(cylinder->center, vec_mul(normal, cylinder->height));
+  *to_init = (t_plane){
+		.point = center,
+		.normal = normal,
+		.color = cylinder->color,
+	  };
+}
 
 bool	intersect_plane(t_ray *ray, t_plane *plane, float *t)
 {

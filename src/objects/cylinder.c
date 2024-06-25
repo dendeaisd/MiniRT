@@ -6,11 +6,12 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 04:27:51 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/24 07:27:34 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/25 19:54:10 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
 
 bool	solve_quadratic_siuuu(float b, float a, float discriminant, float *t0, float *t1)
 {
@@ -33,24 +34,6 @@ void	calculate_cylinder_coefficients(t_ray *ray, t_cylinder *cylinder, float *co
 	coefficients[0] = vec_dot(ray->direction, ray->direction) - powf(rd_axis, 2); // a
 	coefficients[1] = 2 * (vec_dot(ray->direction, delta_p) - rd_axis * dp_axis); // b
 	coefficients[2] = vec_dot(delta_p, delta_p) - powf(dp_axis, 2) - powf(cylinder->diameter / 2, 2); // c
-}
-
-bool	check_parallel_and_caps(t_ray *ray, t_cylinder *cylinder, float *coefficients, float *t)
-{
-	float a = coefficients[0];
-	float c = coefficients[2];
-	if (fabs(a) < 1e-6)
-	{
-		if (fabs(c) > powf(cylinder->diameter / 2, 2))
-			return (false);
-		float rd_axis = vec_dot(ray->direction, cylinder->axis);
-		float dp_axis = vec_dot(vec_sub(ray->origin, cylinder->center), cylinder->axis);
-		float t_cap0 = -dp_axis / rd_axis;
-		float t_cap1 = (cylinder->height - dp_axis) / rd_axis;
-		*t = fmin(t_cap0, t_cap1);
-		return true;
-	}
-	return (false);
 }
 
 bool	check_cylinder_body_hits(t_ray *ray, t_cylinder *cylinder, float t0, float t1, float *t)
@@ -98,13 +81,20 @@ bool	check_cylinder_body(t_ray *ray, t_cylinder *cylinder, float *coefficients, 
 
 bool	intersect_cylinder(t_ray *ray, t_cylinder *cylinder, float *t)
 {
-	t_cylinder tmp = *cylinder;
 	float coefficients[3]; //a, b, c
+	t_cylinder tmp = *cylinder;
+	t_plane bottom;
+	t_plane top;
+	bool	body_hit;
+	bool	bottom_hit;
+	bool 	top_hit;
+
 	tmp.axis = vec_unit(cylinder->axis);
+	make_helper_plane(&tmp, &bottom, false);
+	make_helper_plane(&tmp, &top, true);
 	calculate_cylinder_coefficients(ray, &tmp, coefficients);
-	if (hit_cy_caps(ray, &tmp, t))
-		return (true);
-	if (check_cylinder_body(ray, &tmp, coefficients, t))
-		return (true);
-	return (false);
+	body_hit = check_cylinder_body(ray, &tmp, coefficients, t);
+	bottom_hit = intersect_disk(ray, &bottom, t, cylinder->diameter / 2);
+	top_hit = intersect_disk(ray, &top, t, cylinder->diameter / 2);
+	return (body_hit || bottom_hit || top_hit);
 }
