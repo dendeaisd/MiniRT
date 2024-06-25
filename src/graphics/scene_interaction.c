@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:24:43 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/25 06:51:35 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/25 12:12:18 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_vec	calc_normal(t_object *object, t_vec hit_point)
 }
 
 void	fetch_properties(t_object *object, t_vec hit_point, \
-							t_color *color, t_vec *normal)
+					t_color *color, t_vec *normal)
 {
 	*normal = calc_normal(object, hit_point);
 	if (object->type == SPHERE)
@@ -83,18 +83,12 @@ unsigned int	get_pixel_color(int obj_idx, \
 {
 	t_object	*object;
 	t_vec		hit_point;
-	t_color		color;
 	t_color		total_color;
-	t_vec		normal;
 
 	object = &scene->objects[obj_idx];
 	if (obj_idx == -1)
 		return (vec_to_color((t_color){0, 0, 0}));
 	hit_point = vec_add(ray.origin, vec_mul(ray.direction, distance));
-	color = (t_color){0, 0, 0};
-	normal = (t_vec){0, 0, 0};
-	fetch_properties(object, hit_point, &color, &normal);
-	total_color = cast_light(scene, object, hit_point, normal, \
-			vec_unit(vec_sub(scene->camera.position, hit_point)), color);
+	total_color = cast_light(scene, object, hit_point);
 	return (vec_to_color(total_color));
 }

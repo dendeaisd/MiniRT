@@ -6,13 +6,11 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 21:53:57 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/25 06:52:42 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/25 13:11:23 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 int	check_intersections(t_ray *ray, t_scene *scene, float *closest_dist)
 {
@@ -26,15 +24,7 @@ int	check_intersections(t_ray *ray, t_scene *scene, float *closest_dist)
 	closest_idx = -1;
 	while (++i < scene->objects_nb)
 	{
-		hit = false;
-		if (scene->objects[i].type == SPHERE)
-			hit = intersect_sphere(ray, &scene->objects[i].data.sphere, &t);
-		else if (scene->objects[i].type == PLANE)
-			hit = intersect_plane(ray, &scene->objects[i].data.plane, &t);
-		else if (scene->objects[i].type == CYLINDER)
-			hit = intersect_cylinder(ray, &scene->objects[i].data.cylinder, &t);
-		else if (scene->objects[i].type == CONE)
-			hit = intersect_cone(ray, &scene->objects[i].data.cone, &t);
+		hit = intersect_object(ray, &scene->objects[i], &t);
 		if (hit && t < *closest_dist)
 		{
 			closest_idx = i;
