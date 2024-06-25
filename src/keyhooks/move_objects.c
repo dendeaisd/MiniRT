@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 12:04:57 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/26 00:31:58 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/26 00:46:26 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,22 @@ static void	translate_sphere(t_mini_rt *rt, t_sphere *sphere)
 		sphere->center.z += 1.0f;
 	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_KP_SUBTRACT))
 		sphere->center.z -= 1.0f;
+}
+
+static void	translate_plane(t_mini_rt *rt, t_plane *plane)
+{
+	if (mlx_is_key_down(rt->window.mlx, MLX_KEY_RIGHT))
+		plane->point.x += 1.0f;
+	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_LEFT))
+		plane->point.x -= 1.0f;
+	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_UP))
+		plane->point.y += 1.0f;
+	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_DOWN))
+		plane->point.y -= 1.0f;
+	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_KP_ADD))
+		plane->point.z += 1.0f;
+	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_KP_SUBTRACT))
+		plane->point.z -= 1.0f;
 }
 
 static void	translate_cylinder(t_mini_rt *rt, t_cylinder *cylinder)
@@ -66,6 +82,8 @@ static void	move_specific_object(int index, t_mini_rt *rt)
 		translate_sphere(rt, &(rt->scene.objects[index].data.sphere));
 	else if (rt->scene.objects[index].type == CYLINDER)
 		translate_cylinder(rt, &(rt->scene.objects[index].data.cylinder));
+	else if (rt->scene.objects[index].type == PLANE)
+		translate_plane(rt, &(rt->scene.objects[index].data.plane));
 	else if (rt->scene.objects[index].type == CONE)
 		translate_cone(rt, &(rt->scene.objects[index].data.cone));
 }
@@ -103,7 +121,10 @@ void	move_objects(void *param)
 	if ((mlx_is_key_down(rt->window.mlx, MLX_KEY_O)))
 	{
 		while (++i < rt->scene.objects_nb)
-			move_specific_object(i, rt);
+		{
+			if (rt->scene.objects[i].type != PLANE)
+				move_specific_object(i, rt);
+		}
 		render_scene(rt);
 	}
 	if (rt->scene.objects_nb < 10)
