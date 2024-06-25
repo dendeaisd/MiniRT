@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/25 13:14:04 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/25 19:48:30 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void			setup_camera(t_camera *camera, int width, int height);
 t_ray			generate_ray(t_scene *scene, t_window *window, int x, int y);
 unsigned int	get_pixel_color(int obj_idx, t_scene *scene, \
 						t_ray ray, float distance);
-void			render_scene(t_mini_rt *mini_rt);
+void			render_scene(void *param);
 
 /** Color utils **/
 t_color			clamp_color(t_color color);
@@ -99,6 +99,9 @@ float	cast_shadow(t_scene *scene, \
 float	cast_object_shadows(t_scene *scene, \
 			t_object *hit_object, t_vec hit_point, t_vec light_dir);
 bool	shadow_intersect(t_ray *ray, t_scene *scene, float light_dist);						
+
+/* ***************************      Keyhooks       ************************** */
+void	ft_keyhook(mlx_key_data_t keydata, void *param);
 
 /* ***************************    General Utils    ************************** */
 float	ft_atof(const char *str);

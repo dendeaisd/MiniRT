@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 21:53:57 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/25 13:11:23 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/25 19:47:39 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,15 @@ void	*thread_render(void *arg)
 	return (NULL);
 }
 
-void	render_scene(t_mini_rt *mini_rt)
+void	render_scene(void *param)
 {
 	const int		threads_nb = 12;
 	pthread_t		*threads;
 	t_thread_data	*data;
 	int				i;
+	t_mini_rt		*mini_rt;
 
+	mini_rt = param;
 	setup_camera(&mini_rt->scene.camera, \
 		mini_rt->window.mlx->width, mini_rt->window.mlx->height);
 	threads = (pthread_t *)malloc(threads_nb * sizeof(pthread_t));
