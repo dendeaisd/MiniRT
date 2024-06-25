@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 12:04:57 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/25 20:44:46 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/25 20:50:55 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,17 @@ static void	move_camera(void *param)
 	
 	rt = (t_mini_rt *)param;
 	if (mlx_is_key_down(rt->window.mlx, MLX_KEY_RIGHT))
-		rt->scene.camera.position.x += 0.05f;
+		rt->scene.camera.orientation.x += 0.05f;
 	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_LEFT))
-		rt->scene.camera.position.x -= 0.05f;
+		rt->scene.camera.orientation.x -= 0.05f;
 	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_UP))
-		rt->scene.camera.position.y += 0.05f;
+		rt->scene.camera.orientation.y += 0.05f;
 	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_DOWN))
-		rt->scene.camera.position.y -= 0.05f;
+		rt->scene.camera.orientation.y -= 0.05f;
 	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_KP_ADD))
-		rt->scene.camera.position.z += 0.05f;
-	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_KP_SUBTRACT))
 		rt->scene.camera.position.z -= 0.05f;
+	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_KP_SUBTRACT))
+		rt->scene.camera.position.z += 0.05f;
 	render_scene(rt);
 }
 
