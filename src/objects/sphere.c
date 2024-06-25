@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 00:27:21 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/19 18:10:30 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/25 06:02:53 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ bool	solve_quadratic(float b, float discriminant, float *t0, float *t1)
 	if (discriminant < 0)
 		return (false);
 	sqrt_disc = sqrtf(discriminant);
-	*t0 = *t1 = (-b - sqrt_disc) / (2 * a);
+	*t0 = (-b - sqrt_disc) / (2 * a);
+	*t1 = *t0;
 	if (discriminant > 0)
 		*t1 = (-b + sqrt_disc) / (2 * a);
 	return (true);
