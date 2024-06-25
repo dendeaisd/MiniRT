@@ -1,5 +1,5 @@
 NAME		:= miniRT
-CFLAGS		:= -Wunreachable-code -Ofast -g
+CFLAGS		:= -mavx -Wunreachable-code -Ofast -g -Wall -Wextra -Werror
 LIBMLX		:= ./MLX42
 LIB			:= ./Lib
 CC			:= cc
@@ -9,7 +9,7 @@ OBJ_DIR	=	./objs/
 HEADERS	:= -I ./include -I $(LIB)/Libft -I $(LIBMLX)/include
 LIB_M		:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 SRCS		:= $(wildcard src/*.c \
-						src/vector/*.c \
+						src/vector/simd/*.c \
 						src/objects/*.c \
 						src/graphics/*.c \
 						src/parsing/*.c \

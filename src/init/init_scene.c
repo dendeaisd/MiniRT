@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:54:35 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/18 23:39:37 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/25 06:27:50 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,22 @@ void	init_amb_light(char **info, t_scene *scene, char **map_2d)
 {
 	float	ratio;
 
-	if (array_has_only_numbers(info + 1) == false) // +1 because the index 0 is the identifier (A, C, L)
-		ft_exit_mini_rt("invalid input for Ambient Lightning", map_2d, info, scene);
-
+	if (array_has_only_numbers(info + 1) == false)
+		ft_exit_mini_rt("invalid input for Ambient Lightning", \
+					map_2d, info, scene);
 	ratio = ft_atof(info[1]);
 	if (ratio < 0 || ratio > 1)
-		ft_exit_mini_rt("ambient lightning must have a ratio between 0.0 and 1.0", map_2d, info, scene);
-
+		ft_exit_mini_rt(\
+		"ambient lightning must have a ratio between 0.0 and 1.0", \
+					map_2d, info, scene);
 	scene->ambilight.ratio = ratio;
 	if (invalid_color(info + 2))
-		ft_exit_mini_rt("invalid color for Ambient lightning", map_2d, info, scene);
-
+		ft_exit_mini_rt("invalid color for Ambient lightning", \
+					map_2d, info, scene);
 	scene->ambilight.color.r = ft_atoi(info[2]);
 	scene->ambilight.color.g = ft_atoi(info[3]);
 	scene->ambilight.color.b = ft_atoi(info[4]);
 }
-
 
 /*
 	C	-50,0,20			0,0,1.0		70
@@ -49,28 +49,28 @@ void	init_amb_light(char **info, t_scene *scene, char **map_2d)
 */
 void	init_camera(char **info, t_scene *scene, char **map_2d)
 {
+	int	i;
+
 	if (array_has_only_numbers(info + 1) == false)
 		ft_exit_mini_rt("invalid input for Camera", map_2d, info, scene);
 	scene->camera.position.x = ft_atof(info[1]);
 	scene->camera.position.y = ft_atof(info[2]);
 	scene->camera.position.z = ft_atof(info[3]);
-	
-	int i = 3;
+	i = 3;
 	while (++i < 7)
 	{
 		if (ft_atof(info[i]) < -1 || ft_atof(info[i]) > 1)
-			ft_exit_mini_rt("camera must have orientation of x, y and z in the range of -1 to 1", map_2d, info, scene);
+			ft_exit_mini_rt(\
+			"camera must have orientation in the range  [-1, 1]", \
+				map_2d, info, scene);
 	}
 	scene->camera.orientation.x = ft_atof(info[4]);
 	scene->camera.orientation.y = ft_atof(info[5]);
 	scene->camera.orientation.z = ft_atof(info[6]);
-
 	if (ft_atof(info[7]) < 0 || ft_atof(info[7]) > 180)
-		ft_exit_mini_rt("camera must have a field of view in range of 0 to 180 degrees", map_2d, info, scene);
+		ft_exit_mini_rt(\
+		"FOV must be in the range [0, 180]", map_2d, info, scene);
 	scene->camera.fov = ft_atof(info[7]);
-	
-	// The 4 additional lines Flavia had in her init_scene:
-	// scene->camera.orientation = vec_mul(scene->camera.orientation, -1);
 	scene->camera.ratio = 0.f;
 	scene->camera.viewport.width = 0.f;
 	scene->camera.viewport.height = 0.f;
@@ -85,20 +85,20 @@ void	init_camera(char **info, t_scene *scene, char **map_2d)
 void	init_light(char **info, t_scene *scene, char **map_2d)
 {
 	float	brightness;
-	
+
 	if (array_has_only_numbers(info + 1) == false)
 		ft_exit_mini_rt("invalid input for Light", map_2d, info, scene);
 	scene->light.position.x = ft_atof(info[1]);
 	scene->light.position.y = ft_atof(info[2]);
 	scene->light.position.z = ft_atof(info[3]);
-	
 	brightness = ft_atof(info[4]);
 	if (brightness < 0 || brightness > 1)
-		ft_exit_mini_rt("light must have a brightness ratio between 0.0 and 1.0", map_2d, info, scene);
+		ft_exit_mini_rt(\
+		"light must have a brightness ratio between 0.0 and 1.0", \
+			map_2d, info, scene);
 	scene->light.brightness = brightness;
-
-	if (ft_2darray_size(info) == 5) //mandatory part that has no color:
-		scene->light.color = (t_color){255, 255, 255}; //sets the color to white, if no values are provided
+	if (ft_2darray_size(info) == 5)
+		scene->light.color = (t_color){255, 255, 255};
 	else
 	{
 		if (invalid_color(info + 5))
@@ -107,5 +107,4 @@ void	init_light(char **info, t_scene *scene, char **map_2d)
 		scene->light.color.g = ft_atoi(info[6]);
 		scene->light.color.b = ft_atoi(info[7]);
 	}
-	// scene->light.position = vec_mul(scene->light.position, -1);
 }

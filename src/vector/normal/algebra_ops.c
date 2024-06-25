@@ -6,11 +6,11 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 22:35:24 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/10 23:25:47 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/22 06:21:53 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/vec3.h"
+#include "../../../include/vec3.h"
 
 /**
  * @brief Computes the dot product of two vectors.
