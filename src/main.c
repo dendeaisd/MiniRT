@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:59:34 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/25 19:57:52 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/26 00:06:28 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int	main(int argc, char **argv)
 	init_window(&mini_rt, WIDTH, HEIGHT);
 	render_scene(&mini_rt);
 	handle_hooks(&mini_rt);
-	// mlx_key_hook(mini_rt.window.mlx, &ft_keyhook, &mini_rt);
-	// mlx_loop_hook(mini_rt.window.mlx, &render_scene, &mini_rt);
 	mlx_loop(mini_rt.window.mlx);
 	cleanup_and_exit(1, NULL, &mini_rt);
 	return (0);
