@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 12:04:57 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/25 20:50:55 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/25 21:29:30 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,41 @@
 // 	render_scene(rt);
 // }
 
+// static void	move_camera(void *param)
+// {
+// 	t_mini_rt	*rt;
+	
+// 	rt = (t_mini_rt *)param;
+// 	if (mlx_is_key_down(rt->window.mlx, MLX_KEY_RIGHT))
+// 		rt->scene.camera.orientation.x += 0.05f;
+// 	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_LEFT))
+// 		rt->scene.camera.orientation.x -= 0.05f;
+// 	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_UP))
+// 		rt->scene.camera.orientation.y += 0.05f;
+// 	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_DOWN))
+// 		rt->scene.camera.orientation.y -= 0.05f;
+// 	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_KP_ADD))
+// 		rt->scene.camera.position.z -= 0.05f;
+// 	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_KP_SUBTRACT))
+// 		rt->scene.camera.position.z += 0.05f;
+// 	render_scene(rt);
+// }
+
 static void	move_camera(void *param)
 {
 	t_mini_rt	*rt;
 	
 	rt = (t_mini_rt *)param;
 	if (mlx_is_key_down(rt->window.mlx, MLX_KEY_RIGHT))
+	{
+		rt->scene.camera.position.x -= 0.05f;
 		rt->scene.camera.orientation.x += 0.05f;
+	}
 	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_LEFT))
+	{
+		rt->scene.camera.position.x += 0.05f;
 		rt->scene.camera.orientation.x -= 0.05f;
+	}
 	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_UP))
 		rt->scene.camera.orientation.y += 0.05f;
 	else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_DOWN))
@@ -93,15 +119,6 @@ static void	ft_keyhook(mlx_key_data_t keydata, void *param)
 	// if (keydata.key == MLX_KEY_RIGHT)
 	// 	move_camera_v2(mini_rt, 'r');
 
-	// OR THE OBJECTS:
-	// if ((keydata.key == MLX_KEY_W) || (keydata.key == MLX_KEY_UP))
-	// 	ft_do_move(game, game->p_x, game->p_y - 1, 'W');
-	// if ((keydata.key == MLX_KEY_S) || (keydata.key == MLX_KEY_DOWN))
-	// 	ft_do_move(game, game->p_x, game->p_y + 1, 'S');
-	// if ((keydata.key == MLX_KEY_A) || (keydata.key == MLX_KEY_LEFT))
-	// 	ft_do_move(game, game->p_x - 1, game->p_y, 'A');
-	// if ((keydata.key == MLX_KEY_D) || (keydata.key == MLX_KEY_RIGHT))
-	// 	ft_do_move(game, game->p_x + 1, game->p_y, 'D');
 }
 
 void	handle_hooks(t_mini_rt *mini_rt)
