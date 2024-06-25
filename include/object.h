@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 01:54:16 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/24 06:46:23 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/25 19:54:54 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ bool	intersect_sphere(t_ray * ray, t_sphere * sphere, float *t);
 
 //*PLANE*//
 bool    intersect_plane(t_ray *ray, t_plane *plane, float *t);
+void	make_helper_plane(t_cylinder *cylinder, t_plane *to_init, bool is_top);
 
 // *CYLINDER*//
 // bool	intersect_cylinder(t_ray *ray, t_cylinder *cylinder, float *t);
