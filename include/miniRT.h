@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/25 20:43:13 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/25 22:54:01 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ bool	shadow_intersect(t_ray *ray, t_scene *scene, float light_dist);
 
 /* ***************************      Keyhooks       ************************** */
 void	handle_hooks(t_mini_rt *mini_rt);
+void	move_objects(void *param);
 // void	ft_keyhook(mlx_key_data_t keydata, void *param);
 
 /* ***************************    General Utils    ************************** */
