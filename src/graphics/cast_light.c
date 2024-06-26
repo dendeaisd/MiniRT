@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cast_light.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:03:24 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/26 03:25:53 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/26 16:02:23 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_color	apply_shadows(t_scene *scene, t_object *hit_object, \
+static t_color	apply_soft_shadows(t_scene *scene, t_object *hit_object, \
 					t_vec hit_point, t_vec normal)
 {
 	t_vec	light_dir;
@@ -21,9 +21,23 @@ t_color	apply_shadows(t_scene *scene, t_object *hit_object, \
 
 	light_dir = vec_unit(vec_sub(scene->light.position, hit_point));
 	shadow_factor = 1.0f - (cast_shadow(scene, hit_point, scene->light, normal) * 0.3);
-	shadow_factor *= 1.0f - cast_object_shadows(scene, \
-								hit_object, hit_point, &scene->light);
+	shadow_factor *= 1.0f - cast_object_soft_shadows(scene, hit_object, hit_point, &scene->light);
+	direct_light = calculate_lighting(scene, hit_point, \
+				normal, vec_unit(vec_sub(scene->camera.position, hit_point)));
+	return (scale_color(direct_light, shadow_factor));
+}
 
+static t_color	apply_hard_shadows(t_scene *scene, t_object *hit_object, \
+					t_vec hit_point, t_vec normal)
+{
+	t_vec	light_dir;
+	float	shadow_factor;
+	t_color	direct_light;
+
+	light_dir = vec_unit(vec_sub(scene->light.position, hit_point));
+	shadow_factor = 1.0f - cast_shadow(scene, hit_point, scene->light, normal);
+	shadow_factor *= (1.0f - cast_object_hard_shadows(scene, \
+										hit_object, hit_point, light_dir));
 	direct_light = calculate_lighting(scene, hit_point, \
 				normal, vec_unit(vec_sub(scene->camera.position, hit_point)));
 	return (scale_color(direct_light, shadow_factor));
@@ -55,7 +69,11 @@ t_color	cast_light(t_scene *scene, \
 	fetch_properties(hit_object, hit_point, &hit_color, &normal);
 	view_dir = vec_unit(vec_sub(scene->camera.position, hit_point));
 	direct_light = calculate_lighting(scene, hit_point, normal, view_dir);
-	direct_light = apply_shadows(scene, \
-							hit_object, hit_point, normal);
+	if (scene->hd_version)
+		direct_light = apply_soft_shadows(scene, \
+								hit_object, hit_point, normal);
+	else
+		direct_light = apply_hard_shadows(scene, \
+								hit_object, hit_point, normal);
 	return (clamp_color(combine_lighting(scene, hit_color, direct_light)));
 }

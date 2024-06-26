@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 02:37:02 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/25 19:38:42 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/26 16:21:31 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_scene
 	t_ambilight	ambilight;
 	t_object	*objects;
 	int			objects_nb;
-	t_viewport	viewport;
+	bool		hd_version;
 }	t_scene;
 
 #endif

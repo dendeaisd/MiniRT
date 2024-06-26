@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/26 03:41:43 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/26 15:55:37 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@
 # include "scene.h"
 # include "ray.h"
 
-# define WIDTH	1600
-# define HEIGHT	1200
+# define HD_WIDTH	1600
+# define HD_HEIGHT	1200
+# define WIDTH	800
+# define HEIGHT	600
 
 # define ERROR "\x1B[31mError: \x1B[0m"
 
@@ -60,7 +62,7 @@ int		ft_2darray_size(char **array);
 bool	invalid_color(char **color_arr);
 
 /* ********************    Initialization Functions    ********************** */
-void		init_window(t_mini_rt *mini_rt, int width, int height);
+void		init_window(t_mini_rt *mini_rt, bool hd);
 void		init_amb_light(char **info, t_scene *scene, char **map_2d);
 void		init_camera(char **info, t_scene *scene, char **map_2d);
 void		init_light(char **info, t_scene *scene, char **map_2d);
@@ -97,12 +99,16 @@ t_color	cast_light(t_scene *scene, \
 			t_object *hit_object, t_vec hit_point);
 float	cast_shadow(t_scene *scene, \
 			t_vec hit_point, t_light light, t_vec normal);
-float	cast_object_shadows(t_scene *scene, \
-			t_object *hit_object, t_vec hit_point, t_light *light);
-bool	shadow_intersect(t_ray *ray, t_scene *scene, float light_dist);						
+// float	cast_object_shadows(t_scene *scene, \
+// 			t_object *hit_object, t_vec hit_point, t_light *light);
+float	cast_object_hard_shadows(t_scene *scene, \
+			t_object *hit_object, t_vec hit_point, t_vec light_dir);
+float cast_object_soft_shadows(t_scene *scene, t_object *hit_object, t_vec hit_point, t_light *light);
+// bool	shadow_intersect(t_ray *ray, t_scene *scene, float light_dist);						
 
 /* ***************************      Keyhooks       ************************** */
-void	handle_hooks(t_mini_rt *mini_rt);
+void	escape(mlx_key_data_t keydata, void *param);
+void	movement_loops(t_mini_rt *mini_rt);
 void	move_objects(void *param);
 void	rotate_objects(void *param);
 // void	ft_keyhook(mlx_key_data_t keydata, void *param);

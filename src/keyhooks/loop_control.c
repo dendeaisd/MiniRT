@@ -6,22 +6,11 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 12:04:57 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/26 02:16:19 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/26 16:21:01 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-
-static void	escape(mlx_key_data_t keydata, void *param)
-{
-	t_mini_rt	*mini_rt;
-
-	if (keydata.action != MLX_PRESS)
-		return ;
-	mini_rt = param;
-	if (keydata.key == MLX_KEY_ESCAPE)
-		cleanup_and_exit(1, NULL, mini_rt);
-}
 
 static void	translate_camera(void *param)
 {
@@ -88,9 +77,9 @@ static void	translate_light(void *param)
 	}
 }
 
-void	handle_hooks(t_mini_rt *mini_rt)
+void	movement_loops(t_mini_rt *mini_rt)
 {
-	mlx_key_hook(mini_rt->window.mlx, escape, mini_rt);
+	//key hook was here but i moved it in main
 	mlx_loop_hook(mini_rt->window.mlx, translate_camera, mini_rt);
 	mlx_loop_hook(mini_rt->window.mlx, rotate_camera, mini_rt);
 	mlx_loop_hook(mini_rt->window.mlx, translate_light, mini_rt);
