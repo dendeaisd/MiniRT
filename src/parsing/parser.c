@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:18:17 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/26 01:53:16 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/26 19:48:39 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,29 +74,29 @@ static void	count_elements(t_scene *scene, char *map_1d)
  * none of the expected 6, it exits.
  * @param info: the 2d array of strings that the current line of the map has.
  * @param scene: the struct that contains the variables to store the read data.
- * @param map_2d: the 2d array of the rt map file, to be freed in case of exit.
+ * @param map2: the 2d array of the rt map file, to be freed in case of exit.
  */
-static void	parse_element(char **info, t_scene *scene, char **map_2d)
+static void	parse_element(char **info, t_scene *scene, char **map2)
 {
 	static int	obj_cur_index = -1;
 
 	if (!ft_strncmp(info[0], "A", 2) && ft_2darray_size(info) == 5)
-		init_amb_light(info, scene, map_2d);
+		init_amb_light(info, scene, map2);
 	else if (!ft_strncmp(info[0], "C", 2) && ft_2darray_size(info) == 8)
-		init_camera(info, scene, map_2d);
+		init_camera(info, scene, map2);
 	else if (!ft_strncmp(info[0], "L", 2) && (ft_2darray_size(info) == 5
 			|| ft_2darray_size(info) == 8))
-		init_light(info, scene, map_2d);
+		init_light(info, scene, map2);
 	else if (!ft_strncmp(info[0], "sp", 3) && ft_2darray_size(info) == 8)
-		add_sphere(++obj_cur_index, info, scene, map_2d);
+		add_sphere(++obj_cur_index, info, scene, map2);
 	else if (!ft_strncmp(info[0], "pl", 3) && ft_2darray_size(info) == 10)
-		add_plane(++obj_cur_index, info, scene, map_2d);
+		add_plane(++obj_cur_index, info, scene, map2);
 	else if (!ft_strncmp(info[0], "cy", 3) && ft_2darray_size(info) == 12)
-		add_cylinder(++obj_cur_index, info, scene, map_2d);
+		add_cylinder(++obj_cur_index, info, scene, map2);
 	else if (!ft_strncmp(info[0], "cn", 3) && ft_2darray_size(info) == 12)
-		add_cone(++obj_cur_index, info, scene, map_2d);
+		add_cone(++obj_cur_index, info, scene, map2);
 	else
-		ft_exit_mini_rt("invalid rt map.", info, map_2d, scene);
+		ft_exit_mini_rt("invalid rt map.", info, map2, scene);
 }
 
 /**
@@ -112,26 +112,26 @@ static void	parse_map(t_scene *scene, char *map_1d)
 {
 	int		line;
 	char	**elem_info;
-	char	**map_2d;
+	char	**map2;
 
 	count_elements(scene, map_1d);
 	scene->objects = (t_object *)malloc((scene->objects_nb) * sizeof(t_object));
 	if (scene->objects == NULL)
 		ft_exit("malloc for objects failed", 1);
-	map_2d = ft_split(map_1d, '\n');
-	if (map_2d == NULL)
+	map2 = ft_split(map_1d, '\n');
+	if (map2 == NULL)
 		ft_exit_v2("malloc for split failed", 1, scene->objects, -1);
 	line = -1;
-	while (map_2d[++line])
+	while (map2[++line])
 	{
-		modify_before_split(&(map_2d[line]));
-		elem_info = ft_split(map_2d[line], ' ');
+		modify_before_split(&(map2[line]));
+		elem_info = ft_split(map2[line], ' ');
 		if (!elem_info)
-			ft_exit_v4("malloc for split failed", 1, scene->objects, map_2d);
-		parse_element(elem_info, scene, map_2d);
+			ft_exit_v4("malloc for split failed", 1, scene->objects, map2);
+		parse_element(elem_info, scene, map2);
 		fv_free_array(elem_info);
 	}
-	fv_free_array(map_2d);
+	fv_free_array(map2);
 }
 
 /**

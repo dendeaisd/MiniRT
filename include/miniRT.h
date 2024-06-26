@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/26 17:16:50 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/26 19:58:57 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,63 +60,52 @@ void			modify_before_split(char **line);
 bool			array_has_only_numbers(char **array);
 int				ft_2darray_size(char **array);
 bool			invalid_color(char **color_arr);
+float			ft_atof(const char *str);
 
 /* ********************    Initialization Functions    ********************** */
-void		init_window(t_mini_rt *mini_rt, bool hd);
-void		init_amb_light(char **info, t_scene *scene, char **map_2d);
-void		init_camera(char **info, t_scene *scene, char **map_2d);
-void		init_light(char **info, t_scene *scene, char **map_2d);
-void		add_sphere(int obj_index, char **info, t_scene *scene, char **map_2d);
-void		add_plane(int obj_index, char **info, t_scene *scene, char **map_2d);
-void		add_cylinder(int obj_index, char **info, t_scene *scene, char **map_2d);
-void		add_cone(int obj_index, char **info, t_scene *scene, char **map_2d);
+void			init_amb_light(char **info, t_scene *scene, char **map2);
+void			init_camera(char **info, t_scene *scene, char **map2);
+void			init_light(char **info, t_scene *scene, char **map2);
+void			add_sphere(int idx, char **info, t_scene *scene, char **map2);
+void			add_plane(int idx, char **info, t_scene *scene, char **map2);
+void			add_cylinder(int idx, char **info, t_scene *scene, char **map2);
+void			add_cone(int idx, char **info, t_scene *scene, char **map2);
+void			init_window(t_mini_rt *mini_rt, bool hd);
 
-// From FLAVIA. We need name for the category here... *********************** *
-
+/* ***************************    Rendering    ****************************** */
+void			render_scene(t_mini_rt *mini_rt);
 void			setup_camera(t_camera *camera, int width, int height);
 t_ray			generate_ray(t_scene *scene, t_window *window, int x, int y);
 unsigned int	get_pixel_color(int obj_idx, t_scene *scene, \
 						t_ray ray, float distance);
-void		render_scene(t_mini_rt *mini_rt);
-// void			render_scene(void *param); //the loophook version
+bool			intersect_object(t_ray *ray, t_object *object, float *t);
 
-/** Color utils **/
+/* ******************    Core Lightning Calculations    ********************* */
+t_color			apply_ambilight(t_ambilight ambilight, t_color color);
+t_color			calculate_lighting(t_scene *scene, \
+						t_vec hit_point, t_vec normal, t_vec view_dir);
+void			fetch_properties(t_object *object, t_vec hit_point, \
+						t_color *color, t_vec *normal);
+t_color			cast_light(t_scene *scene, \
+						t_object *hit_object, t_vec hit_point);
+float			cast_shadow(t_scene *scene, \
+						t_vec hit_point, t_light light, t_vec normal);
+float			cast_object_hard_shadows(t_scene *scene, \
+						t_object *hit_object, t_vec hit_point, t_vec light_dir);
+float			cast_object_soft_shadows(t_scene *scene, t_object *hit_object, \
+						t_vec hit_point, t_light *light);
+
+/* **************************    Color Utils    ***************************** */
 t_color			clamp_color(t_color color);
 unsigned int	vec_to_color(t_color color);
 t_color			scale_color(t_color color, float factor);
 t_color			gamma_correction(t_color color, float gamma);
 
-/** Core lighting calculations **/
-t_color			apply_ambilight(t_ambilight ambilight, t_color color);
-t_color			calculate_lighting(t_scene *scene, \
-						t_vec hit_point, t_vec normal, t_vec view_dir);
-
-
-void	fetch_properties(t_object *object, t_vec hit_point, \
-					t_color *color, t_vec *normal);
-t_color	cast_light(t_scene *scene, \
-			t_object *hit_object, t_vec hit_point);
-float	cast_shadow(t_scene *scene, \
-			t_vec hit_point, t_light light, t_vec normal);
-// float	cast_object_shadows(t_scene *scene, \
-// 			t_object *hit_object, t_vec hit_point, t_light *light);
-float	cast_object_hard_shadows(t_scene *scene, \
-			t_object *hit_object, t_vec hit_point, t_vec light_dir);
-float cast_object_soft_shadows(t_scene *scene, t_object *hit_object, t_vec hit_point, t_light *light);
-// bool	shadow_intersect(t_ray *ray, t_scene *scene, float light_dist);						
-
 /* ***************************      Keyhooks       ************************** */
-void	escape(mlx_key_data_t keydata, void *param);
-void	movement_loops(t_mini_rt *mini_rt);
-void	move_objects(void *param);
-void	rotate_objects(void *param);
-// void	ft_keyhook(mlx_key_data_t keydata, void *param);
-
-bool			intersect_object(t_ray *ray, t_object *object, float *t);
-void			fetch_properties(t_object *object, t_vec hit_point, \
-						t_color *color, t_vec *normal);
-/* ***************************    General Utils    ************************** */
-float			ft_atof(const char *str);
+void			escape(mlx_key_data_t keydata, void *param);
+void			movement_loops(t_mini_rt *mini_rt);
+void			move_objects(void *param);
+void			rotate_objects(void *param);
 
 /* ******************************    Cleanup    ***************************** */
 void			cleanup_and_exit(int fd_to, char *message, t_mini_rt *mini_rt);
