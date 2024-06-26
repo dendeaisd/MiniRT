@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/25 13:14:04 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/26 02:28:39 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # include "scene.h"
 # include "ray.h"
 
-# define WIDTH	800
-# define HEIGHT	600
+# define WIDTH	1600
+# define HEIGHT	1200
 
 # define ERROR "\x1B[31mError: \x1B[0m"
 
@@ -97,7 +97,7 @@ t_color	cast_light(t_scene *scene, \
 float	cast_shadow(t_scene *scene, \
 			t_vec hit_point, t_light light, t_vec normal);
 float	cast_object_shadows(t_scene *scene, \
-			t_object *hit_object, t_vec hit_point, t_vec light_dir);
+			t_object *hit_object, t_vec hit_point, t_light *light);
 bool	shadow_intersect(t_ray *ray, t_scene *scene, float light_dist);						
 
 /* ***************************    General Utils    ************************** */
