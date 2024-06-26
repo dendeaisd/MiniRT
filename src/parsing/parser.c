@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:18:17 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/24 04:42:35 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/26 01:53:16 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,8 @@ void	open_and_parse_map(char **argv, t_scene *scene)
 	line = get_next_line(fd);
 	if (!line || !line[0] || ft_strlen(line) > 1024)
 		ft_exit_v2("invalid .rt file", 0, line, fd);
-	ft_strlcpy(map, line, ft_strlen(line) + 1);
+	if (line[0] != '#')
+		ft_strlcpy(map, line, ft_strlen(line) + 1);
 	while (line != NULL)
 	{
 		free(line);

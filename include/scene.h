@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 02:37:02 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/26 05:22:55 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/26 17:17:31 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_scene
 	t_ambilight	ambilight;
 	t_object	*objects;
 	int			objects_nb;
+	bool		hd_version;
 }	t_scene;
 
 #endif

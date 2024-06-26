@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/26 05:28:18 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/26 17:16:50 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@
 # include "scene.h"
 # include "ray.h"
 
-# define WIDTH	1800
-# define HEIGHT	1600
+# define HD_WIDTH	1600
+# define HD_HEIGHT	1200
+# define WIDTH	800
+# define HEIGHT	600
 
 # define ERROR "\x1B[31mError: \x1B[0m"
 
@@ -60,18 +62,14 @@ int				ft_2darray_size(char **array);
 bool			invalid_color(char **color_arr);
 
 /* ********************    Initialization Functions    ********************** */
-void			init_window(t_mini_rt *mini_rt, int width, int height);
-void			init_amb_light(char **info, t_scene *scene, char **map_2d);
-void			init_camera(char **info, t_scene *scene, char **map_2d);
-void			init_light(char **info, t_scene *scene, char **map_2d);
-void			add_sphere(int obj_index, char **info, \
-									t_scene *scene, char **map_2d);
-void			add_plane(int obj_index, char **info, \
-									t_scene *scene, char **map_2d);
-void			add_cylinder(int obj_index, char **info, \
-									t_scene *scene, char **map_2d);
-void			add_cone(int obj_index, char **info, \
-									t_scene *scene, char **map_2d);
+void		init_window(t_mini_rt *mini_rt, bool hd);
+void		init_amb_light(char **info, t_scene *scene, char **map_2d);
+void		init_camera(char **info, t_scene *scene, char **map_2d);
+void		init_light(char **info, t_scene *scene, char **map_2d);
+void		add_sphere(int obj_index, char **info, t_scene *scene, char **map_2d);
+void		add_plane(int obj_index, char **info, t_scene *scene, char **map_2d);
+void		add_cylinder(int obj_index, char **info, t_scene *scene, char **map_2d);
+void		add_cone(int obj_index, char **info, t_scene *scene, char **map_2d);
 
 // From FLAVIA. We need name for the category here... *********************** *
 
@@ -79,7 +77,8 @@ void			setup_camera(t_camera *camera, int width, int height);
 t_ray			generate_ray(t_scene *scene, t_window *window, int x, int y);
 unsigned int	get_pixel_color(int obj_idx, t_scene *scene, \
 						t_ray ray, float distance);
-void			render_scene(t_mini_rt *mini_rt);
+void		render_scene(t_mini_rt *mini_rt);
+// void			render_scene(void *param); //the loophook version
 
 /** Color utils **/
 t_color			clamp_color(t_color color);
@@ -90,14 +89,28 @@ t_color			gamma_correction(t_color color, float gamma);
 /** Core lighting calculations **/
 t_color			apply_ambilight(t_ambilight ambilight, t_color color);
 t_color			calculate_lighting(t_scene *scene, \
-						t_vec hit_point, t_vec normal, t_vec view_dir);			
-t_color			cast_light(t_scene *scene, \
-				t_object *hit_object, t_vec hit_point);
-float			cast_shadow(t_scene *scene, \
-				t_vec hit_point, t_light light, t_vec normal);
-float			cast_object_shadows(t_scene *scene, \
-				t_object *hit_object, t_vec hit_point, t_light *light);
-bool			shadow_intersect(t_ray *ray, t_scene *scene, float light_dist);
+						t_vec hit_point, t_vec normal, t_vec view_dir);
+
+
+void	fetch_properties(t_object *object, t_vec hit_point, \
+					t_color *color, t_vec *normal);
+t_color	cast_light(t_scene *scene, \
+			t_object *hit_object, t_vec hit_point);
+float	cast_shadow(t_scene *scene, \
+			t_vec hit_point, t_light light, t_vec normal);
+// float	cast_object_shadows(t_scene *scene, \
+// 			t_object *hit_object, t_vec hit_point, t_light *light);
+float	cast_object_hard_shadows(t_scene *scene, \
+			t_object *hit_object, t_vec hit_point, t_vec light_dir);
+float cast_object_soft_shadows(t_scene *scene, t_object *hit_object, t_vec hit_point, t_light *light);
+// bool	shadow_intersect(t_ray *ray, t_scene *scene, float light_dist);						
+
+/* ***************************      Keyhooks       ************************** */
+void	escape(mlx_key_data_t keydata, void *param);
+void	movement_loops(t_mini_rt *mini_rt);
+void	move_objects(void *param);
+void	rotate_objects(void *param);
+// void	ft_keyhook(mlx_key_data_t keydata, void *param);
 
 bool			intersect_object(t_ray *ray, t_object *object, float *t);
 void			fetch_properties(t_object *object, t_vec hit_point, \
