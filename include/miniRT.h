@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/26 21:21:55 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/26 23:44:07 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # include "scene.h"
 # include "ray.h"
 
-# define HD_WIDTH	1600
-# define HD_HEIGHT	1200
+# define HD_WIDTH	1920
+# define HD_HEIGHT	1080
 # define WIDTH	800
 # define HEIGHT	600
 
