@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:54:35 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/26 19:48:39 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/27 01:10:36 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ void	init_camera(char **info, t_scene *scene, char **map2)
 
 	if (array_has_only_numbers(info + 1) == false)
 		ft_exit_mini_rt("invalid input for Camera", map2, info, scene);
-	scene->camera.position.x = ft_atof(info[1]);
-	scene->camera.position.y = ft_atof(info[2]);
-	scene->camera.position.z = ft_atof(info[3]);
+	scene->camera.position.x = ft_atof(info[1]) / 100;
+	scene->camera.position.y = ft_atof(info[2]) / 100;
+	scene->camera.position.z = ft_atof(info[3]) / 100;
 	i = 3;
 	while (++i < 7)
 	{
