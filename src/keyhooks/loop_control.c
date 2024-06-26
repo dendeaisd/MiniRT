@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop_control.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 12:04:57 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/26 17:12:42 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/26 19:07:14 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static void	translate_camera(void *param)
 			rt->scene.camera.position.z -= 0.05f;
 		else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_KP_SUBTRACT))
 			rt->scene.camera.position.z += 0.05f;
-		render_scene(rt);
 	}
 }
 
@@ -50,7 +49,6 @@ static void	rotate_camera(void *param)
 			rt->scene.camera.orientation.y += 0.05f;
 		else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_DOWN))
 			rt->scene.camera.orientation.y -= 0.05f;
-		render_scene(rt);
 	}
 }
 
@@ -62,17 +60,17 @@ static void	translate_light(void *param)
 	if ((mlx_is_key_down(rt->window.mlx, MLX_KEY_L)))
 	{
 		if (mlx_is_key_down(rt->window.mlx, MLX_KEY_RIGHT))
-			rt->scene.light.position.x += 1.5f;
+			rt->scene.light.position.x += 2.f;
 		else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_LEFT))
-			rt->scene.light.position.x -= 1.5f;
+			rt->scene.light.position.x -= 2.f;
 		else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_UP))
-			rt->scene.light.position.y += 1.5f;
+			rt->scene.light.position.y += 2.f;
 		else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_DOWN))
-			rt->scene.light.position.y -= 1.5f;
+			rt->scene.light.position.y -= 2.f;
 		else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_KP_ADD))
-			rt->scene.light.position.z -= 1.5f;
+			rt->scene.light.position.z -= 2.f;
 		else if (mlx_is_key_down(rt->window.mlx, MLX_KEY_KP_SUBTRACT))
-			rt->scene.light.position.z += 1.5f;
+			rt->scene.light.position.z += 2.f;
 		render_scene(rt);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:47:26 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/26 18:37:56 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/26 18:57:59 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,10 @@ float	cast_shadow(t_scene *scene, \
 		light_dist = EPSILON;
 	filter_radius = fmin(1.f / light_dist, 1.f);
 	i = -1;
-	while (++i < NUM_SHADOW_SAMPLES)
-	{
 		shadow_ray = calc_shadow_ray(hit_point, normal, \
 				vec_sub(light.position, hit_point), filter_radius);
 		if (shadow_intersect(&shadow_ray, scene, light_dist))
 			shadow_intensity += 1.0f;
-	}
-	shadow_intensity /= NUM_SHADOW_SAMPLES;
 	return (shadow_intensity);
 }
 
