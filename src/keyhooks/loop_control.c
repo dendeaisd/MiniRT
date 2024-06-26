@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 12:04:57 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/25 22:52:37 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/26 02:16:19 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,5 @@ void	handle_hooks(t_mini_rt *mini_rt)
 	mlx_loop_hook(mini_rt->window.mlx, rotate_camera, mini_rt);
 	mlx_loop_hook(mini_rt->window.mlx, translate_light, mini_rt);
 	mlx_loop_hook(mini_rt->window.mlx, move_objects, mini_rt);
+	mlx_loop_hook(mini_rt->window.mlx, rotate_objects, mini_rt);
 }

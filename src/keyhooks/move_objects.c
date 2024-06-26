@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 12:04:57 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/26 00:46:26 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/26 02:41:06 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,25 +88,25 @@ static void	move_specific_object(int index, t_mini_rt *rt)
 		translate_cone(rt, &(rt->scene.objects[index].data.cone));
 }
 
-static void	move_objects_separately(t_mini_rt *rt)
+static void	move_objects_separately(t_mini_rt *rt, int nb)
 {
-	if (rt->scene.objects_nb > 0 && mlx_is_key_down(rt->window.mlx, MLX_KEY_1))
+	if (nb > 0 && mlx_is_key_down(rt->window.mlx, MLX_KEY_1))
 		move_specific_object(0, rt);
-	else if (rt->scene.objects_nb > 1 && mlx_is_key_down(rt->window.mlx, MLX_KEY_2))
+	else if (nb > 1 && mlx_is_key_down(rt->window.mlx, MLX_KEY_2))
 		move_specific_object(1, rt);
-	else if (rt->scene.objects_nb > 2 && mlx_is_key_down(rt->window.mlx, MLX_KEY_3))
+	else if (nb > 2 && mlx_is_key_down(rt->window.mlx, MLX_KEY_3))
 		move_specific_object(2, rt);
-	else if (rt->scene.objects_nb > 3 && mlx_is_key_down(rt->window.mlx, MLX_KEY_4))
+	else if (nb > 3 && mlx_is_key_down(rt->window.mlx, MLX_KEY_4))
 		move_specific_object(3, rt);
-	else if (rt->scene.objects_nb > 4 && mlx_is_key_down(rt->window.mlx, MLX_KEY_5))
+	else if (nb > 4 && mlx_is_key_down(rt->window.mlx, MLX_KEY_5))
 		move_specific_object(4, rt);
-	else if (rt->scene.objects_nb > 5 && mlx_is_key_down(rt->window.mlx, MLX_KEY_6))
+	else if (nb > 5 && mlx_is_key_down(rt->window.mlx, MLX_KEY_6))
 		move_specific_object(5, rt);
-	else if (rt->scene.objects_nb > 6 && mlx_is_key_down(rt->window.mlx, MLX_KEY_7))
+	else if (nb > 6 && mlx_is_key_down(rt->window.mlx, MLX_KEY_7))
 		move_specific_object(6, rt);
-	else if (rt->scene.objects_nb > 7 && mlx_is_key_down(rt->window.mlx, MLX_KEY_8))
+	else if (nb > 7 && mlx_is_key_down(rt->window.mlx, MLX_KEY_8))
 		move_specific_object(7, rt);
-	else if (rt->scene.objects_nb > 8 && mlx_is_key_down(rt->window.mlx, MLX_KEY_9))
+	else if (nb > 8 && mlx_is_key_down(rt->window.mlx, MLX_KEY_9))
 		move_specific_object(8, rt);
 	render_scene(rt);
 }
@@ -128,5 +128,5 @@ void	move_objects(void *param)
 		render_scene(rt);
 	}
 	if (rt->scene.objects_nb < 10)
-		move_objects_separately(rt);
+		move_objects_separately(rt, rt->scene.objects_nb);
 }

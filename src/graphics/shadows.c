@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cast_shadow.c                                      :+:      :+:    :+:   */
+/*   shadows.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:47:26 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/25 11:51:55 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/26 02:11:00 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ bool	shadow_intersect(t_ray *ray, t_scene *scene, float light_dist)
 		hit = false;
 		if (scene->objects[i].type == SPHERE)
 			hit = intersect_sphere(ray, &scene->objects[i].data.sphere, &t);
-		else if (scene->objects[i].type == PLANE)
-			hit = intersect_plane(ray, &scene->objects[i].data.plane, &t);
 		else if (scene->objects[i].type == CYLINDER)
 			hit = intersect_cylinder(ray, &scene->objects[i].data.cylinder, &t);
 		else if (scene->objects[i].type == CONE)
