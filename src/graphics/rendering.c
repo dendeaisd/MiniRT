@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 21:53:57 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/25 13:11:23 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/26 02:56:24 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	*thread_render(void *arg)
 
 void	render_scene(t_mini_rt *mini_rt)
 {
-	const int		threads_nb = 12;
+	const int		threads_nb = 24;
 	pthread_t		*threads;
 	t_thread_data	*data;
 	int				i;
