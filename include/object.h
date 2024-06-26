@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 01:54:16 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/25 19:54:54 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/26 05:25:33 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,25 +76,22 @@ typedef struct s_object
 	t_obj_data	data;
 }	t_object;
 
-/***INTERSECTION***/
-//*SPHERE*//
+/*** SPHERE ***/
 float	calculate_discriminant(t_ray *ray, t_sphere *sphere, \
 							float *b, float *c);
 bool	solve_quadratic(float b, float discriminant, float *t0, float *t1);
 bool	find_closest_hit(float t0, float t1, float *t);
-bool	intersect_sphere(t_ray * ray, t_sphere * sphere, float *t);
+bool	intersect_sphere(t_ray *ray, t_sphere *sphere, float *t);
 
-//*PLANE*//
-bool    intersect_plane(t_ray *ray, t_plane *plane, float *t);
+/*** PLANE ***/
+bool	intersect_plane(t_ray *ray, t_plane *plane, float *t);
 void	make_helper_plane(t_cylinder *cylinder, t_plane *to_init, bool is_top);
 
-// *CYLINDER*//
-// bool	intersect_cylinder(t_ray *ray, t_cylinder *cylinder, float *t);
+/*** CYLINDER ***/
 bool	hit_cy_caps(t_ray *ray, t_cylinder *cylinder, float *t);
-bool intersect_cylinder(t_ray *ray, t_cylinder *cylinder, float *t);
+bool	intersect_cylinder(t_ray *ray, t_cylinder *cylinder, float *t);
 bool	intersect_disk(t_ray *ray, t_plane *disk, float *t, float radius);
-
+/*** CONE ***/
 bool	intersect_cone(t_ray *ray, t_cone *cone, float *t);
-// t_vec	cylinder_normal(t_vec center, t_vec axis, t_vec hit_point);
-// bool intersect_inifinite(t_ray *ray, t_cylinder *cylinder, float *t);
+
 #endif

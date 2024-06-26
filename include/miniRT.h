@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/26 15:55:37 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/26 17:16:50 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ typedef struct s_thread_data
 }	t_thread_data;
 
 /* ****************************   PARSING PART   **************************** */
-void	open_and_parse_map(char **argv, t_scene *scene);
-void	modify_before_split(char **line);
-bool	array_has_only_numbers(char **array);
-int		ft_2darray_size(char **array);
-bool	invalid_color(char **color_arr);
+void			open_and_parse_map(char **argv, t_scene *scene);
+void			modify_before_split(char **line);
+bool			array_has_only_numbers(char **array);
+int				ft_2darray_size(char **array);
+bool			invalid_color(char **color_arr);
 
 /* ********************    Initialization Functions    ********************** */
 void		init_window(t_mini_rt *mini_rt, bool hd);
@@ -85,7 +85,6 @@ t_color			clamp_color(t_color color);
 unsigned int	vec_to_color(t_color color);
 t_color			scale_color(t_color color, float factor);
 t_color			gamma_correction(t_color color, float gamma);
-bool			intersect_object(t_ray *ray, t_object *object, float *t);
 
 /** Core lighting calculations **/
 t_color			apply_ambilight(t_ambilight ambilight, t_color color);
@@ -113,18 +112,21 @@ void	move_objects(void *param);
 void	rotate_objects(void *param);
 // void	ft_keyhook(mlx_key_data_t keydata, void *param);
 
+bool			intersect_object(t_ray *ray, t_object *object, float *t);
+void			fetch_properties(t_object *object, t_vec hit_point, \
+						t_color *color, t_vec *normal);
 /* ***************************    General Utils    ************************** */
-float	ft_atof(const char *str);
+float			ft_atof(const char *str);
 
 /* ******************************    Cleanup    ***************************** */
-void	cleanup_and_exit(int fd_to, char *message, t_mini_rt *mini_rt);
+void			cleanup_and_exit(int fd_to, char *message, t_mini_rt *mini_rt);
 
-void	ft_exit(char *err_msg, int exit_value);
-void	ft_exit_v2(char *msg, int exit_val, void *to_free, int fd);
-void	ft_exit_v3(char *err_msg, int exit_value, char **array_to_free);
-void	ft_exit_v4(char *err_msg, int exit_value, void *to_free,
-			char **array_to_free);
-void	ft_exit_mini_rt(char *err_msg, char **array1, char **array2,
-			t_scene *scene);
+void			ft_exit(char *err_msg, int exit_value);
+void			ft_exit_v2(char *msg, int exit_val, void *to_free, int fd);
+void			ft_exit_v3(char *err_msg, int exit_value, char **array_to_free);
+void			ft_exit_v4(char *err_msg, int exit_value, \
+									void *to_free, char **array_to_free);
+void			ft_exit_mini_rt(char *err_msg, char **array1, \
+									char **array2, t_scene *scene);
 
 #endif

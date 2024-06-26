@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:35:02 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/23 02:28:39 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/26 05:23:46 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,5 @@ float	vec_len(t_vec v);
 float	vec_dot(t_vec a, t_vec b);
 t_vec	vec_cross(t_vec a, t_vec b);
 t_vec	vec_unit(t_vec a);
-
 
 #endif

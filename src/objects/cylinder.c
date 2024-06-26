@@ -6,95 +6,102 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 04:27:51 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/25 19:54:10 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/26 05:17:56 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-
-bool	solve_quadratic_siuuu(float b, float a, float discriminant, float *t0, float *t1)
+static bool	solve_quadratic_siuuu(float *coefficients, float *t0, float *t1)
 {
+	float	discriminant;
 	float	sqrt_disc;
+	float	a;
+	float	b;
+	float	c;
 
+	a = coefficients[0];
+	b = coefficients[1];
+	c = coefficients[2];
+	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0)
 		return (false);
 	sqrt_disc = sqrtf(discriminant);
-	*t0 = *t1 = (-b - sqrt_disc) / (2 * a);
-	if (discriminant > 0)
-		*t1 = (-b + sqrt_disc) / (2 * a);
+	*t0 = (-b - sqrt_disc) / (2 * a);
+	*t1 = (-b + sqrt_disc) / (2 * a);
 	return (true);
 }
 
-void	calculate_cylinder_coefficients(t_ray *ray, t_cylinder *cylinder, float *coefficients)
+static void	calculate_coefficients(t_ray *ray, t_cylinder *cy, float *coeffs)
 {
-	t_vec delta_p = vec_sub(ray->origin, cylinder->center);
-	float dp_axis = vec_dot(delta_p, cylinder->axis);
-	float rd_axis = vec_dot(ray->direction, cylinder->axis);
-	coefficients[0] = vec_dot(ray->direction, ray->direction) - powf(rd_axis, 2); // a
-	coefficients[1] = 2 * (vec_dot(ray->direction, delta_p) - rd_axis * dp_axis); // b
-	coefficients[2] = vec_dot(delta_p, delta_p) - powf(dp_axis, 2) - powf(cylinder->diameter / 2, 2); // c
+	t_vec	delta_p;
+	float	dp_axis;
+	float	rd_axis;
+	float	radius;
+
+	radius = cy->diameter / 2;
+	delta_p = vec_sub(ray->origin, cy->center);
+	dp_axis = vec_dot(delta_p, cy->axis);
+	rd_axis = vec_dot(ray->direction, cy->axis);
+	coeffs[0] = vec_dot(ray->direction, ray->direction) - powf(rd_axis, 2);
+	coeffs[1] = 2 * (vec_dot(ray->direction, delta_p) - rd_axis * dp_axis);
+	coeffs[2] = vec_dot(delta_p, delta_p) - powf(dp_axis, 2) - powf(radius, 2);
 }
 
-bool	check_cylinder_body_hits(t_ray *ray, t_cylinder *cylinder, float t0, float t1, float *t)
+static bool	calc_hit(t_ray *ray, t_cylinder *cy, float dist, float *t)
 {
-	// Initial checks to see if any hit is within the bounds of the cylinder
-	bool hit0_valid = false, hit1_valid = false;
-	float min_t = INFINITY;
+	t_vec	hit_point;
+	float	dist_to_cap;
 
-	// Check the first hit point
-	t_vec hit_point0 = vec_add(ray->origin, vec_mul(ray->direction, t0));
-	float dist_to_cap0 = vec_dot(vec_sub(hit_point0, cylinder->center), cylinder->axis);
-	if (dist_to_cap0 >= 0 && dist_to_cap0 <= cylinder->height)
+	hit_point = vec_add(ray->origin, vec_mul(ray->direction, dist));
+	dist_to_cap = vec_dot(vec_sub(hit_point, cy->center), cy->axis);
+	if (dist_to_cap >= 0 && dist_to_cap <= cy->height)
 	{
-		hit0_valid = true;
-		min_t = t0;
-	}
-	
-	// Check the second hit point
-	t_vec hit_point1 = vec_add(ray->origin, vec_mul(ray->direction, t1));
-	float dist_to_cap1 = vec_dot(vec_sub(hit_point1, cylinder->center), cylinder->axis);
-	if (dist_to_cap1 >= 0 && dist_to_cap1 <= cylinder->height)
-	{
-		hit1_valid = true;
-		if (t1 < min_t) min_t = t1;
-	}
-	// Assign the smallest value to t
-	if (hit0_valid || hit1_valid)
-	{
-		*t = min_t;
+		if (dist < *t)
+			*t = dist;
 		return (true);
 	}
 	return (false);
 }
 
-bool	check_cylinder_body(t_ray *ray, t_cylinder *cylinder, float *coefficients, float *t)
+static bool	check_cy_body(t_ray *ray, t_cylinder *cy, float *coeffs, float *t)
 {
-	float a = coefficients[0];
-	float b = coefficients[1];
-	float discriminant = coefficients[1] * coefficients[1] - 4 * coefficients[0] * coefficients[2];
-	float t0, t1;
-	if (discriminant < 0 || !solve_quadratic_siuuu(b, a, discriminant, &t0, &t1))
+	float	t0;
+	float	t1;
+	float	tmp;
+	bool	hit0_valid;
+	bool	hit1_valid;
+
+	tmp = INFINITY;
+	hit0_valid = false;
+	hit1_valid = false;
+	if (!solve_quadratic_siuuu(coeffs, &t0, &t1))
 		return (false);
-	return check_cylinder_body_hits(ray, cylinder, t0, t1, t);
+	hit0_valid = calc_hit(ray, cy, t0, &tmp);
+	hit1_valid = calc_hit(ray, cy, t1, &tmp);
+	if (hit0_valid || hit1_valid)
+	{
+		*t = tmp;
+		return (true);
+	}
+	return (false);
 }
 
 bool	intersect_cylinder(t_ray *ray, t_cylinder *cylinder, float *t)
 {
-	float coefficients[3]; //a, b, c
-	t_cylinder tmp = *cylinder;
-	t_plane bottom;
-	t_plane top;
-	bool	body_hit;
-	bool	bottom_hit;
-	bool 	top_hit;
+	float		coefficients[3];
+	t_cylinder	tmp;
+	t_plane		bottom;
+	t_plane		top;
+	bool		hits[3];
 
+	tmp = *cylinder;
 	tmp.axis = vec_unit(cylinder->axis);
 	make_helper_plane(&tmp, &bottom, false);
 	make_helper_plane(&tmp, &top, true);
-	calculate_cylinder_coefficients(ray, &tmp, coefficients);
-	body_hit = check_cylinder_body(ray, &tmp, coefficients, t);
-	bottom_hit = intersect_disk(ray, &bottom, t, cylinder->diameter / 2);
-	top_hit = intersect_disk(ray, &top, t, cylinder->diameter / 2);
-	return (body_hit || bottom_hit || top_hit);
+	calculate_coefficients(ray, &tmp, coefficients);
+	hits[0] = check_cy_body(ray, &tmp, coefficients, t);
+	hits[1] = intersect_disk(ray, &bottom, t, cylinder->diameter / 2);
+	hits[2] = intersect_disk(ray, &top, t, cylinder->diameter / 2);
+	return (hits[0] || hits[1] || hits[2]);
 }

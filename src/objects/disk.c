@@ -6,17 +6,16 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 06:14:46 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/25 19:53:40 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/26 05:06:14 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-#include "miniRT.h"
 
 bool	check_radius(float *t, t_ray *ray, t_plane *disk, float radius)
 {
-	t_vec   pos;
-	float		len;
+	t_vec	pos;
+	float	len;
 
 	pos = vec_add(ray->origin, vec_mul(ray->direction, *t));
 	len = sqrt(vec_dot(vec_sub(disk->point, pos), vec_sub(disk->point, pos)));
