@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/26 02:28:39 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/26 05:28:18 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # include "scene.h"
 # include "ray.h"
 
-# define WIDTH	1600
-# define HEIGHT	1200
+# define WIDTH	1800
+# define HEIGHT	1600
 
 # define ERROR "\x1B[31mError: \x1B[0m"
 
@@ -53,21 +53,25 @@ typedef struct s_thread_data
 }	t_thread_data;
 
 /* ****************************   PARSING PART   **************************** */
-void	open_and_parse_map(char **argv, t_scene *scene);
-void	modify_before_split(char **line);
-bool	array_has_only_numbers(char **array);
-int		ft_2darray_size(char **array);
-bool	invalid_color(char **color_arr);
+void			open_and_parse_map(char **argv, t_scene *scene);
+void			modify_before_split(char **line);
+bool			array_has_only_numbers(char **array);
+int				ft_2darray_size(char **array);
+bool			invalid_color(char **color_arr);
 
 /* ********************    Initialization Functions    ********************** */
-void		init_window(t_mini_rt *mini_rt, int width, int height);
-void		init_amb_light(char **info, t_scene *scene, char **map_2d);
-void		init_camera(char **info, t_scene *scene, char **map_2d);
-void		init_light(char **info, t_scene *scene, char **map_2d);
-void		add_sphere(int obj_index, char **info, t_scene *scene, char **map_2d);
-void		add_plane(int obj_index, char **info, t_scene *scene, char **map_2d);
-void		add_cylinder(int obj_index, char **info, t_scene *scene, char **map_2d);
-void		add_cone(int obj_index, char **info, t_scene *scene, char **map_2d);
+void			init_window(t_mini_rt *mini_rt, int width, int height);
+void			init_amb_light(char **info, t_scene *scene, char **map_2d);
+void			init_camera(char **info, t_scene *scene, char **map_2d);
+void			init_light(char **info, t_scene *scene, char **map_2d);
+void			add_sphere(int obj_index, char **info, \
+									t_scene *scene, char **map_2d);
+void			add_plane(int obj_index, char **info, \
+									t_scene *scene, char **map_2d);
+void			add_cylinder(int obj_index, char **info, \
+									t_scene *scene, char **map_2d);
+void			add_cone(int obj_index, char **info, \
+									t_scene *scene, char **map_2d);
 
 // From FLAVIA. We need name for the category here... *********************** *
 
@@ -82,36 +86,34 @@ t_color			clamp_color(t_color color);
 unsigned int	vec_to_color(t_color color);
 t_color			scale_color(t_color color, float factor);
 t_color			gamma_correction(t_color color, float gamma);
-bool			intersect_object(t_ray *ray, t_object *object, float *t);
 
 /** Core lighting calculations **/
 t_color			apply_ambilight(t_ambilight ambilight, t_color color);
 t_color			calculate_lighting(t_scene *scene, \
-						t_vec hit_point, t_vec normal, t_vec view_dir);
+						t_vec hit_point, t_vec normal, t_vec view_dir);			
+t_color			cast_light(t_scene *scene, \
+				t_object *hit_object, t_vec hit_point);
+float			cast_shadow(t_scene *scene, \
+				t_vec hit_point, t_light light, t_vec normal);
+float			cast_object_shadows(t_scene *scene, \
+				t_object *hit_object, t_vec hit_point, t_light *light);
+bool			shadow_intersect(t_ray *ray, t_scene *scene, float light_dist);
 
-
-void	fetch_properties(t_object *object, t_vec hit_point, \
-					t_color *color, t_vec *normal);
-t_color	cast_light(t_scene *scene, \
-			t_object *hit_object, t_vec hit_point);
-float	cast_shadow(t_scene *scene, \
-			t_vec hit_point, t_light light, t_vec normal);
-float	cast_object_shadows(t_scene *scene, \
-			t_object *hit_object, t_vec hit_point, t_light *light);
-bool	shadow_intersect(t_ray *ray, t_scene *scene, float light_dist);						
-
+bool			intersect_object(t_ray *ray, t_object *object, float *t);
+void			fetch_properties(t_object *object, t_vec hit_point, \
+						t_color *color, t_vec *normal);
 /* ***************************    General Utils    ************************** */
-float	ft_atof(const char *str);
+float			ft_atof(const char *str);
 
 /* ******************************    Cleanup    ***************************** */
-void	cleanup_and_exit(int fd_to, char *message, t_mini_rt *mini_rt);
+void			cleanup_and_exit(int fd_to, char *message, t_mini_rt *mini_rt);
 
-void	ft_exit(char *err_msg, int exit_value);
-void	ft_exit_v2(char *msg, int exit_val, void *to_free, int fd);
-void	ft_exit_v3(char *err_msg, int exit_value, char **array_to_free);
-void	ft_exit_v4(char *err_msg, int exit_value, void *to_free,
-			char **array_to_free);
-void	ft_exit_mini_rt(char *err_msg, char **array1, char **array2,
-			t_scene *scene);
+void			ft_exit(char *err_msg, int exit_value);
+void			ft_exit_v2(char *msg, int exit_val, void *to_free, int fd);
+void			ft_exit_v3(char *err_msg, int exit_value, char **array_to_free);
+void			ft_exit_v4(char *err_msg, int exit_value, \
+									void *to_free, char **array_to_free);
+void			ft_exit_mini_rt(char *err_msg, char **array1, \
+									char **array2, t_scene *scene);
 
 #endif

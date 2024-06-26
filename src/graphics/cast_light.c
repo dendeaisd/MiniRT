@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:03:24 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/26 03:25:53 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/26 05:18:33 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ t_color	apply_shadows(t_scene *scene, t_object *hit_object, \
 	t_color	direct_light;
 
 	light_dir = vec_unit(vec_sub(scene->light.position, hit_point));
-	shadow_factor = 1.0f - (cast_shadow(scene, hit_point, scene->light, normal) * 0.3);
+	shadow_factor = 1.0f - (cast_shadow(scene, \
+					hit_point, scene->light, normal) * 0.3);
 	shadow_factor *= 1.0f - cast_object_shadows(scene, \
 								hit_object, hit_point, &scene->light);
-
 	direct_light = calculate_lighting(scene, hit_point, \
 				normal, vec_unit(vec_sub(scene->camera.position, hit_point)));
 	return (scale_color(direct_light, shadow_factor));

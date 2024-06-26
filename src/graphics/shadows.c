@@ -6,7 +6,7 @@
 /*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:47:26 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/26 03:30:24 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/26 05:30:24 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "float.h"
 #define NUM_SHADOW_SAMPLES 64
 #define EPSILON 0.0001f
+//TODO: norm
 
 bool	shadow_intersect(t_ray *ray, t_scene *scene, float light_dist)
 {
@@ -100,7 +101,6 @@ t_vec uniform_grid_jitter(t_light *light, int sample, int num_samples)
 	return vec_add(light->position, (t_vec){jitter_x, jitter_y, jitter_z});
 }
 
-// Cast object shadows with jittered light position
 float cast_object_shadows(t_scene *scene, t_object *hit_object, t_vec hit_point, t_light *light)
 {
 	t_ray shadow_ray;
