@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/26 19:58:57 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/26 21:21:55 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,19 @@ t_color			gamma_correction(t_color color, float gamma);
 
 /* ***************************      Keyhooks       ************************** */
 void			escape(mlx_key_data_t keydata, void *param);
-void			movement_loops(t_mini_rt *mini_rt);
+void			hooks_for_live_movement(t_mini_rt *mini_rt);
+void			translate_camera(void *param);
+void			rotate_camera(void *param);
+void			translate_light(void *param);
 void			move_objects(void *param);
-void			rotate_objects(void *param);
+void			translate_sphere(t_mini_rt *rt, t_sphere *sphere);
+void			translate_plane(t_mini_rt *rt, t_plane *plane);
+void			translate_cylinder(t_mini_rt *rt, t_cylinder *cylinder);
+void			translate_cone(t_mini_rt *rt, t_cone *cone);
+// void			rotate_objects(void *param);
+void			rotate_plane(t_mini_rt *rt, t_plane *plane);
+void			rotate_cylinder(t_mini_rt *rt, t_cylinder *cylinder);
+void			rotate_cone(t_mini_rt *rt, t_cone *cone);
 
 /* ******************************    Cleanup    ***************************** */
 void			cleanup_and_exit(int fd_to, char *message, t_mini_rt *mini_rt);

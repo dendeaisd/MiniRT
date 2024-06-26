@@ -3,3 +3,5 @@ objs/
 Lib/
 MLX42
 .dist
+scenes/parse_check.rt
+scenes/test.rt

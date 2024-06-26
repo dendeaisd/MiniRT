@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 22:50:37 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/26 15:37:47 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/26 20:10:11 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	init_window(t_mini_rt *mini_rt, bool hd)
 {
 	int	width;
-	int height;
-	
+	int	height;
+
 	if (hd == true)
 	{
 		width = HD_WIDTH;

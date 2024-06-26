@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 21:53:57 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/26 03:43:10 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/26 20:09:52 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,33 +111,3 @@ void	render_scene(t_mini_rt *mini_rt)
 		cleanup_and_exit(2, "failed to display image", mini_rt);
 	free(threads);
 }
-
-// // the loophook version:
-// void	render_scene(void *param)
-// {
-// 	const int		threads_nb = 12;
-// 	pthread_t		*threads;
-// 	t_thread_data	*data;
-// 	int				i;
-// 	t_mini_rt		*mini_rt;
-
-// 	mini_rt = param;
-// 	setup_camera(&mini_rt->scene.camera, \
-// 		mini_rt->window.mlx->width, mini_rt->window.mlx->height);
-// 	threads = (pthread_t *)malloc(threads_nb * sizeof(pthread_t));
-// 	i = -1;
-// 	while (++i < threads_nb)
-// 	{
-// 		data = (t_thread_data *)malloc(sizeof(t_thread_data));
-// 		data->mini_rt = mini_rt;
-// 		data->th_idx = i;
-// 		data->th_nb = threads_nb;
-// 		pthread_create(&threads[i], NULL, thread_render, data);
-// 	}
-// 	i = -1;
-// 	while (++i < threads_nb)
-// 		pthread_join(threads[i], NULL);
-// 	if (mlx_image_to_window(mini_rt->window.mlx, mini_rt->window.img, 0, 0) < 0)
-// 		cleanup_and_exit(2, "failed to display image", mini_rt);
-// 	free(threads);
-// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hard_shadows.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:47:26 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/26 18:57:59 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/26 20:09:27 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ float	cast_shadow(t_scene *scene, \
 		light_dist = EPSILON;
 	filter_radius = fmin(1.f / light_dist, 1.f);
 	i = -1;
-		shadow_ray = calc_shadow_ray(hit_point, normal, \
+	shadow_ray = calc_shadow_ray(hit_point, normal, \
 				vec_sub(light.position, hit_point), filter_radius);
-		if (shadow_intersect(&shadow_ray, scene, light_dist))
-			shadow_intensity += 1.0f;
+	if (shadow_intersect(&shadow_ray, scene, light_dist))
+		shadow_intensity += 1.0f;
 	return (shadow_intensity);
 }
 
