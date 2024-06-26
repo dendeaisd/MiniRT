@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/26 23:44:07 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/27 00:51:38 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,16 @@ typedef struct s_thread_data
 	int				th_idx;
 	int				th_nb;
 }	t_thread_data;
+
+typedef struct s_soft_shadow_data
+{
+	bool			hit;
+	t_ray			ray;
+	t_vec			light_point;
+	t_vec			light_dir;
+	float			to_light;
+	int				hits;
+}	t_soft_shadow_data;
 
 /* ****************************   PARSING PART   **************************** */
 void			open_and_parse_map(char **argv, t_scene *scene);
