@@ -1,5 +1,5 @@
 NAME		:= miniRT
-CFLAGS		:= -mavx -Wunreachable-code -Ofast -g -Wall -Wextra -Werror
+CFLAGS		:= -mavx -Wunreachable-code -Ofast -g
 LIBMLX		:= ./MLX42
 LIB			:= ./Lib
 CC			:= cc

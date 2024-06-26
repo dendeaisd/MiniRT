@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hard_shadows.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:47:26 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/26 17:20:18 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/26 18:37:56 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ float	cast_object_hard_shadows(t_scene *scene, \
 			continue ;
 		t = INFINITY;
 		hit = intersect_object(&shadow_ray, &scene->objects[i], &t);
+		if (hit_object->type == PLANE)
+			hit = false;
 		if (hit && t > EPSILON)
 			return (1.f);
 	}
