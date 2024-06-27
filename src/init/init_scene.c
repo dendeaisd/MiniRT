@@ -3,22 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:54:35 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/27 01:10:36 by fvoicu           ###   ########.fr       */
+/*   Updated: 2024/06/27 03:38:28 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-/*
-Example of Ambient Lightning Formatting:
-	A   0.2   255,255,255
-∗	identifier: A
-∗	ambient lighting ratio in range [0.0,1.0]: 0.2
-∗	R,G,B colors in range [0-255]: 255, 255, 255
-*/
 void	init_amb_light(char **info, t_scene *scene, char **map2)
 {
 	float	ratio;
@@ -40,13 +33,6 @@ void	init_amb_light(char **info, t_scene *scene, char **map2)
 	scene->ambilight.color.b = ft_atoi(info[4]);
 }
 
-/*
-	C	-50,0,20			0,0,1.0		70
-∗	x,y,z coordinates of the view point: -50.0,0,20
-∗	3d normalized orientation vector. In range [-1,1] for each x,y,z axis:
-	0.0,0.0,1.0
-∗	FOV : Horizontal field of view in degrees in range [0,180]: 70
-*/
 void	init_camera(char **info, t_scene *scene, char **map2)
 {
 	int	i;
@@ -76,12 +62,6 @@ void	init_camera(char **info, t_scene *scene, char **map2)
 	scene->camera.viewport.height = 0.f;
 }
 
-/*
-*	Example: L   -40.0, 50.0, 0.0   0.6  ( 10,0,255 )
-*	x,y,z coordinates of the light point
-*	light brightness ratio in range [0.0,1.0] -> now 0.6
-*	( bonus part: R,G,B colors in range 0-255 )
-*/
 void	init_light(char **info, t_scene *scene, char **map2)
 {
 	float	brightness;
