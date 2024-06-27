@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/27 02:32:11 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/27 02:38:14 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,6 @@ void			translate_sphere(t_mini_rt *rt, t_sphere *sphere);
 void			translate_plane(t_mini_rt *rt, t_plane *plane);
 void			translate_cylinder(t_mini_rt *rt, t_cylinder *cylinder);
 void			translate_cone(t_mini_rt *rt, t_cone *cone);
-// void			rotate_objects(void *param);
 void			rotate_plane(t_mini_rt *rt, t_plane *plane);
 void			rotate_cylinder(t_mini_rt *rt, t_cylinder *cylinder);
 void			rotate_cone(t_mini_rt *rt, t_cone *cone);
