@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:18:17 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/26 19:48:39 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/27 03:26:44 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ void	open_and_parse_map(char **argv, t_scene *scene)
 {
 	int		fd;
 	char	*line;
-	char	map[1024];
+	char	map[4096];
 
 	if (ft_strncmp((argv[1] + (ft_strlen(argv[1]) - 3)), ".rt", 4) != 0)
 		ft_exit("not a .rt file", 0);
@@ -155,7 +155,7 @@ void	open_and_parse_map(char **argv, t_scene *scene)
 	if (fd == -1)
 		ft_exit("failed to open the file", 1);
 	line = get_next_line(fd);
-	if (!line || !line[0] || ft_strlen(line) > 1024)
+	if (!line || !line[0] || ft_strlen(line) > 4096)
 		ft_exit_v2("invalid .rt file", 0, line, fd);
 	if (line[0] != '#')
 		ft_strlcpy(map, line, ft_strlen(line) + 1);
@@ -166,7 +166,7 @@ void	open_and_parse_map(char **argv, t_scene *scene)
 		if (line == NULL)
 			break ;
 		if (line[0] != '#')
-			ft_strlcat(map, line, 1024);
+			ft_strlcat(map, line, 4096);
 	}
 	close(fd);
 	parse_map(scene, map);
