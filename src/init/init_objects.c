@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_objects.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:54:35 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/27 04:39:03 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/27 08:19:01 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	add_sphere(int idx, char **info, t_scene *scene, char **map2)
 	scene->objects[idx].data.sphere.center.x = ft_atof(info[1]);
 	scene->objects[idx].data.sphere.center.y = ft_atof(info[2]);
 	scene->objects[idx].data.sphere.center.z = ft_atof(info[3]);
+	if (scene->objects[idx].data.sphere.center.z == 0)
+		scene->objects[idx].data.sphere.center.z += 10;
 	scene->objects[idx].data.sphere.diameter = ft_atof(info[4]);
 	if (invalid_color(info + 5))
 		ft_exit_mini_rt("invalid color for sphere", map2, info, scene);
@@ -38,6 +40,8 @@ void	add_plane(int idx, char **info, t_scene *scene, char **map2)
 	scene->objects[idx].data.plane.point.x = ft_atof(info[1]);
 	scene->objects[idx].data.plane.point.y = ft_atof(info[2]);
 	scene->objects[idx].data.plane.point.z = ft_atof(info[3]);
+	if (scene->objects[idx].data.plane.point.z == 0)
+		scene->objects[idx].data.plane.point.z += 0;
 	i = 3;
 	while (++i < 7)
 	{
@@ -65,6 +69,8 @@ void	add_cylinder(int idx, char **info, t_scene *scene, char **map2)
 	scene->objects[idx].data.cylinder.center.x = ft_atof(info[1]);
 	scene->objects[idx].data.cylinder.center.y = ft_atof(info[2]);
 	scene->objects[idx].data.cylinder.center.z = ft_atof(info[3]);
+	if (scene->objects[idx].data.cylinder.center.z == 0)
+		scene->objects[idx].data.plane.point.z += 10;
 	i = 3;
 	while (++i < 7)
 		if (ft_atof(info[i]) < -1 || ft_atof(info[i]) > 1)
@@ -92,6 +98,8 @@ void	add_cone(int idx, char **info, t_scene *scene, char **map2)
 	scene->objects[idx].data.cone.center.x = ft_atof(info[1]);
 	scene->objects[idx].data.cone.center.y = ft_atof(info[2]);
 	scene->objects[idx].data.cone.center.z = ft_atof(info[3]);
+	if (scene->objects[idx].data.cone.center.z == 0)
+		scene->objects[idx].data.cone.center.z += 10;
 	i = 3;
 	while (++i < 7)
 		if (ft_atof(info[i]) < -1 || ft_atof(info[i]) > 1)
