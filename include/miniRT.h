@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/27 02:38:14 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/27 03:50:35 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,10 @@ t_ray			generate_ray(t_scene *scene, t_window *window, int x, int y);
 unsigned int	get_pixel_color(int obj_idx, t_scene *scene, \
 						t_ray ray, float distance);
 bool			intersect_object(t_ray *ray, t_object *object, float *t);
+
+/* ************************    Generate stars    **************************** */
+bool			is_star_hit(t_ray ray);
+unsigned int	get_star_color(void);
 
 /* ******************    Core Lightning Calculations    ********************* */
 t_color			apply_ambilight(t_ambilight ambilight, t_color color);

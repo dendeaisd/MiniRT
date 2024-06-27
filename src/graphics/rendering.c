@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fvoicu <fvoicu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 21:53:57 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/26 20:09:52 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/27 03:51:06 by fvoicu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,12 @@ void	render_pixel(t_mini_rt *mini_rt, int i, int j)
 		color = get_pixel_color(obj_idx, \
 			&mini_rt->scene, ray, closest_dist);
 	else
-		color = vec_to_color((t_color){0, 0, 0});
+	{
+		if (is_star_hit(ray))
+			color = get_star_color();
+		else
+			color = vec_to_color((t_color){5, 5, 10});
+	}
 	mlx_put_pixel(mini_rt->window.img, i, j, color);
 }
 
