@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:54:35 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/27 03:38:28 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/27 04:13:37 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,12 @@ void	init_amb_light(char **info, t_scene *scene, char **map2)
 					map2, info, scene);
 	ratio = ft_atof(info[1]);
 	if (ratio < 0 || ratio > 1)
-		ft_exit_mini_rt(\
-		"ambient lightning must have a ratio between 0.0 and 1.0", \
-					map2, info, scene);
+		ft_exit_mini_rt("ambient lightning must have a ratio between 0.0 "
+			"and 1.0", map2, info, scene);
 	scene->ambilight.ratio = ratio;
 	if (invalid_color(info + 2))
 		ft_exit_mini_rt("invalid color for Ambient lightning", \
-					map2, info, scene);
+			map2, info, scene);
 	scene->ambilight.color.r = ft_atoi(info[2]);
 	scene->ambilight.color.g = ft_atoi(info[3]);
 	scene->ambilight.color.b = ft_atoi(info[4]);
@@ -46,16 +45,15 @@ void	init_camera(char **info, t_scene *scene, char **map2)
 	while (++i < 7)
 	{
 		if (ft_atof(info[i]) < -1 || ft_atof(info[i]) > 1)
-			ft_exit_mini_rt(\
-			"camera must have orientation in the range  [-1, 1]", \
-				map2, info, scene);
+			ft_exit_mini_rt("camera must have orientation in the "
+				"range [-1, 1]", map2, info, scene);
 	}
 	scene->camera.orientation.x = ft_atof(info[4]);
 	scene->camera.orientation.y = ft_atof(info[5]);
 	scene->camera.orientation.z = ft_atof(info[6]);
 	if (ft_atof(info[7]) < 0 || ft_atof(info[7]) > 180)
-		ft_exit_mini_rt(\
-		"FOV must be in the range [0, 180]", map2, info, scene);
+		ft_exit_mini_rt("FOV must be in the range [0, 180]",
+			map2, info, scene);
 	scene->camera.fov = ft_atof(info[7]);
 	scene->camera.ratio = 0.f;
 	scene->camera.viewport.width = 0.f;
@@ -73,9 +71,8 @@ void	init_light(char **info, t_scene *scene, char **map2)
 	scene->light.position.z = ft_atof(info[3]);
 	brightness = ft_atof(info[4]);
 	if (brightness < 0 || brightness > 1)
-		ft_exit_mini_rt(\
-		"light must have a brightness ratio between 0.0 and 1.0", \
-			map2, info, scene);
+		ft_exit_mini_rt("light must have a brightness ratio between "
+			"0.0 and 1.0", map2, info, scene);
 	scene->light.brightness = brightness;
 	if (ft_2darray_size(info) == 5)
 		scene->light.color = (t_color){255, 255, 255};

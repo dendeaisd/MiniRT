@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:54:35 by mevangel          #+#    #+#             */
-/*   Updated: 2024/06/26 19:48:39 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/27 04:39:03 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,8 @@ void	add_plane(int idx, char **info, t_scene *scene, char **map2)
 	while (++i < 7)
 	{
 		if (ft_atof(info[i]) < -1 || ft_atof(info[i]) > 1)
-			ft_exit_mini_rt(\
-			"plane must have normal(x, y, z) vector in range [-1,1]", \
-				map2, info, scene);
+			ft_exit_mini_rt("plane must have normal(x, y, z) vector"
+				" in range [-1,1]", map2, info, scene);
 	}
 	scene->objects[idx].data.plane.normal.x = ft_atof(info[4]);
 	scene->objects[idx].data.plane.normal.y = ft_atof(info[5]);
@@ -69,9 +68,8 @@ void	add_cylinder(int idx, char **info, t_scene *scene, char **map2)
 	i = 3;
 	while (++i < 7)
 		if (ft_atof(info[i]) < -1 || ft_atof(info[i]) > 1)
-			ft_exit_mini_rt(\
-			"cylinder must have axis(x, y, z) in range [-1,1]", \
-				map2, info, scene);
+			ft_exit_mini_rt("cylinder must have axis(x, y, z) in "
+				"range [-1,1]", map2, info, scene);
 	scene->objects[idx].data.cylinder.axis.x = ft_atof(info[4]);
 	scene->objects[idx].data.cylinder.axis.y = ft_atof(info[5]);
 	scene->objects[idx].data.cylinder.axis.z = ft_atof(info[6]);
@@ -97,9 +95,8 @@ void	add_cone(int idx, char **info, t_scene *scene, char **map2)
 	i = 3;
 	while (++i < 7)
 		if (ft_atof(info[i]) < -1 || ft_atof(info[i]) > 1)
-			ft_exit_mini_rt(\
-			"cylinder must have axis(x, y, z) in range [-1,1]", \
-				map2, info, scene);
+			ft_exit_mini_rt("cylinder must have axis(x, y, z) in "
+				"range [-1,1]", map2, info, scene);
 	scene->objects[idx].data.cone.axis.x = ft_atof(info[4]);
 	scene->objects[idx].data.cone.axis.y = ft_atof(info[5]);
 	scene->objects[idx].data.cone.axis.z = ft_atof(info[6]);
