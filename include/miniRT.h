@@ -6,7 +6,7 @@
 /*   By: mevangel <mevangel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:29:12 by fvoicu            #+#    #+#             */
-/*   Updated: 2024/06/27 00:51:38 by mevangel         ###   ########.fr       */
+/*   Updated: 2024/06/27 02:32:11 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # define HEIGHT	600
 
 # define ERROR "\x1B[31mError: \x1B[0m"
+# define GREEN "\x1B[32m"
+# define RESET "\x1B[0m"
 
 typedef struct s_window
 {

@@ -15,7 +15,7 @@
 void	cleanup_and_exit(int fd_to, char *message, t_mini_rt *mini_rt)
 {
 	if (fd_to == 1)
-		ft_putendl_fd("\x1B[32mminiRT closed successfully!\x1B[0m", 1);
+		ft_putendl_fd(GREEN "miniRT closed successfully!" RESET, 1);
 	else if (fd_to == 2)
 	{
 		ft_putstr_fd(ERROR, 2);
