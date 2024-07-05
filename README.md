@@ -9,7 +9,7 @@
 ## 📝 Description
 "_The goal of this project is to generate images using the **Raytracing protocol**. Those computer-generated images each represent a scene, as seen from a specific angle and position, defined by simple geometric objects, and each with its own lighting system._"
 
-In simpler words, from a 'weird' **.rt file**, full of numbers that follow [_specific guidelines_](https://github.com/dendeaisd/MiniRT/edit/main/README.md#scene-decription-file-rt-requirements), we generate **images**, that represent the "scene" that the .rt file "describes":
+In simpler words, from a 'weird' **.rt file**, full of numbers that follow [_specific guidelines_](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#scene-decription-file-rt-requirements), we generate **images**, that represent the "scene" that the .rt file "describes":
 
 ![overview_example](images/overview_example.png)
 Graphics Library that was used: [MLX42](https://github.com/codam-coding-college/MLX42)
