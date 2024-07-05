@@ -47,7 +47,7 @@ Graphics Library that was used: [MLX42](https://github.com/codam-coding-college/
 ![scene_map_explained](images/rt_file_explained.png)
 
 ### ❗ Error Handling:
-> You can browse many cases of invalid scene files [here](https://github.com/dendeaisd/MiniRT/tree/main/scenes/invalid) and run them according to the instructions below, to check the Error messages we provide.
+> You can browse many cases of [invalid scene files](https://github.com/dendeaisd/MiniRT/tree/main/scenes/invalid) and run them according to the [Usage](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#-usage) instructions, to check the Error messages we provide.
 - Running the program with more than 3 arguments, or less than 2.
 - Empty or unexisting .rt file
 - Wrong extension of file, like `.txt`
