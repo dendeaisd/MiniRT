@@ -1,7 +1,9 @@
 miniRT
+.DS_Store
+miniRT.pdf
 objs/
 Lib/
 MLX42
 .dist
 scenes/parse_check.rt
-scenes/test.rt
+scenes/invalid/test.rt
