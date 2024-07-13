@@ -63,6 +63,34 @@ Graphics Library that was used: [MLX42](https://github.com/codam-coding-college/
 
 ## ⭐ Additional (bonus) features we added:
 
+### &nbsp;1️⃣ &nbsp;Cone Object 🍦
+- The cone (with identifier `cn`) follows the pattern of the cylinder declaration, with only difference that the first x,y,z coordinates represent now the bottom of the cone:
+![cone_description](images/cone_description.png)
+- You can notice the presence of cone for example in the `icecream` and `dwarf` scenes above in the [Preview 👀](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#-preview).
+
+### &nbsp;2️⃣ &nbsp;Colored Light 🎨💡
+- We are parsing **RGB color values for the Light** (as shown above in the [scene decription file explanation](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#-scene-decription-file-rt-requirements)).
+- Examples of rendered images with colored light:
+
+![colored_light_images](images/colored_light_collage.png)
+
+### &nbsp;3️⃣ &nbsp; Specular Reflection &nbsp; 🔦 
+![specular reflection](images/specular_reflection_pointed.png)
+
+### &nbsp;4️⃣ &nbsp; Soft Shadows &nbsp; 🌔
+Here's an example of the **soft shadows** we added, vs the **hard shadows** that were asked in the mandatory part of the subject:
+![soft_shadows](images/soft_vs_hard_shadows.png)
+
+### &nbsp;5️⃣ &nbsp; LIVE Movements of Camera, Light, Objects &nbsp; 🎥 
+
+### &nbsp;6️⃣ &nbsp; Dual Mode of Running the Program &nbsp; 🔄
+
+
+### &nbsp;7️⃣ &nbsp; Randomized stars in the backround &nbsp; 🌌
+- That was an aesthetic addition, because in the absence of planes as background, there was an absolute black background which we wanted to "beautify"
+- Example of the feature:
+
+
 ## ⚙️ Installation
 
 ## 🕹 Usage
