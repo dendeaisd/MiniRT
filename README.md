@@ -79,6 +79,7 @@ Graphics Library that was used: [MLX42](https://github.com/codam-coding-college/
 
 ### &nbsp;4️⃣ &nbsp; Soft Shadows &nbsp; 🌔
 Here's an example of the **soft shadows** we added, vs the **hard shadows** that were asked in the mandatory part of the subject:
+
 ![soft_shadows](images/soft_vs_hard_shadows.png)
 
 ### &nbsp;5️⃣ &nbsp; LIVE Movements of Camera, Light, Objects &nbsp; 🎥 
@@ -87,9 +88,8 @@ Here's an example of the **soft shadows** we added, vs the **hard shadows** that
 
 
 ### &nbsp;7️⃣ &nbsp; Randomized stars in the backround &nbsp; 🌌
-- That was an aesthetic addition, because in the absence of planes as background, there was an absolute black background which we wanted to "beautify"
-- Example of the feature:
-
+That was an aesthetic addition, because in the absence of planes as background, there was an absolute black background which we wanted to "beautify", so randomized stars were our "solution": <br><br>
+![stars_and_rocket](images/stars.gif)
 
 ## ⚙️ Installation
 
