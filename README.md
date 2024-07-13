@@ -37,7 +37,7 @@ Graphics Library that was used: [MLX42](https://github.com/codam-coding-college/
 ✔️ The program displays the image in a window, which can be closed by clicking either **ESC** or the red cross on the window's frame.<br>
 ✔️ The program must take as first argument a scene description file with the **.rt** extension:
 
-### Scene decription file (.rt) requirements:
+### &nbsp;&nbsp;&nbsp; Scene decription file (.rt) requirements:
 - Each type of element can be separated by one or more line break(s).
 - Each type of information from an element can be separated by one or more space(s), and/or tabs.
 - Each type of element can be set in any order in the file.
@@ -45,13 +45,14 @@ Graphics Library that was used: [MLX42](https://github.com/codam-coding-college/
 - Each element first’s information is the **type identifier** (composed by one or two character(s)), followed by all specific information for each object in a strict order as follows:
 
 ![scene_map_explained](images/rt_file_explained.png)
+💡 **TIP**: You can create **any scene** you want, by following the above requirements and specified ranges for the numbers.<br>
 
 ### ❗ Error Handling:
 > You can browse many cases of [invalid scene files](https://github.com/dendeaisd/MiniRT/tree/main/scenes/invalid) and run them according to the [Usage](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#-usage) instructions, to check the Error messages we provide.
 - Running the program with more than 3 arguments, or less than 2.
 - Empty or unexisting .rt file
 - Wrong extension of file, like `.txt`
-- Wrong element identifier (only "A", "C", "L", "sp", "pl", "cy" are accepted)
+- Wrong element identifier (only `A`, `C`, `L`, `sp`, `pl`, `cy` are accepted)
 - Duplicate or absent ambient lightning, camera or light
 - Wrong number of arguments for some element(s) (for example, 8 numbers provided for the camera, instead of 7).
 - RGB color values not in the integer range [0-255]
@@ -66,4 +67,7 @@ Graphics Library that was used: [MLX42](https://github.com/codam-coding-college/
 
 ## 🕹 Usage
 
-## 📚 References
+## 🙌 &nbsp;Acknowledgements
+
+- The files [`icecream.rt`](https://github.com/dendeaisd/MiniRT/blob/main/scenes/icecream.rt) and [`snowman.rt`](https://github.com/dendeaisd/MiniRT/blob/main/scenes/snowman.rt) are borrowed from the [oph-design/miniRT](https://github.com/oph-design/miniRT.git) authored by [oph-design](https://github.com/oph-design) and [LaurinUB](https://github.com/LaurinUB).
+- Special Thanks also to [oph-design](https://github.com/oph-design) for the creation of our scene [`dwarf.rt`](https://github.com/dendeaisd/MiniRT/blob/main/scenes/dwarf.rt) 🙏
