@@ -1,3 +1,8 @@
+
+# This scene is borrowed from the original repository at:
+# https://github.com/oph-design/miniRT.git
+# Original authors: oph-design & LaurinUB
+
 A	0.6											255,255,255
 C	0,15,50			0,0,1		60
 L	15,10,0						0.3				255,255,255
@@ -19,6 +24,3 @@ cy	-2.5,-6.7,20	-1,0,-0.3	0.5		6		205,133,63
 sp	40,-40,60					65				255,255,255
 sp	-40,-40,60					65				255,255,255
 sp	0,-40,70					70				255,255,255
-
-
-
