@@ -128,7 +128,7 @@ which will open the "bigger" window mentioned in the [Dual mode](https://github.
 
 ### &nbsp;2. For **Interactive mode**
 You run the scene without any third argument:
-```
+```bash
 ./miniRT scenes/<scene_of_your_choice.rt>
 ```
 This opens the smaller window, with **hard shadows**, where you can move **LIVE** the camera, objects and light, to see the changes directly, as shown above in the [Dual mode](https://github.com/dendeaisd/MiniRT#6%EF%B8%8F%E2%83%A3--dual-mode-of-running-the-program--).
@@ -143,17 +143,40 @@ This opens the smaller window, with **hard shadows**, where you can move **LIVE*
 
 #### 📖 &nbsp;How to move the scene in the interactive mode:
 
-A) Choose the element of the scene you want to move and hold the corresponding key:
+When you run the program, the terminal will output this information:
+```zsh
+AVAILABLE KEYS TO USE
 
-![element_keys](images/keys_for_elements.png)
+You can combine moving the Element that you want:
+- C for Camera,
+- L for Light,
+- O for all Objects at the same time,
+- 1, 2, 3, etc for each object individually,
 
-##### 📷 &nbsp;For the CAMERA's movement:
+with either:
+- Arrow Keys,'+','-' for translation in x, y, z axis
+or
+- ADWSEZ for rotation in x, y, z axis, respectively
+```
 
-![translation_keys](images/translation_keys.png)
+which means that you can combine holding one **element key** with one **movement key** (for either translation or rotation):
+![movements_memo](images/Movements_memo.png)
+📌 *Note that, the number keys can only be used if the scene has **less than 10 objects**. Else, use the `O` key to move all objects at the same time.*
 
-![rotation_keys](images/rotation_keys.png)
+##### Examples:
+- `C` + `+` :&nbsp;*moves* the camera in the z axis, giving the feeling of zooming in.
+- `C` + `W` :&nbsp;*rotates* the camera in the y axis, giving the feeling of looking up.
+- `L` + `▶️` :&nbsp;*moves* the light in the x axis, more on the right.
+- `O` + `◀️` :&nbsp;*moves* **all objects** at the same time more on the left.
+- `1` + `-` :&nbsp;*moves* the **object**, that is **first declared** in the `scene.rt`, in the z axis, bringing it closer to the camera.
+- `3` + `D` :&nbsp;*rotates* the **3rd object** (third in the `scene.rt`), in the x axis, making it "lean on" the right.<br><br>
 
-
+***Notes regarding the movements:*** <br>
+▶️ *Light can only be moved, not rotated.* <br>
+▶️ *Camera can not rotate in the z axis, nothing happens in that case.* <br>
+▶️ *Spheres are symmetrical so can not be rotated.* <br>
+▶️ *The planes are not moved when pressing `O` so that the difference from before is visible, since they consist the "background" to the other objects.* <br>
+▶️ *The more the objects are, the more time it will take to see the movement if you use the `O` key.* <br>
 
 ## 🙌 &nbsp;Acknowledgements
 
