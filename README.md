@@ -37,12 +37,12 @@ Graphics Library that was used: [MLX42](https://github.com/codam-coding-college/
 ✔️ The program displays the image in a window, which can be closed by clicking either **ESC** or the red cross on the window's frame.<br>
 ✔️ The program must take as first argument a scene description file with the **.rt** extension:
 
-### &nbsp;&nbsp;&nbsp; Scene decription file (.rt) requirements:
-- Each type of element can be separated by one or more line break(s).
+### &nbsp;&nbsp;&nbsp; Scene decription file (`scene.rt`):
+- Each type of element in it can be separated by one or more line break(s).
 - Each type of information from an element can be separated by one or more space(s), and/or tabs.
 - Each type of element can be set in any order in the file.
 - Elements which are defined by a capital letter (A,C,L) can only be declared once in the scene.
-- Each element first’s information is the **type identifier** (composed by one or two character(s)), followed by all specific information for each object in a strict order as follows:
+- Each element first’s information is the **type identifier** (composed by one or two characters), followed by all specific information for each object in a strict order as follows:
 
 ![scene_map_explained](images/rt_file_explained.png)
 💡 **TIP**: You can create **any scene** you want, by following the above requirements and specified ranges for the numbers.<br>
@@ -92,8 +92,54 @@ That was an aesthetic addition, because in the absence of planes as background, 
 ![stars_and_rocket](images/stars.gif)
 
 ## ⚙️ Installation
+1. Clone the repository:
+```bash
+git clone --recursive https://github.com/dendeaisd/MiniRT.git 
+```
+2. Navigate to the project's directory:
+```bash
+cd MiniRT
+```
+3. Compile the program:
+```bash
+make
+```
 
 ## 🕹 Usage
+
+You can run the program in 2 different ways, depending on what mode you want (check above the [Dual mode of running the program](https://github.com/dendeaisd/MiniRT#6%EF%B8%8F%E2%83%A3--dual-mode-of-running-the-program--) ⬆️). 
+
+
+❗ For both modes, replace the `<scene_of_your_choice.rt>` below ⬇️ with the scene you choose from the [scenes](https://github.com/dendeaisd/MiniRT/tree/main/scenes) folder.
+### &nbsp;1. For **HD mode**
+You need to give as third argument the "HD" string and run it as follows:
+```bash
+./miniRT scenes/<scene_of_your_choice.rt> HD
+```
+which will open the "bigger" window mentioned in the [Dual mode](https://github.com/dendeaisd/MiniRT#6%EF%B8%8F%E2%83%A3--dual-mode-of-running-the-program--) above, with the **greater resolution** and **soft shadows**. 
+<p> Examples: </p>
+
+```bash
+./miniRT scenes/snowman.rt HD
+```
+```bash
+./miniRT scenes/grape.rt HD
+```
+
+### &nbsp;2. For **Interactive mode**
+You run the scene without any third argument:
+```
+./miniRT scenes/<scene_of_your_choice.rt>
+```
+This opens the smaller window, with **hard shadows**, where you can move **LIVE** the camera, objects and light, to see the changes directly, as shown above in the [Dual mode](https://github.com/dendeaisd/MiniRT#6%EF%B8%8F%E2%83%A3--dual-mode-of-running-the-program--).
+<p> Examples: </p>
+
+```bash
+./miniRT scenes/light_coloring/blue.rt
+```
+```bash
+./miniRT scenes/icecream.rt
+```
 
 ## 🙌 &nbsp;Acknowledgements
 
