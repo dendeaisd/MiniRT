@@ -107,12 +107,12 @@ make
 
 ## 🕹 Usage
 
-You can run the program in 2 different ways, depending on what mode you want (check above the [Dual mode of running the program](https://github.com/dendeaisd/MiniRT#6%EF%B8%8F%E2%83%A3--dual-mode-of-running-the-program--) ⬆️). 
+You can run the program in 2 different ways, depending on what mode you want (check above the [Dual mode of running the program 🔄](https://github.com/dendeaisd/MiniRT#6%EF%B8%8F%E2%83%A3--dual-mode-of-running-the-program--)). 
 
 
 ❗ For both modes, replace the `<scene_of_your_choice.rt>` below ⬇️ with the scene you choose from the [scenes](https://github.com/dendeaisd/MiniRT/tree/main/scenes) folder.
 ### &nbsp;1. For **HD mode**
-You need to give as third argument the "HD" string and run it as follows:
+You need to give as third argument the **`HD`** string and run it as follows:
 ```bash
 ./miniRT scenes/<scene_of_your_choice.rt> HD
 ```
@@ -140,6 +140,20 @@ This opens the smaller window, with **hard shadows**, where you can move **LIVE*
 ```bash
 ./miniRT scenes/icecream.rt
 ```
+
+#### 📖 &nbsp;How to move the scene in the interactive mode:
+
+A) Choose the element of the scene you want to move and hold the corresponding key:
+
+![element_keys](images/keys_for_elements.png)
+
+##### 📷 &nbsp;For the CAMERA's movement:
+
+![translation_keys](images/translation_keys.png)
+
+![rotation_keys](images/rotation_keys.png)
+
+
 
 ## 🙌 &nbsp;Acknowledgements
 
