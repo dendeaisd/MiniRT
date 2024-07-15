@@ -144,7 +144,7 @@ This opens the smaller window, with **hard shadows**, where you can move **LIVE*
 #### 📖 &nbsp;How to move the scene in the interactive mode:
 
 When you run the program, the terminal will output this information:
-```zsh
+```
 AVAILABLE KEYS TO USE
 
 You can combine moving the Element that you want:
@@ -172,11 +172,11 @@ which means that you can combine holding one **element key** with one **movement
 - `3` + `D` :&nbsp;*rotates* the **3rd object** (third in the `scene.rt`), in the x axis, making it "lean on" the right.<br><br>
 
 ***Notes regarding the movements:*** <br>
-▶️ *Light can only be moved, not rotated.* <br>
-▶️ *Camera can not rotate in the z axis, nothing happens in that case.* <br>
-▶️ *Spheres are symmetrical so can not be rotated.* <br>
-▶️ *The planes are not moved when pressing `O` so that the difference from before is visible, since they consist the "background" to the other objects.* <br>
-▶️ *The more the objects are, the more time it will take to see the movement if you use the `O` key.* <br>
+▫️ *Light can only be moved, not rotated.* <br>
+▫️ *Camera can not rotate in the z axis, nothing happens in that case.* <br>
+▫️ *Spheres are symmetrical so can not be rotated.* <br>
+▫️ *The planes are not moved when pressing `O` so that the difference from before is visible, since they consist the "background" to the other objects.* <br>
+▫️ *The more the objects are, the more time it will take to see the movement if you use the `O` key.* <br>
 
 ## 🙌 &nbsp;Acknowledgements
 
