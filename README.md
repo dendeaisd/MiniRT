@@ -45,10 +45,10 @@ Graphics Library that was used: [MLX42](https://github.com/codam-coding-college/
 - Each element first’s information is the **type identifier** (composed by one or two characters), followed by all specific information for each object in a strict order as follows:
 
 ![scene_map_explained](images/rt_file_explained.png)
-💡 **TIP**: You can create **any scene** you want, by following the above requirements and specified ranges for the numbers.<br>
+💡 **TIP**: *You can create **any scene** you want, by following the above requirements and specified ranges for the numbers.*<br>
 
 ### ❗ Error Handling:
-> You can browse many cases of [invalid scene files](https://github.com/dendeaisd/MiniRT/tree/main/scenes/invalid) and run them according to the [Usage 🚀 ](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#--usage) instructions, to check the Error messages we provide.
+> You can browse many cases of [invalid scene files](https://github.com/dendeaisd/MiniRT/tree/main/scenes/invalid) and run them according to the [Usage 🚀 ](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#--usage)  instructions, to check the Error messages we provide.
 - Running the program with more than 3 arguments, or less than 2.
 - Empty or unexisting .rt file
 - Wrong extension of file, like `.txt`
@@ -75,7 +75,7 @@ Graphics Library that was used: [MLX42](https://github.com/codam-coding-college/
 ![colored_light_images](images/colored_light_collage.png)
 
 ### &nbsp;3️⃣ &nbsp; Specular Reflection &nbsp; 🔦 
-*"It's the reflection from a "mirror-like" surface, where parallel rays all bounce off at the same angle."* <br>
+*"It's the reflection from a mirror-like surface, where parallel rays all bounce off at the same angle."* <br>
 
 Our objects present specular reflection because they have **smooth surfaces** and thus don't have the imperfections that most objects in real life do, creating a clear and sharp reflection similar to that seen in mirrors. This effect enhances the realism and detail of the rendered objects, making them appear more lifelike.<br>
 
