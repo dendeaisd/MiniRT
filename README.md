@@ -75,6 +75,10 @@ Graphics Library that was used: [MLX42](https://github.com/codam-coding-college/
 ![colored_light_images](images/colored_light_collage.png)
 
 ### &nbsp;3️⃣ &nbsp; Specular Reflection &nbsp; 🔦 
+*"It's the reflection from a "mirror-like" surface, where parallel rays all bounce off at the same angle."* <br>
+
+Our objects present specular reflection because they have **smooth surfaces** and thus don't have the imperfections that most objects in real life do, creating a clear and sharp reflection similar to that seen in mirrors. This effect enhances the realism and detail of the rendered objects, making them appear more lifelike.<br>
+
 ![specular reflection](images/specular_reflection_pointed.png)
 
 ### &nbsp;4️⃣ &nbsp; Soft Shadows &nbsp; 🌔
