@@ -9,7 +9,7 @@
 ## 📝 Description
 "_The goal of this project is to generate images using the **Raytracing protocol**. Those computer-generated images each represent a scene, as seen from a specific angle and position, defined by simple geometric objects, and each with its own lighting system._"
 
-In simpler words, from a 'weird' **.rt file**, full of numbers that follow [_specific guidelines_](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#scene-decription-file-rt-requirements), we generate **images**, that represent the "scene" that the .rt file "describes":
+In simpler words, from a 'weird' **.rt file**, full of numbers that follow [_specific guidelines_](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#-scene-decription-file-scenert), we generate **images**, that represent the "scene" that the .rt file "describes":
 
 ![overview_example](images/overview_example.png)
 Graphics Library that was used: [MLX42](https://github.com/codam-coding-college/MLX42)
@@ -48,7 +48,7 @@ Graphics Library that was used: [MLX42](https://github.com/codam-coding-college/
 💡 **TIP**: You can create **any scene** you want, by following the above requirements and specified ranges for the numbers.<br>
 
 ### ❗ Error Handling:
-> You can browse many cases of [invalid scene files](https://github.com/dendeaisd/MiniRT/tree/main/scenes/invalid) and run them according to the [Usage](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#-usage) instructions, to check the Error messages we provide.
+> You can browse many cases of [invalid scene files](https://github.com/dendeaisd/MiniRT/tree/main/scenes/invalid) and run them according to the [Usage 🚀 ](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#--usage) instructions, to check the Error messages we provide.
 - Running the program with more than 3 arguments, or less than 2.
 - Empty or unexisting .rt file
 - Wrong extension of file, like `.txt`
@@ -69,7 +69,7 @@ Graphics Library that was used: [MLX42](https://github.com/codam-coding-college/
 - You can notice the presence of cone for example in the `icecream` and `dwarf` scenes above in the [Preview 👀](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#-preview).
 
 ### &nbsp;2️⃣ &nbsp;Colored Light 🎨💡
-- We are parsing **RGB color values for the Light** (as shown above in the [scene decription file explanation](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#-scene-decription-file-rt-requirements)).
+- We are parsing **RGB color values for the Light** (as shown above in the [scene decription file explanation](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#-scene-decription-file-scenert)).
 - Examples of rendered images with colored light:
 
 ![colored_light_images](images/colored_light_collage.png)
@@ -104,10 +104,10 @@ In order for the LIVE movements (presented above) to be smooth, we needed a **li
 
 | Mode &nbsp;🔄 | Window size | Soft shadows | LIVE movements | Launching |
 | --- | :---: | :---: | :---: | :---: |
-| **1. HD mode &nbsp;🖥️** | 1920x1080 | ✅ | ❌ | `./miniRT scenes/snowman.rt HD` |
-| **2. Interactive mode 🕹️** | 800x600 | ❌ | ✅ | `./miniRT scenes/snowman.rt` |
+| **1. HD mode &nbsp;🖥️** | 1920x1080 | ✅ | ❌ | `./miniRT scenes/grape.rt HD` |
+| **2. Interactive mode 🕹️** | 800x600 | ❌ | ✅ | `./miniRT scenes/grape.rt` |
 
-&nbsp; 💁‍♀️ &nbsp; *For analytical info on how to run the different modes, check out the [Usage 🚀 ](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#-usage) section below ⬇️.*
+&nbsp; 💁‍♀️ &nbsp; *For analytical info on how to run the different modes, check out the [Usage 🚀 ](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#-usage)  section below ⬇️.*
 
 ### &nbsp;7️⃣ &nbsp; Randomized stars in the backround &nbsp; 🌌
 That was an aesthetic addition, because in the absence of planes as background, there was an absolute black background which we wanted to "beautify", so randomized stars were our "solution": <br><br>
@@ -129,7 +129,7 @@ make
 
 ## 🚀  Usage
 
-You can run the program in 2 different ways, depending on what mode you want (check above the [Dual mode for running the program 🔄](https://github.com/dendeaisd/MiniRT#6%EF%B8%8F%E2%83%A3--dual-mode-of-running-the-program--)). 
+You can run the program in 2 different ways, depending on what mode you want (check above the [Dual mode for running the program 🔄](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#6%EF%B8%8F%E2%83%A3--dual-mode-for-running-the-program--)). 
 
 
 ❗ For both modes, replace the `<scene_of_your_choice.rt>` below ⬇️ with the scene you choose from the [scenes](https://github.com/dendeaisd/MiniRT/tree/main/scenes) folder.
@@ -138,7 +138,7 @@ You need to give as third argument the **`HD`** string and run it as follows:
 ```bash
 ./miniRT scenes/<scene_of_your_choice.rt> HD
 ```
-which will open the bigger window mentioned in the [Dual mode](https://github.com/dendeaisd/MiniRT#6%EF%B8%8F%E2%83%A3--dual-mode-of-running-the-program--) above, with the **greater resolution** and **soft shadows**. 
+which will open the bigger window mentioned in the [Dual mode](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#6%EF%B8%8F%E2%83%A3--dual-mode-for-running-the-program--) above, with the **greater resolution** and **soft shadows**. 
 <p> Examples: </p>
 
 ```bash
