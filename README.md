@@ -88,7 +88,7 @@ Here's an example of the **soft shadows** we added, vs the **hard shadows** that
 
 ### &nbsp;5️⃣ &nbsp; LIVE Movements of Camera, Light, Objects &nbsp; 🎥 
 
-We provide the option to interact LIVE with the Camera, Light and Objects so that you see directly the modification on the rendered image.
+We provide the option to interact LIVE with the Camera, Light and Objects so that you see directly the modification on the rendered image. (*Fow "How to" check the corresponding section in [Usage 🚀 ](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#-how-to-move-the-scene-in-the-interactive-mode)*)
 
 #### 1. Translation and Rotation of the Camera 📷 :
 ![camera_movement_gif](images/camera_movement.gif)
@@ -99,8 +99,15 @@ We provide the option to interact LIVE with the Camera, Light and Objects so tha
 #### 3. Translation & Rotation of the Objects :
 ![objects_movement_gif](images/objects_movements.gif)
 
-### &nbsp;6️⃣ &nbsp; Dual Mode of Running the Program &nbsp; 🔄
+### &nbsp;6️⃣ &nbsp; Dual Mode for Running the Program &nbsp; 🔄
+In order for the LIVE movements (presented above) to be smooth, we needed a **lightweight mode** to run the program, so that we could see the modified (after every movement) image quickly. However, an interactive miniRT couldn't, of course, support the higher computational demands of soft shadows or a full HD window. That's why we decided to create **2 different modes** for running the program, according to the needs every moment:
 
+| Mode &nbsp;🔄 | Window size | Soft shadows | LIVE movements | Launching |
+| --- | :---: | :---: | :---: | :---: |
+| **1. HD mode &nbsp;🖥️** | 1920x1080 | ✅ | ❌ | `./miniRT scenes/snowman.rt HD` |
+| **2. Interactive mode 🕹️** | 800x600 | ❌ | ✅ | `./miniRT scenes/snowman.rt` |
+
+&nbsp; 💁‍♀️ &nbsp; *For analytical info on how to run the different modes, check out the [Usage 🚀 ](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#-usage) section below ⬇️.*
 
 ### &nbsp;7️⃣ &nbsp; Randomized stars in the backround &nbsp; 🌌
 That was an aesthetic addition, because in the absence of planes as background, there was an absolute black background which we wanted to "beautify", so randomized stars were our "solution": <br><br>
@@ -120,18 +127,18 @@ cd MiniRT
 make
 ```
 
-## 🕹 Usage
+## 🚀  Usage
 
-You can run the program in 2 different ways, depending on what mode you want (check above the [Dual mode of running the program 🔄](https://github.com/dendeaisd/MiniRT#6%EF%B8%8F%E2%83%A3--dual-mode-of-running-the-program--)). 
+You can run the program in 2 different ways, depending on what mode you want (check above the [Dual mode for running the program 🔄](https://github.com/dendeaisd/MiniRT#6%EF%B8%8F%E2%83%A3--dual-mode-of-running-the-program--)). 
 
 
 ❗ For both modes, replace the `<scene_of_your_choice.rt>` below ⬇️ with the scene you choose from the [scenes](https://github.com/dendeaisd/MiniRT/tree/main/scenes) folder.
-### &nbsp;1. For **HD mode**
+### &nbsp;1. For **HD mode**&nbsp; 🖥️ 
 You need to give as third argument the **`HD`** string and run it as follows:
 ```bash
 ./miniRT scenes/<scene_of_your_choice.rt> HD
 ```
-which will open the "bigger" window mentioned in the [Dual mode](https://github.com/dendeaisd/MiniRT#6%EF%B8%8F%E2%83%A3--dual-mode-of-running-the-program--) above, with the **greater resolution** and **soft shadows**. 
+which will open the bigger window mentioned in the [Dual mode](https://github.com/dendeaisd/MiniRT#6%EF%B8%8F%E2%83%A3--dual-mode-of-running-the-program--) above, with the **greater resolution** and **soft shadows**. 
 <p> Examples: </p>
 
 ```bash
@@ -141,12 +148,12 @@ which will open the "bigger" window mentioned in the [Dual mode](https://github.
 ./miniRT scenes/grape.rt HD
 ```
 
-### &nbsp;2. For **Interactive mode**
+### &nbsp;2. For **Interactive mode** 🕹️
 You run the scene without any third argument:
 ```bash
 ./miniRT scenes/<scene_of_your_choice.rt>
 ```
-This opens the smaller window, with **hard shadows**, where you can move **LIVE** the camera, objects and light, to see the changes directly, as shown above in the [Dual mode](https://github.com/dendeaisd/MiniRT#6%EF%B8%8F%E2%83%A3--dual-mode-of-running-the-program--).
+This opens a smaller window, with **hard shadows**, where you can move **LIVE** the camera, objects and light, to see the changes directly, like it's shown above in the [Live Movements Examples](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#5%EF%B8%8F%E2%83%A3--live-movements-of-camera-light-objects--).
 <p> Examples: </p>
 
 ```bash
