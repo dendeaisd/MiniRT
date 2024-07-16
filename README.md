@@ -88,6 +88,17 @@ Here's an example of the **soft shadows** we added, vs the **hard shadows** that
 
 ### &nbsp;5️⃣ &nbsp; LIVE Movements of Camera, Light, Objects &nbsp; 🎥 
 
+We provide the option to interact LIVE with the Camera, Light and Objects so that you see directly the modification on the rendered image.
+
+#### 1. Translation and Rotation of the Camera 📷 :
+![camera_movement_gif](images/camera_movement.gif)
+
+#### 2. Translation of the Light 🔦 :
+![light_movement_gif](images/light_translation.gif)
+
+#### 3. Translation & Rotation of the Objects :
+![objects_movement_gif](images/objects_movements.gif)
+
 ### &nbsp;6️⃣ &nbsp; Dual Mode of Running the Program &nbsp; 🔄
 
 
