@@ -107,7 +107,7 @@ In order for the LIVE movements (presented above) to be smooth, we needed a **li
 | **1. HD mode &nbsp;🖥️** | 1920x1080 | ✅ | ❌ | `./miniRT scenes/grape.rt HD` |
 | **2. Interactive mode 🕹️** | 800x600 | ❌ | ✅ | `./miniRT scenes/grape.rt` |
 
-&nbsp; 💁‍♀️ &nbsp; *For analytical info on how to run the different modes, check out the [Usage 🚀 ](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#-usage)  section below ⬇️.*
+&nbsp; 💁‍♀️ &nbsp; *For analytical info on how to run the different modes, check out the [Usage 🚀 ](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#--usage)  section below ⬇️.*
 
 ### &nbsp;7️⃣ &nbsp; Randomized stars in the backround &nbsp; 🌌
 That was an aesthetic addition, because in the absence of planes as background, there was an absolute black background which we wanted to "beautify", so randomized stars were our "solution": <br><br>
