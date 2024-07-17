@@ -183,7 +183,7 @@ or
 
 which means that you can combine holding one **element key** with one **movement key** (for either translation or rotation):
 ![movements_memo](images/Movements_memo.png)
-📌 *Note that, the number keys can only be used if the scene has **less than 10 objects**. Else, use the `O` key to move all objects at the same time.*
+📌 *Note that, the number keys can only be used if the scene has **less than 10 objects**, and the numbering of the objects **follows the order of their declaration** in the `scere.rt` file. If the objects are more than 9, use the `O` key to move all objects at the same time.*
 
 ##### Examples:
 - `C` + `+` :&nbsp;*moves* the camera in the z axis, giving the feeling of zooming in.
