@@ -33,7 +33,7 @@ Graphics Library that was used: [MLX42](https://github.com/codam-coding-college/
 ✔️ Management of all possible **intersections** of the objects.<br>
 ✔️ **Resizing** of the object's unique properties: diameter for a sphere, width and height for a cylinder.<br>
 ✔️ Implementation of **Ambient** and **Diffuse lightning**. (Ambient so that the objects are never in the dark.) <br>
-✔️ **Hard shadows** and **soft brightness**.<br>
+✔️ **Hard shadows** and **spot brightness**.<br>
 ✔️ The program displays the image in a window, which can be closed by clicking either **ESC** or the red cross on the window's frame.<br>
 ✔️ The program must take as first argument a scene description file with the **.rt** extension:
 
