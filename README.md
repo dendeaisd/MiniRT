@@ -88,7 +88,7 @@ Here's an example of the **soft shadows** we added, vs the **hard shadows** that
 
 ### &nbsp;5️⃣ &nbsp; LIVE Movements of Camera, Light, Objects &nbsp; 🎥 
 
-We provide the option to interact LIVE with the Camera, Light and Objects so that you see directly the modification on the rendered image. (*Fow "How to" check the corresponding section in [Usage 🚀 ](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#-how-to-move-the-scene-in-the-interactive-mode)*)
+We provide the option to interact LIVE with the Camera, Light and Objects so that you see directly the modification on the rendered image. (*For "How to" check the corresponding section in [Usage 🚀 ](https://github.com/dendeaisd/MiniRT?tab=readme-ov-file#-how-to-move-the-scene-in-the-interactive-mode)*)
 
 #### 1. Translation and Rotation of the Camera 📷 :
 ![camera_movement_gif](images/camera_movement.gif)
@@ -183,7 +183,7 @@ or
 
 which means that you can combine holding one **element key** with one **movement key** (for either translation or rotation):
 ![movements_memo](images/Movements_memo.png)
-📌 *Note that, the number keys can only be used if the scene has **less than 10 objects**, and the numbering of the objects **follows the order of their declaration** in the `scere.rt` file. If the objects are more than 9, use the `O` key to move all objects at the same time.*
+📌 *Note that, the number keys can only be used if the scene has **less than 10 objects**, and the numbering of the objects **follows the order of their declaration** in the `scene.rt` file. If the objects are more than 9, use the `O` key to move all objects at the same time.*
 
 ##### Examples:
 - `C` + `+` :&nbsp;*moves* the camera in the z axis, giving the feeling of zooming in.
